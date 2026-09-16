@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đấu Trường Tri Thức: Dân Chủ & Dân Chủ XHCN</title>
     <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         .btn-press {
             transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
@@ -81,7 +82,7 @@
             <div class="flex items-center gap-2">
                 <span class="text-2xl">🏛️</span>
                 <div>
-                    <h1 class="text-lg md:text-xl font-bold bg-gradient-to-r from-red-500 via-amber-500 to-yellow-500 bg-clip-text text-transparent">
+                    <h1 id="lobby-title-online" class="text-lg md:text-xl font-bold bg-gradient-to-r from-red-500 via-amber-500 to-yellow-500 bg-clip-text text-transparent">
                         ĐẤU TRƯỜNG DÂN CHỦ XHCN
                     </h1>
                     <p class="text-xs text-[var(--muted-foreground)]">Chủ nghĩa Xã hội Khoa học (MLN131) • Giáo trình 2021</p>
@@ -1129,6 +1130,35 @@
         // --- 4. STATE MANAGEMENT ---
         let players = [];
         let activePlayer = "Người chơi 1";
+        
+        // === SUPABASE INITIALIZATION ===
+        const SUPABASE_URL = 'https://hlycdtmluupavmwhuttn.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_xBkMMXvr6uYZ4tSSOpOAjg_BApgf6yg';
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // --- ONLINE PRESENCE TRACKING ---
+        const room = supabase.channel('online_users', {
+            config: { presence: { key: 'user' } }
+        });
+        room.on('presence', { event: 'sync' }, () => {
+            const state = room.presenceState();
+            const count = Object.keys(state).length;
+            const titleEl = document.getElementById('lobby-title-online');
+            if(titleEl) titleEl.innerHTML = `ĐẤU TRƯỜNG DÂN CHỦ XHCN <span class="text-[10px] px-2 py-0.5 bg-emerald-500/20 text-emerald-500 rounded-full ml-1 inline-flex items-center gap-1">🟢 ${count} Online</span>`;
+        });
+        room.subscribe(async (status) => {
+            if (status === 'SUBSCRIBED') {
+                await room.track({ online_at: new Date().toISOString() });
+            }
+        });
+
+        // --- REALTIME LEADERBOARD AUTO-REFRESH ---
+        supabase.channel('public:leaderboard').on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'leaderboard' }, payload => {
+            if (!document.getElementById('screen-leaderboard').classList.contains('hidden')) {
+                showLeaderboardScreen(); 
+            }
+        }).subscribe();
+
         let leaderboard = [];
 
         let customQuestions = [];
@@ -1662,10 +1692,15 @@
                 date: new Date().toLocaleDateString('vi-VN')
             };
 
-            leaderboard.push(entry);
-            leaderboard.sort((a, b) => b.score - a.score);
-            if (leaderboard.length > 50) leaderboard.pop();
-            saveStorage();
+            // Push to Supabase instead of local storage
+            supabase.from('leaderboard').insert([{
+                player_name: activePlayer,
+                score: score,
+                correct_ratio: `${correctCount}/${totalQuestions}`,
+                date: entry.date
+            }]).then(({error}) => {
+                if (error) console.error("Lỗi lưu điểm:", error);
+            });
 
             document.getElementById('result-player').textContent = activePlayer;
             document.getElementById('result-score').textContent = `${score} đ`;
@@ -1750,7 +1785,7 @@
             updatePlayerUI();
         }
 
-        function showLeaderboardScreen() {
+        async function showLeaderboardScreen() {
             clearInterval(timer);
             document.getElementById('screen-battle').classList.add('hidden');
             document.getElementById('screen-result').classList.add('hidden');
@@ -1759,14 +1794,22 @@
             document.getElementById('screen-leaderboard').classList.remove('hidden');
 
             const tbody = document.getElementById('leaderboard-tbody');
+            tbody.innerHTML = '<tr><td colspan="5" class="p-4 text-center text-[var(--muted-foreground)]"><span class="animate-pulse">Đang tải dữ liệu từ máy chủ Supabase... ⏳</span></td></tr>';
+
+            const { data, error } = await supabase
+                .from('leaderboard')
+                .select('*')
+                .order('score', { ascending: false })
+                .limit(50);
+
             tbody.innerHTML = '';
 
-            if (leaderboard.length === 0) {
+            if (error || !data || data.length === 0) {
                 tbody.innerHTML = '<tr><td colspan="5" class="p-4 text-center text-[var(--muted-foreground)]">Chưa có ai ghi danh vào Bảng vàng. Hãy là người đầu tiên!</td></tr>';
                 return;
             }
 
-            leaderboard.forEach((item, index) => {
+            data.forEach((item, index) => {
                 const tr = document.createElement('tr');
                 let medal = `${index + 1}`;
                 let rowBg = '';
@@ -1777,22 +1820,25 @@
                 tr.className = rowBg;
                 tr.innerHTML = `
                     <td class="p-2.5 text-center">${medal}</td>
-                    <td class="p-2.5 font-semibold">${item.name}</td>
+                    <td class="p-2.5 font-semibold">${item.player_name}</td>
                     <td class="p-2.5 text-right font-mono font-black text-emerald-500">${item.score} đ</td>
-                    <td class="p-2.5 text-center text-[var(--muted-foreground)]">${item.correct}</td>
-                    <td class="p-2.5 text-right text-[var(--muted-foreground)] text-xs">${item.date}</td>
+                    <td class="p-2.5 text-center text-[var(--muted-foreground)]">${item.correct_ratio}</td>
+                    <td class="p-2.5 text-right text-[var(--muted-foreground)] text-xs">${item.date || new Date(item.created_at).toLocaleDateString('vi-VN')}</td>
                 `;
                 tbody.appendChild(tr);
             });
         }
 
-        function clearLeaderboard() {
+        async function clearLeaderboard() {
             if(prompt("Nhập mật khẩu Admin để xóa BXH:") !== "572001") { showToast("Sai mật khẩu!"); return; }
             
-            leaderboard = [];
-            saveStorage();
+            showToast("Đang xóa BXH trên Server...");
+            // Supabase requires a filter to delete all, neq ensures all are deleted
+            const { error } = await supabase.from('leaderboard').delete().neq('id', '00000000-0000-0000-0000-000000000000');
+            if(error) { showToast("Lỗi: " + error.message); return; }
+            
             showLeaderboardScreen();
-            showToast("Đã xóa sạch Bảng xếp hạng!");
+            showToast("Đã xóa sạch Bảng xếp hạng trên Server!");
         }
 
         function showAdminScreen() {
