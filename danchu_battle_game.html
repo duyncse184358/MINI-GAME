@@ -1684,7 +1684,7 @@
             document.getElementById('screen-result').classList.remove('hidden');
 
             const totalQuestions = currentQuestions.length;
-            const correctCount = totalQuestions - mistakes.length;
+            const correctCount = Math.max(0, currentQuestionIndex - mistakes.length);
             const entry = {
                 name: activePlayer,
                 score: score,
