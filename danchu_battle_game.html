@@ -174,7 +174,7 @@
             <!-- Rules quick check -->
             <div class="p-3.5 rounded-xl border border-[var(--border)] bg-[var(--background)]/60 text-xs space-y-1 text-[var(--muted-foreground)]">
                 <div class="font-bold text-[var(--foreground)] flex items-center gap-1">
-                    <span>⚡</span> 3 Mạng (❤️❤️❤️) • Chuỗi Combo • 16 Câu hỏi trích xuất chuẩn Giáo trình 2021
+                    <span>⚡</span> 3 Mạng (❤️❤️❤️) • Chuỗi Combo • <span id="display-q-per-game">16</span> Câu hỏi trích xuất chuẩn Giáo trình 2021
                 </div>
                 <p>Nguồn gốc Demoskratos • 3 Phương diện Mác-Lênin • Tư tưởng Hồ Chí Minh • 3 Nền dân chủ lịch sử • 3 Bản chất Dân chủ XHCN.</p>
             </div>
@@ -1194,6 +1194,8 @@
         }
 
         function updatePlayerUI() {
+            const qDisplay = document.getElementById("display-q-per-game");
+            if(qDisplay) qDisplay.textContent = gameSettings.qPerGame;
             const input = document.getElementById('player-name-input');
             if (input && activePlayer) {
                 input.value = activePlayer;
