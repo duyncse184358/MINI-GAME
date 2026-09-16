@@ -1697,7 +1697,7 @@
                 player_name: activePlayer,
                 score: score,
                 correct_ratio: `${correctCount}/${totalQuestions}`,
-                date: entry.date
+                
             }]).then(({error}) => {
                 if (error) console.error("Lỗi lưu điểm:", error);
             });
@@ -1796,8 +1796,7 @@
             const tbody = document.getElementById('leaderboard-tbody');
             tbody.innerHTML = '<tr><td colspan="5" class="p-4 text-center text-[var(--muted-foreground)]"><span class="animate-pulse">Đang tải dữ liệu từ máy chủ Supabase... ⏳</span></td></tr>';
 
-            const { data, error } = await supabase
-                .from('leaderboard')
+            const { data, error } = await supabaseClient.from('leaderboard')
                 .select('*')
                 .order('score', { ascending: false })
                 .limit(50);
