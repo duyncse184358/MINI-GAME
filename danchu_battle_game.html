@@ -1134,10 +1134,10 @@
         // === SUPABASE INITIALIZATION ===
         const SUPABASE_URL = 'https://hlycdtmluupavmwhuttn.supabase.co';
         const SUPABASE_ANON_KEY = 'sb_publishable_xBkMMXvr6uYZ4tSSOpOAjg_BApgf6yg';
-        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
         // --- ONLINE PRESENCE TRACKING ---
-        const room = supabase.channel('online_users', {
+        const room = supabaseClient.channel('online_users', {
             config: { presence: { key: 'user' } }
         });
         room.on('presence', { event: 'sync' }, () => {
@@ -1153,7 +1153,7 @@
         });
 
         // --- REALTIME LEADERBOARD AUTO-REFRESH ---
-        supabase.channel('public:leaderboard').on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'leaderboard' }, payload => {
+        supabaseClient.channel('public:leaderboard').on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'leaderboard' }, payload => {
             if (!document.getElementById('screen-leaderboard').classList.contains('hidden')) {
                 showLeaderboardScreen(); 
             }
@@ -1693,7 +1693,7 @@
             };
 
             // Push to Supabase instead of local storage
-            supabase.from('leaderboard').insert([{
+            supabaseClient.from('leaderboard').insert([{
                 player_name: activePlayer,
                 score: score,
                 correct_ratio: `${correctCount}/${totalQuestions}`,
@@ -1834,7 +1834,7 @@
             
             showToast("Đang xóa BXH trên Server...");
             // Supabase requires a filter to delete all, neq ensures all are deleted
-            const { error } = await supabase.from('leaderboard').delete().neq('id', '00000000-0000-0000-0000-000000000000');
+            const { error } = await supabaseClient.from('leaderboard').delete().neq('id', '00000000-0000-0000-0000-000000000000');
             if(error) { showToast("Lỗi: " + error.message); return; }
             
             showLeaderboardScreen();
