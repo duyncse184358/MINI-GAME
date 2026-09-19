@@ -1162,7 +1162,7 @@
         let leaderboard = [];
 
         let customQuestions = [];
-        let gameSettings = { qPerGame: 16 };
+        let gameSettings = { qPerGame: 30 };
 
         let currentQuestionIndex = 0;
         let score = 0;
@@ -1198,7 +1198,7 @@
                 if (storedCustomQ) customQuestions = JSON.parse(storedCustomQ);
 
                 const storedSettings = localStorage.getItem('mln_settings');
-                if (storedSettings) gameSettings = JSON.parse(storedSettings);
+                if (storedSettings) { const saved = JSON.parse(storedSettings); gameSettings = { ...saved, qPerGame: Math.max(saved.qPerGame || 0, 30) }; } else { gameSettings = { qPerGame: 30 }; }
 
                 const lastActive = localStorage.getItem('mln_active_player');
                 if (lastActive && players.includes(lastActive)) {
@@ -1684,7 +1684,7 @@
             document.getElementById('screen-result').classList.remove('hidden');
 
             const totalQuestions = currentQuestions.length;
-            const correctCount = Math.max(0, currentQuestionIndex - mistakes.length);
+            const answeredCount = currentQuestionIndex; const correctCount = Math.max(0, answeredCount - mistakes.length);
             const entry = {
                 name: activePlayer,
                 score: score,
