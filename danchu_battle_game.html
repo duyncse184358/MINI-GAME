@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Äáº¥u TrÆ°á»ng Tri Thá»©c: DÃ¢n Chá»§ & DÃ¢n Chá»§ XHCN</title>
+    <title>Đấu Trường Tri Thức: Dân Chủ & Dân Chủ XHCN</title>
     <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
@@ -74,29 +74,29 @@
 
         <!-- Toast Notification (Zero Browser Modals) -->
         <div id="game-toast" class="hidden absolute top-4 left-1/2 -translate-x-1/2 z-50 px-4 py-2 rounded-xl bg-amber-500 text-black font-bold text-xs shadow-xl transition-all flex items-center gap-1.5 border border-amber-300">
-            <span>ðŸ“¢</span> <span id="toast-text">ThÃ´ng bÃ¡o</span>
+            <span>📢</span> <span id="toast-text">Thông báo</span>
         </div>
 
         <!-- Top Header & Controls -->
         <div class="flex justify-between items-center pb-3 border-b border-[var(--border)] mb-4">
             <div class="flex items-center gap-2">
-                <span class="text-2xl">ðŸ›ï¸</span>
+                <span class="text-2xl">🏛️</span>
                 <div>
                     <h1 id="lobby-title-online" class="text-lg md:text-xl font-bold bg-gradient-to-r from-red-500 via-amber-500 to-yellow-500 bg-clip-text text-transparent">
-                        Äáº¤U TRÆ¯á»œNG DÃ‚N CHá»¦ XHCN
+                        ĐẤU TRƯỜNG DÂN CHỦ XHCN
                     </h1>
-                    <p class="text-xs text-[var(--muted-foreground)]">Chá»§ nghÄ©a XÃ£ há»™i Khoa há»c (MLN131) â€¢ GiÃ¡o trÃ¬nh 2021</p>
+                    <p class="text-xs text-[var(--muted-foreground)]">Chủ nghĩa Xã hội Khoa học (MLN131) • Giáo trình 2021</p>
                 </div>
             </div>
             <div class="flex items-center gap-2">
-                <button type="button" id="audio-toggle" onclick="toggleAudio()" class="p-2 rounded-lg border border-[var(--border)] hover:bg-[var(--accent)] text-sm cursor-pointer" title="Báº­t/Táº¯t Ã¢m thanh">
-                    ðŸ”Š
+                <button type="button" id="audio-toggle" onclick="toggleAudio()" class="p-2 rounded-lg border border-[var(--border)] hover:bg-[var(--accent)] text-sm cursor-pointer" title="Bật/Tắt âm thanh">
+                    🔊
                 </button>
-                <button type="button" onclick="showAdminScreen()" class="px-3 py-1.5 rounded-lg border border-[var(--border)] hover:bg-[var(--accent)] font-semibold text-xs md:text-sm transition flex items-center gap-1 cursor-pointer" title="CÃ i Ä‘áº·t & CÃ¢u há»i">
-                    âš™ï¸ Admin
+                <button type="button" onclick="showAdminScreen()" class="px-3 py-1.5 rounded-lg border border-[var(--border)] hover:bg-[var(--accent)] font-semibold text-xs md:text-sm transition flex items-center gap-1 cursor-pointer" title="Cài đặt & Câu hỏi">
+                    ⚙️ Admin
                 </button>
                 <button type="button" onclick="showLeaderboardScreen()" class="px-3 py-1.5 rounded-lg border border-amber-500/40 bg-amber-500/10 text-amber-600 dark:text-amber-400 font-semibold text-xs md:text-sm hover:bg-amber-500/20 transition flex items-center gap-1 cursor-pointer">
-                    ðŸ† BXH
+                    🏆 BXH
                 </button>
             </div>
         </div>
@@ -105,20 +105,20 @@
         <div id="screen-lobby" class="space-y-5 py-2">
             <div class="bg-gradient-to-br from-red-900/10 via-amber-900/5 to-transparent p-5 rounded-xl border border-[var(--border)]">
                 <h2 class="text-base font-bold mb-1.5 flex items-center gap-2">
-                    <span>ðŸ‘¤</span> TÃªn NgÆ°á»i ChÆ¡i
+                    <span>👤</span> Tên Người Chơi
                 </h2>
                 <p class="text-xs text-[var(--muted-foreground)] mb-3">
-                    Nháº­p tÃªn cá»§a báº¡n Ä‘á»ƒ báº¯t Ä‘áº§u vÃ  ghi danh vÃ o Báº£ng vÃ ng xáº¿p háº¡ng:
+                    Nhập tên của bạn để bắt đầu và ghi danh vào Bảng vàng xếp hạng:
                 </p>
 
                 <!-- Direct Input Box -->
                 <div class="mb-3.5">
                     <div class="relative flex items-center">
-                        <input type="text" id="player-name-input" placeholder="Nháº­p tÃªn cá»§a báº¡n (vÃ­ dá»¥: HoÃ ng, Linh, An...)" maxlength="20"
+                        <input type="text" id="player-name-input" placeholder="Nhập tên của bạn (ví dụ: Hoàng, Linh, An...)" maxlength="20"
                             class="w-full pl-3.5 pr-12 py-2.5 text-sm rounded-xl border border-[var(--border)] bg-[var(--background)] focus:outline-none focus:ring-2 focus:ring-amber-500 font-bold"
                             oninput="onPlayerInputChanged()" onkeydown="if(event.key==='Enter') startBattle()">
                         <button type="button" onclick="startBattle()" class="absolute right-2 px-2.5 py-1 bg-amber-500 hover:bg-amber-400 text-black text-xs font-bold rounded-lg cursor-pointer">
-                            VÃ o âš”ï¸
+                            Vào ⚔️
                         </button>
                     </div>
                 </div>
@@ -126,8 +126,8 @@
                 <!-- Recent Players Tags (Quick Pick & 1-Click Delete) -->
                 <div id="saved-players-section" class="mb-3.5">
                     <div class="text-[11px] font-semibold text-[var(--muted-foreground)] mb-1.5 flex items-center justify-between">
-                        <span>Danh sÃ¡ch ngÆ°á»i chÆ¡i Ä‘Ã£ lÆ°u:</span>
-                        <span class="text-[10px] text-amber-500/80">Báº¥m tÃªn Ä‘á»ƒ chá»n â€¢ Báº¥m Ã— Ä‘á» Ä‘á»ƒ xÃ³a</span>
+                        <span>Danh sách người chơi đã lưu:</span>
+                        <span class="text-[10px] text-amber-500/80">Bấm tên để chọn • Bấm × đỏ để xóa</span>
                     </div>
                     <div id="saved-players-list" class="flex flex-wrap gap-2 min-h-[30px]">
                         <!-- Injected dynamically via JS -->
@@ -137,37 +137,37 @@
                 <!-- Active Player Banner -->
                 <div class="bg-[var(--background)] p-3 rounded-lg border border-[var(--border)] flex justify-between items-center">
                     <div>
-                        <span class="text-xs text-[var(--muted-foreground)]">Äang thi Ä‘áº¥u vá»›i tÆ° cÃ¡ch:</span>
-                        <div id="active-player-display" class="text-sm font-black text-amber-500">NgÆ°á»i chÆ¡i 1</div>
+                        <span class="text-xs text-[var(--muted-foreground)]">Đang thi đấu với tư cách:</span>
+                        <div id="active-player-display" class="text-sm font-black text-amber-500">Người chơi 1</div>
                     </div>
                     <div class="text-right">
-                        <span class="text-xs text-[var(--muted-foreground)]">Ká»· lá»¥c cá»§a báº¡n:</span>
-                        <div id="active-player-best" class="text-sm font-bold text-emerald-500">0 Ä‘iá»ƒm</div>
+                        <span class="text-xs text-[var(--muted-foreground)]">Kỷ lục của bạn:</span>
+                        <div id="active-player-best" class="text-sm font-bold text-emerald-500">0 điểm</div>
                     </div>
                 </div>
             </div>
 
-            <!-- Features Highlights (Bom, CÆ°á»›p Ä‘iá»ƒm, Äá»•i Ä‘iá»ƒm) -->
+            <!-- Features Highlights (Bom, Cướp điểm, Đổi điểm) -->
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs">
                 <div class="p-3 rounded-xl border border-red-500/30 bg-red-500/5 flex items-center gap-2.5">
-                    <span class="text-2xl">ðŸ’£</span>
+                    <span class="text-2xl">💣</span>
                     <div>
-                        <div class="font-bold text-red-500">CÃ¢u Há»i Bom</div>
-                        <div class="text-[11px] text-[var(--muted-foreground)]">Chá»‰ cÃ³ 8s! ÄÃºng: +300Ä‘ & +1â¤ï¸, sai ná»• máº¥t 2â¤ï¸!</div>
+                        <div class="font-bold text-red-500">Câu Hỏi Bom</div>
+                        <div class="text-[11px] text-[var(--muted-foreground)]">Chỉ có 8s! Đúng: +300đ & +1❤️, sai nổ mất 2❤️!</div>
                     </div>
                 </div>
                 <div class="p-3 rounded-xl border border-amber-500/30 bg-amber-500/5 flex items-center gap-2.5">
-                    <span class="text-2xl">ðŸ´â€â˜ ï¸</span>
+                    <span class="text-2xl">🏴‍☠️</span>
                     <div>
-                        <div class="font-bold text-amber-500">CÆ°á»›p Äiá»ƒm</div>
-                        <div class="text-[11px] text-[var(--muted-foreground)]">CÆ¡ há»™i cÆ°á»›p ngáº«u nhiÃªn tá»›i +300Ä‘ tá»« kho tÃ i sáº£n tÆ° báº£n!</div>
+                        <div class="font-bold text-amber-500">Cướp Điểm</div>
+                        <div class="text-[11px] text-[var(--muted-foreground)]">Cơ hội cướp ngẫu nhiên tới +300đ từ kho tài sản tư bản!</div>
                     </div>
                 </div>
                 <div class="p-3 rounded-xl border border-purple-500/30 bg-purple-500/5 flex items-center gap-2.5">
-                    <span class="text-2xl">ðŸ”„</span>
+                    <span class="text-2xl">🔄</span>
                     <div>
-                        <div class="font-bold text-purple-500">RÆ°Æ¡ng Äá»•i Äiá»ƒm</div>
-                        <div class="text-[11px] text-[var(--muted-foreground)]">Má»Ÿ 3 rÆ°Æ¡ng bÃ­ áº©n: x2 Ä‘iá»ƒm, Ä‘á»•i thÆ°á»Ÿng hoáº·c nháº­n KhiÃªn ðŸ›¡ï¸</div>
+                        <div class="font-bold text-purple-500">Rương Đổi Điểm</div>
+                        <div class="text-[11px] text-[var(--muted-foreground)]">Mở 3 rương bí ẩn: x2 điểm, đổi thưởng hoặc nhận Khiên 🛡️</div>
                     </div>
                 </div>
             </div>
@@ -175,14 +175,14 @@
             <!-- Rules quick check -->
             <div class="p-3.5 rounded-xl border border-[var(--border)] bg-[var(--background)]/60 text-xs space-y-1 text-[var(--muted-foreground)]">
                 <div class="font-bold text-[var(--foreground)] flex items-center gap-1">
-                    <span>⚡</span> 3 Mạng (❤️❤️❤️) • Chuỗi Combo • <span id="display-q-per-game">30</span> Câu hỏi trích xuất chuẩn Giáo trình 2021
+                    <span>⚡</span> 3 Mạng (❤️❤️❤️) • Chuỗi Combo • <span id="display-q-per-game">16</span> Câu hỏi trích xuất chuẩn Giáo trình 2021
                 </div>
-                <p>Nguá»“n gá»‘c Demoskratos â€¢ 3 PhÆ°Æ¡ng diá»‡n MÃ¡c-LÃªnin â€¢ TÆ° tÆ°á»Ÿng Há»“ ChÃ­ Minh â€¢ 3 Ná»n dÃ¢n chá»§ lá»‹ch sá»­ â€¢ 3 Báº£n cháº¥t DÃ¢n chá»§ XHCN.</p>
+                <p>Nguồn gốc Demoskratos • 3 Phương diện Mác-Lênin • Tư tưởng Hồ Chí Minh • 3 Nền dân chủ lịch sử • 3 Bản chất Dân chủ XHCN.</p>
             </div>
 
             <div class="text-center pt-1">
                 <button type="button" onclick="startBattle()" class="w-full md:w-3/4 py-3.5 px-6 rounded-xl bg-gradient-to-r from-red-600 via-amber-600 to-yellow-600 hover:opacity-95 text-white font-black text-base shadow-lg btn-press flex items-center justify-center gap-2 mx-auto cursor-pointer">
-                    <span>âš”ï¸</span> Báº®T Äáº¦U VÃ€O Äáº¤U TRÆ¯á»œNG <span>âš”ï¸</span>
+                    <span>⚔️</span> BẮT ĐẦU VÀO ĐẤU TRƯỜNG <span>⚔️</span>
                 </button>
             </div>
         </div>
@@ -191,34 +191,34 @@
         <div id="screen-admin" class="hidden space-y-4 py-2">
             <div class="flex justify-between items-center pb-2 border-b border-[var(--border)]">
                 <h2 class="text-base md:text-lg font-bold flex items-center gap-2">
-                    <span>âš™ï¸</span> ADMIN PANEL
+                    <span>⚙️</span> ADMIN PANEL
                 </h2>
                 <button type="button" onclick="goToLobby()" class="text-xs px-3 py-1.5 rounded-lg border border-[var(--border)] hover:bg-[var(--accent)] cursor-pointer">
-                    â¬…ï¸ Quay láº¡i sáº£nh
+                    ⬅️ Quay lại sảnh
                 </button>
             </div>
 
             <div class="space-y-4">
                 <div class="p-4 rounded-xl border border-[var(--border)] bg-[var(--card)] space-y-3">
-                    <h3 class="font-bold text-sm text-amber-500">ðŸ“¥ Náº¡p cÃ¢u há»i tá»« file Blooket CSV/TSV</h3>
-                    <p class="text-xs text-[var(--muted-foreground)]">DÃ¡n ná»™i dung tá»« file CSV (hoáº·c copy tá»« Excel) gá»“m 7 cá»™t: CÃ¢u há»i | Ä.Ã¡n 1 | Ä.Ã¡n 2 | Ä.Ã¡n 3 | Ä.Ã¡n 4 | Thá»i gian | Cá»™t ÄÃ¡p Ã¡n ÄÃºng (1-4). Bá» qua dÃ²ng tiÃªu Ä‘á».</p>
-                    <textarea id="admin-csv-input" rows="5" class="w-full p-2.5 text-xs rounded-xl border border-[var(--border)] bg-[var(--background)] focus:outline-none focus:ring-2 focus:ring-amber-500" placeholder="CÃ¢u há»i 1\tÄ.Ã¡n 1\tÄ.Ã¡n 2..."></textarea>
+                    <h3 class="font-bold text-sm text-amber-500">📥 Nạp câu hỏi từ file Blooket CSV/TSV</h3>
+                    <p class="text-xs text-[var(--muted-foreground)]">Dán nội dung từ file CSV (hoặc copy từ Excel) gồm 7 cột: Câu hỏi | Đ.án 1 | Đ.án 2 | Đ.án 3 | Đ.án 4 | Thời gian | Cột Đáp án Đúng (1-4). Bỏ qua dòng tiêu đề.</p>
+                    <textarea id="admin-csv-input" rows="5" class="w-full p-2.5 text-xs rounded-xl border border-[var(--border)] bg-[var(--background)] focus:outline-none focus:ring-2 focus:ring-amber-500" placeholder="Câu hỏi 1\tĐ.án 1\tĐ.án 2..."></textarea>
                     <div class="flex justify-between items-center">
-                        <span id="admin-q-count" class="text-xs font-bold text-emerald-500">Äang cÃ³: 16 cÃ¢u gá»‘c</span>
+                        <span id="admin-q-count" class="text-xs font-bold text-emerald-500">Đang có: 16 câu gốc</span>
                         <div class="space-x-2">
-                            <button type="button" onclick="clearCustomQuestions()" class="text-xs text-red-500 hover:underline cursor-pointer">XÃ³a cÃ¢u há»i thÃªm</button>
-                            <button type="button" onclick="parseCSV()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-lg cursor-pointer">Nháº­p CSV</button>
+                            <button type="button" onclick="clearCustomQuestions()" class="text-xs text-red-500 hover:underline cursor-pointer">Xóa câu hỏi thêm</button>
+                            <button type="button" onclick="parseCSV()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-lg cursor-pointer">Nhập CSV</button>
                         </div>
                     </div>
                 </div>
 
                 <div class="p-4 rounded-xl border border-[var(--border)] bg-[var(--card)] space-y-3">
-                    <h3 class="font-bold text-sm text-blue-500">âš™ï¸ Cáº¥u hÃ¬nh lÆ°á»£t chÆ¡i</h3>
+                    <h3 class="font-bold text-sm text-blue-500">⚙️ Cấu hình lượt chơi</h3>
                     <div class="flex items-center gap-3">
                         <label class="text-xs">Số câu hỏi mỗi ván (chọn ngẫu nhiên):</label>
-                        <input type="number" id="admin-q-per-game" min="5" max="100" value="30" class="w-20 p-1.5 text-xs rounded-lg border border-[var(--border)] bg-[var(--background)]">
+                        <input type="number" id="admin-q-per-game" min="5" max="100" value="16" class="w-20 p-1.5 text-xs rounded-lg border border-[var(--border)] bg-[var(--background)]">
                     </div>
-                    <button type="button" onclick="saveAdminSettings()" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold rounded-lg cursor-pointer">LÆ°u Cáº¥u HÃ¬nh</button>
+                    <button type="button" onclick="saveAdminSettings()" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold rounded-lg cursor-pointer">Lưu Cấu Hình</button>
                 </div>
             </div>
         </div>
@@ -228,13 +228,13 @@
             <!-- HUD Status Bar -->
             <div class="flex flex-wrap justify-between items-center gap-2 p-2.5 bg-[var(--background)] rounded-xl border border-[var(--border)] text-xs md:text-sm font-semibold">
                 <div class="flex items-center gap-2">
-                    <span class="px-2 py-0.5 bg-amber-500/10 text-amber-500 rounded-md border border-amber-500/20 text-xs" id="hud-player">NgÆ°á»i chÆ¡i</span>
-                    <span class="text-red-500 font-bold tracking-wider" id="hud-lives">â¤ï¸â¤ï¸â¤ï¸</span>
-                    <span id="hud-shield" class="hidden text-blue-500 text-xs font-bold bg-blue-500/10 px-1.5 py-0.5 rounded border border-blue-500/30">ðŸ›¡ï¸ KhiÃªn ThÃ©p</span>
+                    <span class="px-2 py-0.5 bg-amber-500/10 text-amber-500 rounded-md border border-amber-500/20 text-xs" id="hud-player">Người chơi</span>
+                    <span class="text-red-500 font-bold tracking-wider" id="hud-lives">❤️❤️❤️</span>
+                    <span id="hud-shield" class="hidden text-blue-500 text-xs font-bold bg-blue-500/10 px-1.5 py-0.5 rounded border border-blue-500/30">🛡️ Khiên Thép</span>
                 </div>
                 <div class="flex items-center gap-3">
                     <span class="text-orange-500 text-xs md:text-sm font-bold" id="hud-combo">Combo: 0x</span>
-                    <span class="text-emerald-500 font-black text-base" id="hud-score">0 Ä‘</span>
+                    <span class="text-emerald-500 font-black text-base" id="hud-score">0 đ</span>
                     <span class="text-[var(--muted-foreground)] text-xs font-mono" id="hud-progress">1/16</span>
                 </div>
             </div>
@@ -247,23 +247,23 @@
             <!-- Bomb Banner (Shown on bomb questions) -->
             <div id="bomb-banner" class="hidden p-2.5 rounded-xl border border-red-500 bg-red-500/15 text-red-600 dark:text-red-300 font-black text-xs flex items-center justify-between bomb-pulse">
                 <div class="flex items-center gap-1.5">
-                    <span class="text-xl">ðŸ’£</span>
-                    <span>CÃ‚U Há»ŽI BOM Ná»” CHáº¬M! (8 GIÃ‚Y)</span>
+                    <span class="text-xl">💣</span>
+                    <span>CÂU HỎI BOM NỔ CHẬM! (8 GIÂY)</span>
                 </div>
-                <span class="text-[11px] font-normal">ÄÃºng: +300Ä‘ & +1â¤ï¸ â€¢ Sai/Háº¿t giá»: Ná»” Máº¤T 2â¤ï¸!</span>
+                <span class="text-[11px] font-normal">Đúng: +300đ & +1❤️ • Sai/Hết giờ: NỔ MẤT 2❤️!</span>
             </div>
 
             <!-- Question Card -->
             <div id="question-card" class="bg-[var(--background)]/90 p-4 md:p-5 rounded-xl border border-[var(--border)] shadow-sm space-y-3 transition-all">
                 <div class="flex justify-between items-start gap-2">
                     <span id="question-badge" class="px-2 py-0.5 rounded-md text-[11px] font-bold bg-blue-500/10 text-blue-500 border border-blue-500/20">
-                        VÃ²ng 1
+                        Vòng 1
                     </span>
                     <span id="question-timer-num" class="text-xs font-mono font-black text-amber-500">15s</span>
                 </div>
 
                 <h3 id="question-title" class="text-sm md:text-base font-bold leading-snug">
-                    Ná»™i dung cÃ¢u há»i...
+                    Nội dung câu hỏi...
                 </h3>
 
                 <!-- Answers Options Container -->
@@ -277,24 +277,24 @@
                 <!-- Injected via JS -->
             </div>
 
-            <!-- Special Event Modal: CHEST SWAP (Äá»”I ÄIá»‚M) -->
+            <!-- Special Event Modal: CHEST SWAP (ĐỔI ĐIỂM) -->
             <div id="chest-modal" class="hidden p-4 rounded-xl border border-purple-500/40 bg-purple-950/30 backdrop-blur-md text-center space-y-3 gold-glow">
                 <div class="text-xs font-bold text-purple-400 uppercase tracking-wide flex items-center justify-center gap-1">
-                    <span>âœ¨</span> Sá»° KIá»†N Äá»”I ÄIá»‚M BÃ áº¨N! <span>âœ¨</span>
+                    <span>✨</span> SỰ KIỆN ĐỔI ĐIỂM BÍ ẨN! <span>✨</span>
                 </div>
-                <p class="text-xs text-[var(--muted-foreground)]">HÃ£y chá»n 1 trong 3 chiáº¿c rÆ°Æ¡ng may máº¯n Ä‘á»ƒ thay Ä‘á»•i cá»¥c diá»‡n:</p>
+                <p class="text-xs text-[var(--muted-foreground)]">Hãy chọn 1 trong 3 chiếc rương may mắn để thay đổi cục diện:</p>
                 <div class="grid grid-cols-3 gap-2.5 py-1">
                     <button type="button" onclick="pickChest(1)" class="chest-btn p-3 rounded-xl border border-purple-500/30 bg-purple-500/15 hover:bg-purple-500/30 btn-press text-center cursor-pointer">
-                        <div class="text-3xl mb-1 pointer-events-none">ðŸŽ</div>
-                        <div class="text-xs font-bold text-purple-200 pointer-events-none">RÆ°Æ¡ng 1</div>
+                        <div class="text-3xl mb-1 pointer-events-none">🎁</div>
+                        <div class="text-xs font-bold text-purple-200 pointer-events-none">Rương 1</div>
                     </button>
                     <button type="button" onclick="pickChest(2)" class="chest-btn p-3 rounded-xl border border-purple-500/30 bg-purple-500/15 hover:bg-purple-500/30 btn-press text-center cursor-pointer">
-                        <div class="text-3xl mb-1 pointer-events-none">ðŸŽ</div>
-                        <div class="text-xs font-bold text-purple-200 pointer-events-none">RÆ°Æ¡ng 2</div>
+                        <div class="text-3xl mb-1 pointer-events-none">🎁</div>
+                        <div class="text-xs font-bold text-purple-200 pointer-events-none">Rương 2</div>
                     </button>
                     <button type="button" onclick="pickChest(3)" class="chest-btn p-3 rounded-xl border border-purple-500/30 bg-purple-500/15 hover:bg-purple-500/30 btn-press text-center cursor-pointer">
-                        <div class="text-3xl mb-1 pointer-events-none">ðŸŽ</div>
-                        <div class="text-xs font-bold text-purple-200 pointer-events-none">RÆ°Æ¡ng 3</div>
+                        <div class="text-3xl mb-1 pointer-events-none">🎁</div>
+                        <div class="text-xs font-bold text-purple-200 pointer-events-none">Rương 3</div>
                     </button>
                 </div>
                 <div id="chest-result" class="hidden text-xs font-bold text-amber-400 p-2 rounded bg-purple-900/40 border border-purple-500/30"></div>
@@ -303,10 +303,10 @@
             <!-- Bottom Navigation -->
             <div class="flex justify-between items-center pt-1">
                 <button type="button" onclick="quitGamePrompt()" class="text-xs text-[var(--muted-foreground)] hover:text-red-500 transition cursor-pointer p-1">
-                    ðŸ³ï¸ Dá»«ng & LÆ°u Ä‘iá»ƒm
+                    🏳️ Dừng & Lưu điểm
                 </button>
                 <button type="button" id="btn-next-question" onclick="nextQuestion()" class="hidden px-5 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs md:text-sm btn-press shadow-md cursor-pointer">
-                    Tiáº¿p theo âž¡ï¸
+                    Tiếp theo ➡️
                 </button>
             </div>
         </div>
@@ -314,38 +314,38 @@
         <!-- ================= SCREEN 3: RESULT & SUMMARY ================= -->
         <div id="screen-result" class="hidden space-y-5 py-3 text-center">
             <div class="p-5 rounded-2xl bg-[var(--background)] border border-[var(--border)] space-y-2.5">
-                <div id="result-icon" class="text-4xl">ðŸ†</div>
-                <h2 id="result-title" class="text-xl md:text-2xl font-black text-amber-500">CHIáº¾N THáº®NG Äáº¤U TRÆ¯á»œNG!</h2>
-                <p id="result-subtitle" class="text-xs text-[var(--muted-foreground)]">Báº¡n Ä‘Ã£ xuáº¥t sáº¯c hoÃ n thÃ nh trá»n váº¹n cÃ¡c thá»­ thÃ¡ch</p>
+                <div id="result-icon" class="text-4xl">🏆</div>
+                <h2 id="result-title" class="text-xl md:text-2xl font-black text-amber-500">CHIẾN THẮNG ĐẤU TRƯỜNG!</h2>
+                <p id="result-subtitle" class="text-xs text-[var(--muted-foreground)]">Bạn đã xuất sắc hoàn thành trọn vẹn các thử thách</p>
 
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 py-2">
                     <div class="p-2.5 rounded-xl bg-[var(--card)] border border-[var(--border)]">
-                        <div class="text-[11px] text-[var(--muted-foreground)]">NgÆ°á»i chÆ¡i</div>
+                        <div class="text-[11px] text-[var(--muted-foreground)]">Người chơi</div>
                         <div id="result-player" class="font-bold text-xs md:text-sm truncate">---</div>
                     </div>
                     <div class="p-2.5 rounded-xl bg-[var(--card)] border border-[var(--border)]">
-                        <div class="text-[11px] text-[var(--muted-foreground)]">Tá»•ng Äiá»ƒm</div>
+                        <div class="text-[11px] text-[var(--muted-foreground)]">Tổng Điểm</div>
                         <div id="result-score" class="font-black text-sm md:text-base text-emerald-500">0</div>
                     </div>
                     <div class="p-2.5 rounded-xl bg-[var(--card)] border border-[var(--border)]">
-                        <div class="text-[11px] text-[var(--muted-foreground)]">ÄÃºng / Tá»•ng</div>
+                        <div class="text-[11px] text-[var(--muted-foreground)]">Đúng / Tổng</div>
                         <div id="result-accuracy" class="font-bold text-xs md:text-sm text-blue-500">0/0</div>
                     </div>
                     <div class="p-2.5 rounded-xl bg-[var(--card)] border border-[var(--border)]">
-                        <div class="text-[11px] text-[var(--muted-foreground)]">Combo lá»›n nháº¥t</div>
+                        <div class="text-[11px] text-[var(--muted-foreground)]">Combo lớn nhất</div>
                         <div id="result-maxcombo" class="font-bold text-xs md:text-sm text-orange-500">0x</div>
                     </div>
                 </div>
 
                 <div id="rank-badge" class="inline-block px-3.5 py-1 rounded-full text-xs font-bold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/30">
-                    Danh hiá»‡u: Há»c giáº£ DÃ¢n chá»§ XHCN
+                    Danh hiệu: Học giả Dân chủ XHCN
                 </div>
             </div>
 
             <!-- Mistakes review -->
             <div class="text-left">
                 <button type="button" onclick="toggleMistakes()" id="btn-toggle-mistakes" class="text-xs font-semibold text-amber-500 hover:underline flex items-center gap-1 cursor-pointer">
-                    ðŸ” Xem láº¡i cÃ¡c cÃ¢u tráº£ lá»i sai vÃ  giáº£i thÃ­ch chuáº©n giÃ¡o trÃ¬nh
+                    🔍 Xem lại các câu trả lời sai và giải thích chuẩn giáo trình
                 </button>
                 <div id="mistakes-container" class="hidden mt-2.5 space-y-2.5 max-h-56 overflow-y-auto pr-1">
                     <!-- Injected via JS -->
@@ -354,13 +354,13 @@
 
             <div class="flex flex-col sm:flex-row justify-center gap-2 pt-1">
                 <button type="button" onclick="restartGame()" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs md:text-sm btn-press shadow cursor-pointer">
-                    ðŸ”„ Äáº¥u láº¡i ngay
+                    🔄 Đấu lại ngay
                 </button>
                 <button type="button" onclick="showLeaderboardScreen()" class="px-5 py-2.5 rounded-xl border border-amber-500/40 bg-amber-500/10 text-amber-600 dark:text-amber-400 font-bold text-xs md:text-sm btn-press cursor-pointer">
-                    ðŸ† Xem Báº£ng Xáº¿p Háº¡ng
+                    🏆 Xem Bảng Xếp Hạng
                 </button>
                 <button type="button" onclick="goToLobby()" class="px-5 py-2.5 rounded-xl border border-[var(--border)] hover:bg-[var(--accent)] font-semibold text-xs md:text-sm btn-press cursor-pointer">
-                    ðŸ‘¥ Äá»•i ngÆ°á»i chÆ¡i
+                    👥 Đổi người chơi
                 </button>
             </div>
         </div>
@@ -369,10 +369,10 @@
         <div id="screen-leaderboard" class="hidden space-y-4 py-2">
             <div class="flex justify-between items-center">
                 <h2 class="text-base md:text-lg font-bold flex items-center gap-2">
-                    <span>ðŸ†</span> Báº¢NG VÃ€NG Xáº¾P Háº NG
+                    <span>🏆</span> BẢNG VÀNG XẾP HẠNG
                 </h2>
                 <button type="button" onclick="goToLobby()" class="text-xs px-3 py-1.5 rounded-lg border border-[var(--border)] hover:bg-[var(--accent)] cursor-pointer">
-                    â¬…ï¸ Quay láº¡i sáº£nh
+                    ⬅️ Quay lại sảnh
                 </button>
             </div>
 
@@ -380,11 +380,11 @@
                 <table class="w-full text-left text-xs md:text-sm">
                     <thead class="bg-[var(--card)] border-b border-[var(--border)] text-[var(--muted-foreground)] uppercase text-[10px] md:text-xs sticky top-0">
                         <tr>
-                            <th class="p-2.5 text-center">Háº¡ng</th>
-                            <th class="p-2.5">TÃªn NgÆ°á»i ChÆ¡i</th>
-                            <th class="p-2.5 text-right">Äiá»ƒm Sá»‘</th>
-                            <th class="p-2.5 text-center">ÄÃºng</th>
-                            <th class="p-2.5 text-right">NgÃ y thi</th>
+                            <th class="p-2.5 text-center">Hạng</th>
+                            <th class="p-2.5">Tên Người Chơi</th>
+                            <th class="p-2.5 text-right">Điểm Số</th>
+                            <th class="p-2.5 text-center">Đúng</th>
+                            <th class="p-2.5 text-right">Ngày thi</th>
                         </tr>
                     </thead>
                     <tbody id="leaderboard-tbody" class="divide-y divide-[var(--border)]">
@@ -395,10 +395,10 @@
 
             <div class="flex justify-between items-center pt-1 text-xs">
                 <button type="button" id="btn-clear-lb" onclick="clearLeaderboard()" class="text-red-500 hover:underline cursor-pointer">
-                    ðŸ—‘ï¸ XÃ³a toÃ n bá»™ BXH
+                    🗑️ Xóa toàn bộ BXH
                 </button>
                 <button type="button" onclick="goToLobby()" class="px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-bold btn-press cursor-pointer">
-                    ðŸŽ® ChÆ¡i Ngay
+                    🎮 Chơi Ngay
                 </button>
             </div>
         </div>
@@ -521,47 +521,615 @@
 
         function toggleAudio() {
             audioEnabled = !audioEnabled;
-            document.getElementById('audio-toggle').textContent = audioEnabled ? 'ðŸ”Š' : 'ðŸ”‡';
-            showToast(audioEnabled ? "ÄÃ£ báº­t Ã¢m thanh ðŸ”Š" : "ÄÃ£ táº¯t Ã¢m thanh ðŸ”‡");
+            document.getElementById('audio-toggle').textContent = audioEnabled ? '🔊' : '🔇';
+            showToast(audioEnabled ? "Đã bật âm thanh 🔊" : "Đã tắt âm thanh 🔇");
         }
 
         // --- 3. 16 QUESTIONS (GIÁO TRÌNH 2021) ---
-                const rawQuestions = [
-    { round: "Vòng 1: Đạo đức, Văn minh", type: "mcq", question: "Theo Hồ Chí Minh, Đảng Cộng sản Việt Nam có mục đích tự thân không?", options: ["Có, mục đích là xây dựng hệ thống tổ chức chặt chẽ", "Không, Đảng không có mục đích tự thân, chỉ nhằm phục vụ Tổ quốc và nhân dân", "Có, mục đích là củng cố quyền lực nhà nước", "Không, mục đích của Đảng do Quốc tế Cộng sản định đoạt"], correct: 1, explanation: "Hồ Chí Minh khẳng định Đảng không có mục đích tự thân, mọi hoạt động đều vì lợi ích của giai cấp, nhân dân và dân tộc." },
-    { round: "Vòng 1: Đạo đức, Văn minh", type: "mcq", question: "Hồ Chí Minh cho rằng, xây dựng Đảng là đạo đức, là văn minh thì cốt lõi phải dựa trên nền tảng nào?", options: ["Trí tuệ của giới tinh hoa", "Hệ thống pháp luật chặt chẽ", "Đạo đức cách mạng của mỗi cán bộ, đảng viên", "Mối quan hệ ngoại giao với các nước"], correct: 2, explanation: "Đạo đức cách mạng là cái gốc của người cán bộ, đảng viên. Đảng là đạo đức, văn minh bắt nguồn từ sự trong sạch của từng đảng viên." },
-    { round: "Vòng 1: Đạo đức, Văn minh", type: "mcq", question: "Trong bài nói tại Lễ kỷ niệm 30 năm Ngày thành lập Đảng (1960), Hồ Chí Minh đã nói: 'Đảng ta là đạo đức, là _______.'", options: ["tự do", "hòa bình", "sức mạnh", "văn minh"], correct: 3, explanation: "Bác khẳng định 'Đảng ta là đạo đức, là văn minh'." },
-    { round: "Vòng 1: Đạo đức, Văn minh", type: "mcq", question: "Tính 'văn minh' của Đảng Cộng sản Việt Nam được Hồ Chí Minh nhấn mạnh thể hiện ở việc Đảng phải hoạt động trong khuôn khổ nào?", options: ["Khuôn khổ của kinh tế thị trường.", "Khuôn khổ của Hiến pháp và pháp luật.", "Khuôn khổ của hệ thống quốc tế.", "Khuôn khổ của tình cảm cá nhân."], correct: 1, explanation: "Đảng lãnh đạo nhà nước và xã hội nhưng Đảng cũng phải hoạt động trong khuôn khổ Hiến pháp và pháp luật." },
-    { round: "Vòng 1: Đạo đức, Văn minh", type: "mcq", question: "Hồ Chí Minh cảnh báo: 'Một dân tộc, một đảng và mỗi con người, ngày hôm qua là vĩ đại... không nhất định hôm nay và ngày mai vẫn được mọi người yêu mến, nếu...'", options: ["...không có sức mạnh kinh tế.", "...lòng dạ không trong sáng nữa, nếu sa vào chủ nghĩa cá nhân.", "...không được quốc tế ủng hộ.", "...không có vũ khí hiện đại."], correct: 1, explanation: "Đó là lời răn dạy sâu sắc về sự suy thoái, biến chất từ bên trong." },
-    { round: "Vòng 1: Đạo đức, Văn minh", type: "mcq", question: "Quan điểm 'Xây dựng Đảng là đạo đức, là văn minh' là bước phát triển sáng tạo của Hồ Chí Minh so với học thuyết nào?", options: ["Học thuyết Tam dân của Tôn Trung Sơn.", "Học thuyết dân chủ tư sản Pháp.", "Học thuyết Mác - Lênin về Đảng kiểu mới của giai cấp vô sản.", "Triết học Nho giáo."], correct: 2, explanation: "Đó là đóng góp sáng tạo đặc biệt của Người vào học thuyết Mác - Lênin về xây dựng Đảng." },
-    { round: "Vòng 2: Các Nguyên Tắc", type: "mcq", question: "Nguyên tắc nào được Hồ Chí Minh coi là nguyên tắc TỔ CHỨC cơ bản nhất, cốt lõi nhất của Đảng Cộng sản?", options: ["Tự phê bình và phê bình", "Tập trung dân chủ", "Kỷ luật nghiêm minh", "Gắn bó với nhân dân"], correct: 1, explanation: "Tập trung dân chủ là nguyên tắc tổ chức cơ bản nhất của tổ chức Đảng." },
-    { round: "Vòng 2: Các Nguyên Tắc", type: "mcq", question: "Thực hiện 'Tập trung dân chủ' trong Đảng nghĩa là gì?", options: ["Tập trung là chính, dân chủ là phụ.", "Dân chủ là tự do tuyệt đối, không cần lãnh đạo.", "Tập trung trên nền tảng dân chủ và dân chủ dưới sự chỉ đạo tập trung.", "Lãnh đạo đưa ra quyết định, cấp dưới chỉ được tuân theo."], correct: 2, explanation: "Đây là sự thống nhất biện chứng: Dân chủ là cơ sở của tập trung, tập trung bảo đảm cho dân chủ." },
-    { round: "Vòng 2: Các Nguyên Tắc", type: "mcq", question: "Hồ Chí Minh lưu ý hai điều kiện cần tránh trong hoạt động lãnh đạo của Đảng (khi áp dụng tập trung dân chủ) là gì?", options: ["Bệnh lười biếng và bệnh kiêu ngạo.", "Độc đoán chuyên quyền và dựa dẫm tập thể, không dám quyết đoán.", "Tham nhũng và lãng phí.", "Lạc hậu và bảo thủ."], correct: 1, explanation: "Thiếu dân chủ sinh ra độc đoán chuyên quyền; thiếu tập trung dẫn đến dựa dẫm tập thể, vô tổ chức." },
-    { round: "Vòng 2: Các Nguyên Tắc", type: "mcq", question: "Theo Hồ Chí Minh, 'thang thuốc' tốt nhất để làm cho phần tốt trong mỗi tổ chức nảy nở và phần xấu bị mất dần đi là gì?", options: ["Tập trung dân chủ.", "Kỷ luật sắt.", "Tự phê bình và phê bình.", "Xử phạt nghiêm khắc."], correct: 2, explanation: "Tự phê bình và phê bình là thứ vũ khí thần hiệu, là 'thang thuốc' tốt nhất." },
-    { round: "Vòng 2: Các Nguyên Tắc", type: "mcq", question: "Đối tượng của tự phê bình và phê bình trong Đảng là ai?", options: ["Chỉ áp dụng cho cấp dưới.", "Chỉ áp dụng cho lãnh đạo cấp cao.", "Tiến hành từ trên xuống dưới, từ dưới lên trên với mọi cán bộ, đảng viên.", "Chỉ áp dụng khi có khuyết điểm rất nghiêm trọng."], correct: 2, explanation: "Tự phê bình và phê bình phải tiến hành thường xuyên, liên tục, dân chủ, từ trên xuống và từ dưới lên." },
-    { round: "Vòng 2: Các Nguyên Tắc", type: "mcq", question: "Bác ví việc 'Tự phê bình và phê bình' trong Đảng quan trọng và thường xuyên giống như hành động gì của con người mỗi ngày?", options: ["Tập thể dục.", "Rửa mặt hàng ngày.", "Ăn uống.", "Làm việc."], correct: 1, explanation: "Ngày nào cũng phải rửa mặt cho sạch sẽ, cũng như ngày nào cũng phải tự phê bình." },
-    { round: "Vòng 2: Các Nguyên Tắc", type: "mcq", question: "Câu nói: 'Một Đảng giấu giếm khuyết điểm của mình là một Đảng hỏng...' nhấn mạnh nguyên tắc nào?", options: ["Đoàn kết thống nhất.", "Tập trung dân chủ.", "Tự phê bình và phê bình.", "Gắn bó với nhân dân."], correct: 2, explanation: "Dám thừa nhận và sửa chữa khuyết điểm là một Đảng chân chính, tiến bộ." },
-    { round: "Vòng 2: Các Nguyên Tắc", type: "mcq", question: "Trong Di chúc, Hồ Chí Minh nhắc nhở các đồng chí cần giữ gìn sự đoàn kết nhất trí của Đảng như giữ gìn cái gì?", options: ["Mạng sống của chính mình.", "Tài sản của quốc gia.", "Con ngươi của mắt mình.", "Sinh mệnh chính trị."], correct: 2, explanation: "Bác viết: 'phải giữ gìn sự đoàn kết nhất trí của Đảng như giữ gìn con ngươi của mắt mình'." },
-    { round: "Vòng 2: Các Nguyên Tắc", type: "mcq", question: "Đoàn kết trong Đảng không phải là 'đoàn kết xuôi chiều' mà là đoàn kết dựa trên cơ sở nào?", options: ["Bao che khuyết điểm cho nhau.", "Dựa trên lý luận Mác - Lênin, Cương lĩnh, Điều lệ Đảng và tình đồng chí.", "Sự dung hòa lợi ích cá nhân.", "Quyền uy của cấp trên ép buộc."], correct: 1, explanation: "Đoàn kết thống nhất phải dựa trên cơ sở lý luận cách mạng và tình đồng chí thương yêu lẫn nhau." },
-    { round: "Vòng 3: Kỷ luật & Chỉnh đốn", type: "mcq", question: "Hồ Chí Minh quan niệm tính kỷ luật của Đảng Cộng sản phải là loại kỷ luật như thế nào?", options: ["Kỷ luật tùy theo hoàn cảnh linh hoạt.", "Kỷ luật sắt - nghiêm minh và hoàn toàn tự giác.", "Kỷ luật mang tính áp đặt từ trên xuống.", "Kỷ luật có thể du di cho cán bộ cấp cao."], correct: 1, explanation: "Sức mạnh vô địch của Đảng là ở tinh thần kỷ luật nghiêm minh và tự giác (Kỷ luật sắt)." },
-    { round: "Vòng 3: Kỷ luật & Chỉnh đốn", type: "mcq", question: "Đặc điểm nổi bật nhất của 'kỷ luật sắt' trong Đảng theo Tư tưởng Hồ Chí Minh là gì?", options: ["Do sự áp bức mà có.", "Do lòng tự giác của đảng viên về nhiệm vụ của họ đối với Đảng.", "Do sự giám sát khắt khe của quần chúng.", "Do các hình phạt quá nặng."], correct: 1, explanation: "Kỷ luật tự giác làm nên tính vững chắc của kỷ luật Đảng." },
-    { round: "Vòng 3: Kỷ luật & Chỉnh đốn", type: "mcq", question: "Tại sao Hồ Chí Minh lại nhấn mạnh Đảng phải thường xuyên tự chỉnh đốn?", options: ["Vì Đảng là một cơ thể sống, cần loại bỏ yếu tố độc hại để phát triển.", "Vì có sự ép buộc của quốc tế.", "Vì đó là trào lưu của các đảng phái.", "Vì pháp luật bắt buộc."], correct: 0, explanation: "Đảng tồn tại trong xã hội, đảng viên mang trong mình cả mặt tốt và xấu của xã hội, nên tự chỉnh đốn là tất yếu." },
-    { round: "Vòng 3: Kỷ luật & Chỉnh đốn", type: "mcq", question: "Việc tự chỉnh đốn Đảng, theo Hồ Chí Minh, đặc biệt quan trọng nhất vào thời điểm nào?", options: ["Khi Đảng gặp thất bại liên tiếp.", "Khi nền kinh tế khủng hoảng.", "Khi cách mạng chuyển giai đoạn hoặc sau những thắng lợi lớn.", "Ngay trước thềm Đại hội Đảng."], correct: 2, explanation: "Vì sau thắng lợi, cán bộ đảng viên dễ sinh ra kiêu ngạo, tham nhũng, hưởng thụ." },
-    { round: "Vòng 3: Kỷ luật & Chỉnh đốn", type: "mcq", question: "Hồ Chí Minh đòi hỏi Đảng phải thường xuyên tẩy bỏ những phần tử nào ra khỏi tổ chức của mình?", options: ["Phần tử có chuyên môn yếu kém.", "Phần tử không có bằng cấp học thuật.", "Những phần tử thoái hóa, biến chất, hủ hóa.", "Những phần tử hay đưa ra ý kiến phản biện."], correct: 2, explanation: "Phải kiên quyết đưa những phần tử thoái hóa, biến chất ra khỏi Đảng để Đảng trong sạch." },
-    { round: "Vòng 3: Kỷ luật & Chỉnh đốn", type: "mcq", question: "Khi nói về việc xây dựng, rèn luyện Đảng, Bác thường dùng hình ảnh ẩn dụ nào để chỉ việc mài giũa đạo đức của đảng viên?", options: ["Ngọc càng mài càng sáng, vàng càng luyện càng trong.", "Nước chảy đá mòn.", "Có công mài sắt có ngày nên kim.", "Lửa thử vàng gian nan thử sức."], correct: 0, explanation: "Giáo dục, tu dưỡng đạo đức phải gian khổ rèn luyện suốt đời như mài ngọc, luyện vàng." },
-    { round: "Vòng 4: Gắn bó với nhân dân", type: "mcq", question: "Nguồn gốc sức mạnh vô địch của Đảng Cộng sản Việt Nam xuất phát từ đâu?", options: ["Hệ thống vũ khí quân đội.", "Viện trợ từ các nước XHCN.", "Mối liên hệ mật thiết, máu thịt với nhân dân.", "Bộ máy tuyên truyền hùng mạnh."], correct: 2, explanation: "Mối quan hệ gắn bó máu thịt với nhân dân là yếu tố quyết định mọi thắng lợi của Đảng." },
-    { round: "Vòng 4: Gắn bó với nhân dân", type: "mcq", question: "Căn bệnh nào được Hồ Chí Minh phê phán là nguy hiểm nhất làm xa rời Đảng với nhân dân?", options: ["Bệnh lười biếng.", "Bệnh quan liêu, mệnh lệnh, xa rời quần chúng.", "Bệnh giáo điều, sách vở.", "Bệnh thành tích."], correct: 1, explanation: "Quan liêu, mệnh lệnh làm mất đi sự tin yêu của quần chúng nhân dân." },
-    { round: "Vòng 4: Gắn bó với nhân dân", type: "mcq", question: "Nếu không có nhân dân giúp sức thì Đảng sẽ như thế nào theo quan điểm của Hồ Chí Minh?", options: ["Đảng vẫn tự mình lãnh đạo được.", "Đảng sẽ gặp khó khăn nhưng vẫn qua.", "Đảng không làm được việc gì hết.", "Đảng sẽ nhờ quốc tế can thiệp."], correct: 2, explanation: "Sức mạnh của Đảng là sức mạnh của nhân dân." },
-    { round: "Vòng 4: Gắn bó với nhân dân", type: "mcq", question: "Phương châm nào sau đây thể hiện rõ nhất vai trò tiên phong của người đảng viên?", options: ["Nói đi đôi với làm.", "Đảng viên đi trước, làng nước theo sau.", "Cần kiệm liêm chính.", "Phụng công thủ pháp."], correct: 1, explanation: "Đòi hỏi tính tiên phong, gương mẫu đi đầu trong mọi khó khăn của đảng viên." },
-    { round: "Vòng 4: Gắn bó với nhân dân", type: "mcq", question: "Để gắn bó với nhân dân, cán bộ, đảng viên phải tránh thái độ nào khi tiếp xúc với quần chúng?", options: ["Lắng nghe và học hỏi quần chúng.", "Nâng cao trình độ để hướng dẫn quần chúng.", "Thái độ vác mặt 'quan cách mạng', kiêu ngạo.", "Tin tưởng vào sức mạnh quần chúng."], correct: 2, explanation: "Bác luôn dạy cán bộ là 'đày tớ' của dân, tuyệt đối không được lên mặt 'làm quan cách mạng'." },
-    { round: "Vòng 4: Gắn bó với nhân dân", type: "mcq", question: "Hồ Chí Minh khẳng định: 'Sự lãnh đạo trong mọi công tác thiết thực của Đảng, ắt phải từ trong quần chúng ra, trở lại...'", options: ["...nơi quần chúng.", "...Trung ương Đảng.", "...cơ quan nhà nước.", "...sách vở lý luận."], correct: 0, explanation: "Đó là phương pháp lãnh đạo theo đường lối quần chúng." },
-    { round: "Vòng 5: Tổng hợp", type: "mcq", question: "Trong điều kiện Đảng cầm quyền, Hồ Chí Minh đặc biệt lo ngại nguy cơ gì nhất đối với tổ chức Đảng?", options: ["Bị các thế lực đế quốc tấn công quân sự.", "Bị cắt đứt nguồn viện trợ.", "Sự suy thoái về đạo đức, biến chất của cán bộ, đảng viên.", "Thiếu nguồn nhân lực có trình độ."], correct: 2, explanation: "Nguy cơ thoái hóa, biến chất, tham ô, lãng phí là thứ 'giặc nội xâm' đáng sợ nhất." },
-    { round: "Vòng 5: Tổng hợp", type: "mcq", question: "Câu nào sau đây KHÔNG PHẢI là một trong những vấn đề nguyên tắc trong hoạt động của Đảng theo tư tưởng Hồ Chí Minh?", options: ["Tập trung dân chủ.", "Đa nguyên chính trị, đa đảng đối lập.", "Tự phê bình và phê bình.", "Kỷ luật nghiêm minh, tự giác."], correct: 1, explanation: "Đảng Cộng sản Việt Nam hoạt động theo nguyên tắc nhất nguyên chính trị, không chấp nhận đa nguyên đa đảng." },
-    { round: "Vòng 5: Tổng hợp", type: "mcq", question: "Phương pháp giáo dục và rèn luyện đạo đức hiệu quả nhất cho đảng viên và quần chúng, theo Bác là phương pháp gì?", options: ["Xử phạt nghiêm khắc bằng pháp luật.", "Giáo dục bằng sách vở lý luận hàn lâm.", "Đưa vào trại cải tạo.", "Nêu gương."], correct: 3, explanation: "Bác nói: Một tấm gương sống còn có giá trị hơn một trăm bài diễn văn tuyên truyền." }
+        const rawQuestions = [
+    {
+        round: "Vòng 1: Khởi động",
+        type: "mcq",
+        question: "Từ 'Demoskratos' ở Hy Lạp cổ đại dịch theo nghĩa gốc là gì?",
+        options: [
+            "Quyền lực của toàn thể vua chúa và tăng lữ",
+            "Nhân dân cai trị / Quyền lực thuộc về nhân dân",
+            "Sự bình đẳng tự do tuyệt đối không cần pháp luật",
+            "Hình thức bầu cử thương mại của các quý tộc"
+        ],
+        correct: 1,
+        explanation: "Trong tiếng Hy Lạp: 'Demos' là nhân dân, 'Kratos' là cai trị. Dân chủ hiểu căn bản là quyền lực thuộc về nhân dân."
+    },
+    {
+        round: "Vòng 1: Khởi động",
+        type: "mcq",
+        question: "Theo Chủ nghĩa Mác - Lênin, dân chủ được xem xét dưới những phương diện cơ bản nào?",
+        options: [
+            "Chỉ duy nhất ở phương diện đạo đức học",
+            "Quyền lực, chế độ chính trị - nhà nước, và nguyên tắc tổ chức quản lý",
+            "Phương thức phân phối lợi nhuận kinh tế tư nhân",
+            "Một nghi thức tâm linh trong đời sống văn hóa"
+        ],
+        correct: 1,
+        explanation: "Giáo trình nêu 3 phương diện: (1) Quyền lực thuộc về nhân dân; (2) Là hình thái/chính thể nhà nước; (3) Là nguyên tắc tổ chức quản lý (tập trung dân chủ)."
+    },
+    {
+        round: "Vòng 1: Khởi động",
+        type: "mcq",
+        question: "Chủ nghĩa Mác - Lênin khẳng định dân chủ là một phạm trù lịch sử VÀ một phạm trù vĩnh viễn vì sao?",
+        options: [
+            "Là phạm trù lịch sử khi gắn với nhà nước; là phạm trù vĩnh viễn khi là giá trị xã hội của loài người",
+            "Vì dân chủ không bao giờ biến đổi qua các thời kỳ lịch sử",
+            "Vì nó ra đời cùng với vũ trụ và sẽ tồn tại mãi mãi",
+            "Vì mọi chế độ xã hội đều áp dụng mô hình dân chủ giống hệt nhau"
+        ],
+        correct: 0,
+        explanation: "Với tư cách hình thái nhà nước, dân chủ là phạm trù lịch sử (mất đi khi nhà nước tiêu vong). Nhưng với tư cách giá trị nhân loại, nó tồn tại chừng nào con người còn tồn tại."
+    },
+    {
+        round: "Vòng 2: Tư tưởng HCM",
+        type: "mcq",
+        question: "Điền từ còn thiếu vào câu nói nổi tiếng của Chủ tịch Hồ Chí Minh: 'Chế độ ta là chế độ dân chủ, tức là nhân dân là người chủ, mà Chính phủ là người ________ của nhân dân.'",
+        options: [
+            "cha mẹ hiền từ",
+            "lãnh đạo tối cao",
+            "đày tớ trung thành",
+            "quan chức cách mạng"
+        ],
+        correct: 2,
+        explanation: "Bác khẳng định Chính phủ là 'đày tớ trung thành' của nhân dân, chứ tuyệt đối không phải là 'làm quan cách mạng'."
+    },
+    {
+        round: "Vòng 2: Tư tưởng HCM",
+        type: "mcq",
+        question: "Theo tư tưởng Hồ Chí Minh, trong các lĩnh vực của đời sống, hai lĩnh vực dân chủ quan trọng hàng đầu và nổi bật nhất là:",
+        options: [
+            "Dân chủ trong kinh tế và Dân chủ trong chính trị",
+            "Dân chủ trong tôn giáo và Dân chủ trong tín ngưỡng",
+            "Dân chủ trong gia đình và Dân chủ ngoài xã hội",
+            "Dân chủ trong quân sự và Dân chủ trong ngoại giao"
+        ],
+        correct: 0,
+        explanation: "Giáo trình trang 128 - 129 chỉ rõ: Dân chủ trong kinh tế và chính trị là hai lĩnh vực quan trọng hàng đầu, quyết định dân chủ trong văn hóa - xã hội."
+    },
+    {
+        round: "Vòng 2: Tư tưởng HCM",
+        type: "mcq",
+        question: "Bác Hồ từng viết: 'Trong chế độ dân chủ xã hội chủ nghĩa thì bao nhiêu quyền lực đều là của dân, bao nhiêu sức mạnh đều ở nơi dân, bao nhiêu lợi ích đều là vì dân.' Điều này đúng hay sai?",
+        options: [
+            "ĐÚNG",
+            "SAI",
+            "Chỉ đúng một nửa",
+            "Chỉ áp dụng trong thời chiến"
+        ],
+        correct: 0,
+        explanation: "Hoàn toàn ĐÚNG! Đây là luận điểm nổi tiếng của Chủ tịch Hồ Chí Minh về bản chất thực sự của dân chủ ở nước ta."
+    },
+    {
+        round: "Vòng 3: Tiến trình Lịch sử",
+        type: "mcq",
+        question: "Hình thức sơ khai đầu tiên của dân chủ trong thời kỳ Cộng sản nguyên thủy được Ăngghen gọi là gì?",
+        options: [
+            "Dân chủ đại nghị",
+            "Dân chủ nguyên thủy (hoặc Dân chủ quân sự)",
+            "Dân chủ tập trung",
+            "Dân chủ tư sản sơ khai"
+        ],
+        correct: 1,
+        explanation: "Ph. Ăngghen gọi là 'dân chủ nguyên thủy' hay 'dân chủ quân sự', nơi mọi người biểu quyết bầu thủ lĩnh qua Đại hội nhân dân bằng cách giơ tay hoặc hoan hô."
+    },
+    {
+        round: "Vòng 3: Tiến trình Lịch sử",
+        type: "mcq",
+        question: "Trong lịch sử nhân loại, dưới thời kỳ Phong kiến có tồn tại nền dân chủ phong kiến không?",
+        options: [
+            "Có, rất phát triển",
+            "KHÔNG CÓ",
+            "Chỉ có ở phương Tây",
+            "Chỉ có ở phương Đông"
+        ],
+        correct: 1,
+        explanation: "Trong chế độ phong kiến KHÔNG CÓ nền dân chủ, mà bị thay thế hoàn toàn bởi chế độ độc tài chuyên chế của vua chúa."
+    },
+    {
+        round: "Vòng 3: Tiến trình Lịch sử",
+        type: "mcq",
+        question: "Tại sao nền Dân chủ Tư sản dù là bước tiến vĩ đại nhưng vẫn chưa phải là nền dân chủ hoàn thiện nhất?",
+        options: [
+            "Vì không cho phép thành lập các đảng phái chính trị",
+            "Vì xây dựng trên nền tảng chế độ tư hữu về tư liệu sản xuất, phục vụ thiểu số",
+            "Vì nền dân chủ tư sản không có hiến pháp và pháp luật",
+            "Vì giai cấp tư sản không biết ứng dụng khoa học kỹ thuật"
+        ],
+        correct: 1,
+        explanation: "Do dựa trên sở hữu tư nhân về tư liệu sản xuất, quyền lực cốt lõi vẫn nằm trong tay những kẻ nắm tư bản, chiếm đa số của cải."
+    },
+    {
+        round: "Vòng 3: Tiến trình Lịch sử",
+        type: "mcq",
+        question: "Tính đến nay, lịch sử nhân loại đã trải qua bao nhiêu NỀN (chế độ) dân chủ chính thức có nhà nước?",
+        options: [
+            "2 nền dân chủ (Tư sản và XHCN)",
+            "3 nền dân chủ (Chủ nô, Tư sản, Xã hội chủ nghĩa)",
+            "4 nền dân chủ (Nguyên thủy, Chủ nô, Phong kiến, Tư sản)",
+            "5 nền dân chủ tương ứng 5 hình thái kinh tế - xã hội"
+        ],
+        correct: 1,
+        explanation: "Có 3 nền dân chủ gắn với nhà nước: Dân chủ chủ nô, Dân chủ tư sản và Dân chủ XHCN (Dân chủ nguyên thủy chưa có nhà nước, phong kiến không có dân chủ)."
+    },
+    {
+        round: "Vòng 4: Dân chủ XHCN",
+        type: "mcq",
+        question: "Nền dân chủ XHCN được phôi thai từ thực tiễn lịch sử nào và chính thức xác lập sau cuộc cách mạng nào?",
+        options: [
+            "Phôi thai từ Cách mạng Pháp 1789, xác lập sau CTTG 1",
+            "Phôi thai từ Công xã Pari 1871, chính thức xác lập sau Cách mạng Tháng Mười Nga 1917",
+            "Phôi thai từ Phong trào Hiến chương Anh, xác lập sau CMXHCN",
+            "Phôi thai từ Tuyên ngôn Độc lập Mỹ, xác lập sau CTTG 2"
+        ],
+        correct: 1,
+        explanation: "Giáo trình trang 133: Phôi thai từ thực tiễn Công xã Pari (1871) và chính thức xác lập sau Cách mạng Xã hội chủ nghĩa Tháng Mười Nga (1917)."
+    },
+    {
+        round: "Vòng 4: Dân chủ XHCN",
+        type: "mcq",
+        question: "V.I. Lênin từng so sánh mức độ dân chủ giữa hai chế độ: 'Chế độ dân chủ vô sản so với bất cứ chế độ dân chủ tư sản nào, cũng dân chủ hơn gấp ________.'",
+        options: [
+            "mười lần",
+            "trăm lần",
+            "ngàn lần",
+            "triệu lần"
+        ],
+        correct: 3,
+        explanation: "Lênin khẳng định: Dân chủ vô sản dân chủ hơn gấp triệu lần vì nó là nền dân chủ của đại đa số nhân dân lao động thay vì của thiểu số nhà giàu."
+    },
+    {
+        round: "Vòng 5: Ba Bản Chất",
+        type: "mcq",
+        question: "Về BẢN CHẤT CHÍNH TRỊ, nền dân chủ XHCN có đặc trưng nổi bật nào?",
+        options: [
+            "Thực hiện cơ chế đa nguyên chính trị, đa đảng đối lập",
+            "Mang tính nhất nguyên chính trị dưới sự lãnh đạo duy nhất của Đảng Cộng sản",
+            "Không cần có nhà nước và pháp luật quản lý",
+            "Mọi quyết định đều do các nghiệp đoàn quốc tế tự ý phê chuẩn"
+        ],
+        correct: 1,
+        explanation: "Nền dân chủ XHCN mang tính nhất nguyên về chính trị, do Đảng Cộng sản (đội tiên phong của giai cấp công nhân) lãnh đạo để bảo vệ lợi ích nhân dân."
+    },
+    {
+        round: "Vòng 5: Ba Bản Chất",
+        type: "mcq",
+        question: "Về BẢN CHẤT KINH TẾ, nền dân chủ XHCN dựa trên nền tảng sở hữu nào?",
+        options: [
+            "Chế độ tư hữu tư bản chủ nghĩa hoàn toàn",
+            "Chế độ công hữu về các tư liệu sản xuất chủ yếu",
+            "Chế độ phân phối cào bằng bình quân chủ nghĩa",
+            "Phụ thuộc hoàn toàn vào viện trợ của các tổ chức tài chính"
+        ],
+        correct: 1,
+        explanation: "Bản chất kinh tế của dân chủ XHCN là dựa trên chế độ công hữu về tư liệu sản xuất chủ yếu và thực hiện phân phối theo lao động là chủ đạo."
+    },
+    {
+        round: "Vòng 5: Ba Bản Chất",
+        type: "mcq",
+        question: "Về BẢN CHẤT TƯ TƯỞNG - VĂN HÓA, nền dân chủ XHCN lấy hệ tư tưởng nào làm chủ đạo?",
+        options: [
+            "Chủ nghĩa thực dụng và chủ nghĩa cá nhân",
+            "Hệ tư tưởng Mác - Lênin (hệ tư tưởng của giai cấp công nhân)",
+            "Thần quyền tôn giáo của thời trung cổ",
+            "Các trào lưu triết học siêu hình Tây Âu"
+        ],
+        correct: 1,
+        explanation: "Lấy hệ tư tưởng Mác - Lênin làm chủ đạo, đồng thời kế thừa tinh hoa văn hóa truyền thống dân tộc và nhân loại."
+    },
+    {
+        round: "Vòng 5: Ba Bản Chất",
+        type: "mcq",
+        question: "Theo V.I. Lênin, khi xã hội tiến đến chủ nghĩa cộng sản hoàn thiện, nền dân chủ XHCN với tư cách một hình thái nhà nước sẽ ra sao?",
+        options: [
+            "Sẽ trở thành vĩnh cửu không bao giờ mất đi",
+            "Sẽ tự tiêu vong (mất đi tính chính trị, trở thành tập quán tự quản)",
+            "Sẽ bị giai cấp tư sản lật đổ hoàn toàn",
+            "Sẽ biến thành một chế độ quân chủ chuyên chế mới"
+        ],
+        correct: 1,
+        explanation: "Khi không còn giai cấp, nhà nước tiêu vong thì dân chủ với tư cách chế độ nhà nước cũng tiêu vong, tính chính trị mất đi, trở thành thói quen tự quản."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Thuật ngữ 'Demos' trong tiếng Hy Lạp cổ đại có nghĩa là gì?",
+        options: [
+            "Tự do",
+            "Nhà nước",
+            "Nhân dân",
+            "Cai trị"
+        ],
+        correct: 2,
+        explanation: "Demos có nghĩa là Nhân dân."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Thuật ngữ 'Kratos' trong tiếng Hy Lạp cổ đại có nghĩa là gì?",
+        options: [
+            "Nhân dân",
+            "Bình đẳng",
+            "Cai trị",
+            "Tự do"
+        ],
+        correct: 2,
+        explanation: "Kratos có nghĩa là Cai trị hoặc Quyền lực."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Trong chế độ cộng sản nguyên thủy, cơ quan quyền lực cao nhất của thị tộc là gì?",
+        options: [
+            "Hội đồng trưởng lão",
+            "Đại hội nhân dân",
+            "Tù trưởng",
+            "Nhà nước"
+        ],
+        correct: 1,
+        explanation: "Đại hội nhân dân là cơ quan quyền lực cao nhất thời kỳ chưa có nhà nước."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Đặc trưng của 'dân chủ quân sự' trong thời kỳ nguyên thủy là gì?",
+        options: [
+            "Bốc thăm",
+            "Bầu ra thủ lĩnh quân sự",
+            "Cử tri bầu cử",
+            "Cha truyền con nối"
+        ],
+        correct: 1,
+        explanation: "Dân chủ quân sự xoay quanh việc bầu ra thủ lĩnh quân sự để chỉ huy chiến đấu."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Sự xuất hiện của chế độ tư hữu đã dẫn đến sự ra đời của nền dân chủ nào?",
+        options: [
+            "Dân chủ tư sản",
+            "Dân chủ nguyên thủy",
+            "Dân chủ XHCN",
+            "Dân chủ chủ nô"
+        ],
+        correct: 3,
+        explanation: "Sự tư hữu và giai cấp ra đời dẫn đến nhà nước chủ nô và nền dân chủ đầu tiên là Dân chủ chủ nô."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Nền dân chủ tư sản ra đời đánh dấu bước phát triển lịch sử so với chế độ nào?",
+        options: [
+            "Chế độ phong kiến",
+            "Chế độ chiếm hữu nô lệ",
+            "Chế độ XHCN",
+            "Chế độ cộng sản nguyên thủy"
+        ],
+        correct: 0,
+        explanation: "Nó đã lật đổ chế độ phong kiến chuyên chế không có dân chủ."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Nền dân chủ vô sản (XHCN) khác biệt căn bản với các nền dân chủ trước đó ở điểm nào?",
+        options: [
+            "Xóa bỏ hoàn toàn nhà nước",
+            "Là nền dân chủ của đa số",
+            "Không có giai cấp lãnh đạo",
+            "Là nền dân chủ của thiểu số"
+        ],
+        correct: 1,
+        explanation: "Lần đầu tiên trong lịch sử, quyền lực thuộc về đa số nhân dân lao động."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "V.I. Lênin cho rằng chế độ dân chủ vô sản là hình thức nhà nước bảo vệ lợi ích cho ai?",
+        options: [
+            "Tầng lớp trí thức",
+            "Đại đa số nhân dân lao động",
+            "Toàn bộ xã hội kể cả tư sản",
+            "Giai cấp công nhân"
+        ],
+        correct: 1,
+        explanation: "Bảo vệ lợi ích cho đại đa số nhân dân lao động."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Sự khác biệt về mặt bản chất chính trị giữa dân chủ XHCN và dân chủ tư sản là gì?",
+        options: [
+            "Nhất nguyên và đa nguyên chính trị",
+            "Chế độ tư hữu và công hữu",
+            "Tư tưởng Mác-Lênin và tư tưởng tư sản",
+            "Xóa bỏ giai cấp và duy trì giai cấp"
+        ],
+        correct: 0,
+        explanation: "Dân chủ XHCN là nhất nguyên chính trị do Đảng Cộng sản lãnh đạo, trái ngược đa nguyên của dân chủ tư sản."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Bản chất chính trị của nền dân chủ XHCN thể hiện ở việc nhân dân tham gia quản lý nhà nước thông qua yếu tố nào?",
+        options: [
+            "Bằng cách mua phiếu bầu",
+            "Chỉ thông qua biểu tình",
+            "Thông qua các đại diện do họ bầu ra",
+            "Thông qua vua chúa"
+        ],
+        correct: 2,
+        explanation: "Nhân dân quản lý nhà nước thông qua các cơ quan đại diện do mình bầu ra."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Động lực chủ yếu để xây dựng nền dân chủ XHCN là gì?",
+        options: [
+            "Lợi ích của nhân dân",
+            "Sự ép buộc của pháp luật",
+            "Viện trợ kinh tế",
+            "Áp lực từ quốc tế"
+        ],
+        correct: 0,
+        explanation: "Lợi ích của nhân dân chính là động lực chủ yếu để tiến hành xây dựng và phát triển dân chủ XHCN."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Sự phát triển của nền dân chủ XHCN gắn liền với quá trình nào?",
+        options: [
+            "Mở rộng chủ nghĩa tư bản",
+            "Xây dựng CNXH",
+            "Chiến tranh giai cấp liên tục",
+            "Xóa bỏ triệt để văn hóa truyền thống"
+        ],
+        correct: 1,
+        explanation: "Sự phát triển của nó luôn gắn liền và là một phần của công cuộc xây dựng CNXH."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Chế độ công hữu về tư liệu sản xuất trong dân chủ XHCN nhằm mục đích gì?",
+        options: [
+            "Khuyến khích cạnh tranh tư bản",
+            "Làm bần cùng hóa giai cấp tư sản",
+            "Thỏa mãn nhu cầu vật chất và tinh thần của nhân dân",
+            "Tập trung tài sản cho nhà nước"
+        ],
+        correct: 2,
+        explanation: "Công hữu để hướng tới thỏa mãn nhu cầu của đại đa số nhân dân."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Trong nền dân chủ XHCN, dân chủ vừa là mục tiêu, vừa là gì của công cuộc xây dựng CNXH?",
+        options: [
+            "Hệ quả",
+            "Động lực",
+            "Biện pháp",
+            "Phương tiện"
+        ],
+        correct: 1,
+        explanation: "Dân chủ vừa là mục tiêu, vừa là động lực của CNXH."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Quá trình tự tiêu vong của nền dân chủ XHCN gắn liền với sự tiêu vong của yếu tố nào?",
+        options: [
+            "Nhà nước",
+            "Tôn giáo",
+            "Xã hội loài người",
+            "Nền kinh tế hàng hóa"
+        ],
+        correct: 0,
+        explanation: "Dân chủ (với tư cách là chế độ nhà nước) sẽ tiêu vong cùng lúc với sự tiêu vong của nhà nước khi lên CSCN."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "'Dân chủ là một hình thức nhà nước, một trong những hình thái nhà nước' là câu nói của ai?",
+        options: [
+            "C. Mác",
+            "Hồ Chí Minh",
+            "V.I. Lênin",
+            "Ph. Ăngghen"
+        ],
+        correct: 2,
+        explanation: "Đây là câu nói kinh điển của V.I. Lênin."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Dân chủ vô sản không phải là chế độ dân chủ cho mọi người mà là dân chủ đối với ai?",
+        options: [
+            "Giai cấp bóc lột",
+            "Nhân dân lao động",
+            "Tầng lớp trí thức",
+            "Giai cấp công nhân"
+        ],
+        correct: 1,
+        explanation: "Dân chủ đối với nhân dân lao động (đa số) và chuyên chính với bọn bóc lột (thiểu số)."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Theo Lênin, dân chủ vô sản thực hiện việc chuyên chính đối với lực lượng nào?",
+        options: [
+            "Đảng phái đối lập",
+            "Nông dân",
+            "Bọn bóc lột",
+            "Trí thức"
+        ],
+        correct: 2,
+        explanation: "Phải thực hiện chuyên chính (trấn áp) đối với bọn bóc lột."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Nền dân chủ XHCN không ngừng mở rộng quá trình gì của nhân dân?",
+        options: [
+            "Tham gia lực lượng vũ trang",
+            "Tham gia đóng thuế",
+            "Tham gia biểu tình",
+            "Tham gia quản lý nhà nước và xã hội"
+        ],
+        correct: 3,
+        explanation: "Bản chất chính trị là mở rộng quyền tham gia quản lý nhà nước của nhân dân."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Mác và Ăngghen khẳng định bước thứ nhất trong cuộc cách mạng công nhân là gì?",
+        options: [
+            "Phá bỏ toàn bộ nhà máy",
+            "Xóa bỏ ngay nhà nước",
+            "Biến vô sản thành giai cấp thống trị, giành lấy dân chủ",
+            "Tịch thu tài sản"
+        ],
+        correct: 2,
+        explanation: "Bước đầu tiên là giành chính quyền, thiết lập chuyên chính vô sản và nền dân chủ."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Trong chế độ dân chủ tư sản, tính chất 'dân chủ' bị hạn chế cốt lõi bởi yếu tố nào?",
+        options: [
+            "Hiến pháp quy định",
+            "Quyền tự do ngôn luận",
+            "Chế độ bầu cử phổ thông",
+            "Quyền sở hữu tư nhân về tư liệu sản xuất"
+        ],
+        correct: 3,
+        explanation: "Đây là nguyên nhân gốc rễ khiến quyền lực chỉ tập trung vào tay thiểu số tư sản."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Nền dân chủ XHCN phát triển đỉnh cao khi xã hội bước vào giai đoạn nào?",
+        options: [
+            "Chủ nghĩa xã hội",
+            "Chủ nghĩa cộng sản",
+            "Cách mạng công nghiệp",
+            "Thời kỳ quá độ"
+        ],
+        correct: 1,
+        explanation: "Phát triển tới đỉnh cao và cũng là lúc nó tự tiêu vong trong giai đoạn cộng sản chủ nghĩa."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Dân chủ XHCN là nền dân chủ mang bản chất của giai cấp nào?",
+        options: [
+            "Toàn dân",
+            "Giai cấp nông dân",
+            "Giai cấp công nhân",
+            "Tầng lớp trí thức"
+        ],
+        correct: 2,
+        explanation: "Luôn mang bản chất của giai cấp công nhân."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Dân chủ XHCN loại bỏ triệt để các tư tưởng, văn hóa nào?",
+        options: [
+            "Tư tưởng bóc lột, lạc hậu",
+            "Văn hóa tôn giáo",
+            "Tư tưởng dân tộc",
+            "Văn hóa phương Tây"
+        ],
+        correct: 0,
+        explanation: "Loại bỏ tư tưởng bóc lột và kế thừa tinh hoa nhân loại."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Mối quan hệ giữa dân chủ và chuyên chính trong nhà nước vô sản là gì?",
+        options: [
+            "Đối lập hoàn toàn",
+            "Triệt tiêu lẫn nhau",
+            "Thống nhất biện chứng",
+            "Chỉ có dân chủ không có chuyên chính"
+        ],
+        correct: 2,
+        explanation: "Dân chủ với nhân dân và chuyên chính với kẻ thù là hai mặt thống nhất biện chứng."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Điểm khác biệt lớn nhất về văn hóa - xã hội của dân chủ XHCN so với các nền dân chủ trước là sự kết hợp hài hòa lợi ích nào?",
+        options: [
+            "Của nhà nước và quốc tế",
+            "Cá nhân, tập thể và toàn xã hội",
+            "Của vua và dân",
+            "Của chủ và thợ"
+        ],
+        correct: 1,
+        explanation: "Sự kết hợp hài hòa các lợi ích giữa cá nhân, tập thể và toàn xã hội."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Nền dân chủ XHCN có kế thừa các giá trị dân chủ tư sản không?",
+        options: [
+            "Có kế thừa có chọn lọc",
+            "Không kế thừa",
+            "Kế thừa nguyên bản",
+            "Kế thừa và phủ định hoàn toàn"
+        ],
+        correct: 0,
+        explanation: "Kế thừa có chọn lọc những giá trị tiến bộ của nhân loại, bao gồm cả của dân chủ tư sản."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Ai là người trực tiếp lãnh đạo quá trình xây dựng nền dân chủ XHCN?",
+        options: [
+            "Mặt trận Tổ quốc",
+            "Các tổ chức CT-XH",
+            "Nhà nước",
+            "Đảng Cộng sản"
+        ],
+        correct: 3,
+        explanation: "Đảng Cộng sản là lực lượng nòng cốt lãnh đạo xây dựng dân chủ XHCN."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Lênin cho rằng, để tiến tới chủ nghĩa cộng sản, nhất thiết phải trải qua quá trình gì?",
+        options: [
+            "Chuyên chính vô sản",
+            "Hòa hợp giai cấp",
+            "Xóa bỏ đồng tiền",
+            "Cách mạng bạo lực liên tục"
+        ],
+        correct: 0,
+        explanation: "Chuyên chính vô sản là tất yếu để xây dựng thành công CNXH và tiến tới CSCN."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Về mặt tổ chức quản lý xã hội, dân chủ XHCN thực hiện nguyên tắc nào để đảm bảo sự thống nhất?",
+        options: [
+            "Phân quyền cục bộ",
+            "Tập trung dân chủ",
+            "Độc tài cá nhân",
+            "Tự do vô tổ chức"
+        ],
+        correct: 1,
+        explanation: "Tập trung dân chủ là nguyên tắc cơ bản trong quản lý nhà nước và xã hội."
+    }
 ];
 
         // --- 4. STATE MANAGEMENT ---
         let players = [];
-        let activePlayer = "NgÆ°á»i chÆ¡i 1";
+        let activePlayer = "Người chơi 1";
         
         // === SUPABASE INITIALIZATION ===
         const SUPABASE_URL = 'https://hlycdtmluupavmwhuttn.supabase.co';
@@ -576,7 +1144,7 @@
             const state = room.presenceState();
             const count = Object.keys(state).length;
             const titleEl = document.getElementById('lobby-title-online');
-            if(titleEl) titleEl.innerHTML = `Äáº¤U TRÆ¯á»œNG DÃ‚N CHá»¦ XHCN <span class="text-[10px] px-2 py-0.5 bg-emerald-500/20 text-emerald-500 rounded-full ml-1 inline-flex items-center gap-1">ðŸŸ¢ ${count} Online</span>`;
+            if(titleEl) titleEl.innerHTML = `ĐẤU TRƯỜNG DÂN CHỦ XHCN <span class="text-[10px] px-2 py-0.5 bg-emerald-500/20 text-emerald-500 rounded-full ml-1 inline-flex items-center gap-1">🟢 ${count} Online</span>`;
         });
         room.subscribe(async (status) => {
             if (status === 'SUBSCRIBED') {
@@ -594,7 +1162,7 @@
         let leaderboard = [];
 
         let customQuestions = [];
-        let gameSettings = { qPerGame: 30 };
+        let gameSettings = { qPerGame: 16 };
 
         let currentQuestionIndex = 0;
         let score = 0;
@@ -617,11 +1185,11 @@
                 if (storedPlayers) {
                     players = JSON.parse(storedPlayers);
                 } else {
-                    players = ["Há»c ViÃªn 1"];
+                    players = ["Học Viên 1"];
                 }
 
                 players = players.filter(p => p && typeof p === 'string' && p.trim().length > 0);
-                if (players.length === 0) players = ["Há»c ViÃªn 1"];
+                if (players.length === 0) players = ["Học Viên 1"];
 
                 const storedLB = localStorage.getItem('mln_leaderboard');
                 if (storedLB) leaderboard = JSON.parse(storedLB);
@@ -639,8 +1207,8 @@
                     activePlayer = players[0];
                 }
             } catch(e) {
-                players = ["Há»c ViÃªn 1"];
-                activePlayer = "Há»c ViÃªn 1";
+                players = ["Học Viên 1"];
+                activePlayer = "Học Viên 1";
             }
             updatePlayerUI();
         }
@@ -663,7 +1231,7 @@
                 input.value = activePlayer;
             }
 
-            document.getElementById('active-player-display').textContent = activePlayer || "ChÆ°a nháº­p tÃªn";
+            document.getElementById('active-player-display').textContent = activePlayer || "Chưa nhập tên";
 
             const listContainer = document.getElementById('saved-players-list');
             listContainer.innerHTML = '';
@@ -689,7 +1257,7 @@
                 delBtn.type = "button";
                 delBtn.className = 'text-xs text-red-500 hover:text-white hover:bg-red-500 rounded-full w-5 h-5 flex items-center justify-center font-black transition cursor-pointer p-0';
                 delBtn.innerHTML = '&times;';
-                delBtn.title = `XÃ³a '${name}'`;
+                delBtn.title = `Xóa '${name}'`;
                 delBtn.onclick = (e) => {
                     e.stopPropagation(); // Don't trigger chip click
                     deleteSavedPlayer(name);
@@ -704,9 +1272,9 @@
             if (activePlayer) {
                 const pScores = leaderboard.filter(item => item.name === activePlayer).map(item => item.score);
                 const best = pScores.length > 0 ? Math.max(...pScores) : 0;
-                document.getElementById('active-player-best').textContent = `${best} Ä‘iá»ƒm`;
+                document.getElementById('active-player-best').textContent = `${best} điểm`;
             } else {
-                document.getElementById('active-player-best').textContent = "0 Ä‘iá»ƒm";
+                document.getElementById('active-player-best').textContent = "0 điểm";
             }
         }
 
@@ -718,7 +1286,7 @@
                 document.getElementById('active-player-display').textContent = activePlayer;
                 const pScores = leaderboard.filter(item => item.name === activePlayer).map(item => item.score);
                 const best = pScores.length > 0 ? Math.max(...pScores) : 0;
-                document.getElementById('active-player-best').textContent = `${best} Ä‘iá»ƒm`;
+                document.getElementById('active-player-best').textContent = `${best} điểm`;
             }
         }
 
@@ -726,24 +1294,24 @@
             activePlayer = name;
             saveStorage();
             updatePlayerUI();
-            showToast(`ÄÃ£ chá»n: ${name}`);
+            showToast(`Đã chọn: ${name}`);
         }
 
         function deleteSavedPlayer(name) {
             // Direct delete without browser confirm popup (avoids iframe blocking!)
             players = players.filter(p => p !== name);
             if (activePlayer === name) {
-                activePlayer = players.length > 0 ? players[0] : "Há»c ViÃªn 1";
+                activePlayer = players.length > 0 ? players[0] : "Học Viên 1";
             }
             saveStorage();
             updatePlayerUI();
-            showToast(`ÄÃ£ xÃ³a '${name}' khá»i danh sÃ¡ch!`);
+            showToast(`Đã xóa '${name}' khỏi danh sách!`);
         }
 
         // --- 5. GAMEPLAY FLOW ---
         function startBattle() {
             const input = document.getElementById('player-name-input');
-            const name = (input ? input.value.trim() : "") || activePlayer || "Há»c ViÃªn MLN";
+            const name = (input ? input.value.trim() : "") || activePlayer || "Học Viên MLN";
             activePlayer = name;
 
             if (!players.includes(name)) {
@@ -783,14 +1351,14 @@
 
         function renderHUD() {
             lives = Math.max(0, lives);
-            document.getElementById('hud-player').textContent = `ðŸ‘¤ ${activePlayer}`;
-            document.getElementById('hud-score').textContent = `${score} Ä‘`;
+            document.getElementById('hud-player').textContent = `👤 ${activePlayer}`;
+            document.getElementById('hud-score').textContent = `${score} đ`;
             document.getElementById('hud-combo').textContent = `Combo: ${combo}x`;
             document.getElementById('hud-progress').textContent = `${currentQuestionIndex + 1}/${currentQuestions.length}`;
 
             let hearts = "";
-            for (let i = 0; i < lives; i++) hearts += "â¤ï¸";
-            for (let i = lives; i < 3; i++) hearts += "ðŸ–¤";
+            for (let i = 0; i < lives; i++) hearts += "❤️";
+            for (let i = lives; i < 3; i++) hearts += "🖤";
             document.getElementById('hud-lives').textContent = hearts;
 
             const shieldElem = document.getElementById('hud-shield');
@@ -823,7 +1391,7 @@
                 maxTime = 15;
             }
 
-            document.getElementById('question-badge').textContent = isBombQuestion ? 'ðŸ’£ CÃ‚U Há»ŽI BOM' : q.round;
+            document.getElementById('question-badge').textContent = isBombQuestion ? '💣 CÂU HỎI BOM' : q.round;
             document.getElementById('question-title').textContent = q.question;
             document.getElementById('instant-feedback').classList.add('hidden');
             document.getElementById('chest-modal').classList.add('hidden');
@@ -837,7 +1405,7 @@
                 const btn = document.createElement('button');
                 btn.type = 'button';
                 btn.className = 'w-full text-left p-3.5 rounded-xl border border-[var(--border)] bg-[var(--card)] hover:bg-[var(--accent)] font-medium text-xs md:text-sm btn-press transition-colors flex items-center justify-between cursor-pointer';
-                btn.innerHTML = `<span class="pointer-events-none">${opt}</span><span class="text-xs text-[var(--muted-foreground)] opacity-60 font-mono pointer-events-none">PhÃ­m ${idx + 1}</span>`;
+                btn.innerHTML = `<span class="pointer-events-none">${opt}</span><span class="text-xs text-[var(--muted-foreground)] opacity-60 font-mono pointer-events-none">Phím ${idx + 1}</span>`;
                 btn.onclick = () => submitAnswer(idx, btn);
                 container.appendChild(btn);
             });
@@ -909,29 +1477,29 @@
                     earned += 250;
                     if (lives < 3) lives++;
                     playSound('victory');
-                    extraMsg = `<br><span class="text-emerald-400 font-bold">ðŸ›¡ï¸ Gá»  BOM XUáº¤T Sáº®C! ThÆ°á»Ÿng nÃ³ng +250Ä‘ & Há»“i 1 â¤ï¸!</span>`;
+                    extraMsg = `<br><span class="text-emerald-400 font-bold">🛡️ GỠ BOM XUẤT SẮC! Thưởng nóng +250đ & Hồi 1 ❤️!</span>`;
                 } else {
                     playSound('correct');
                 }
 
-                // 25% Chance for Lucky Steal (CÆ°á»›p Ä‘iá»ƒm)
+                // 25% Chance for Lucky Steal (Cướp điểm)
                 const isSteal = (!isBombQuestion && Math.random() < 0.25);
                 if (isSteal) {
                     const stolenPoints = Math.floor(Math.random() * 150) + 150;
                     earned += stolenPoints;
                     playSound('coin');
-                    extraMsg += `<br><span class="text-amber-400 font-bold gold-glow inline-block p-1 rounded">ðŸ´â€â˜ ï¸ KÃCH HOáº T CÆ¯á»šP ÄIá»‚M: Báº¡n vá»«a tá»‹ch thu kho cá»§a bá»n bÃ³c lá»™t, cÆ°á»›p Ä‘Æ°á»£c +${stolenPoints}Ä‘! ðŸ’°</span>`;
+                    extraMsg += `<br><span class="text-amber-400 font-bold gold-glow inline-block p-1 rounded">🏴‍☠️ KÍCH HOẠT CƯỚP ĐIỂM: Bạn vừa tịch thu kho của bọn bóc lột, cướp được +${stolenPoints}đ! 💰</span>`;
                 }
 
                 score += earned;
-                showFeedback(true, `+${earned} Ä‘iá»ƒm (Combo ${combo}x) ðŸ”¥${extraMsg}<br>${q.explanation}`);
+                showFeedback(true, `+${earned} điểm (Combo ${combo}x) 🔥${extraMsg}<br>${q.explanation}`);
 
                 const comboBadge = document.getElementById('hud-combo');
                 comboBadge.classList.remove('pulse-combo');
                 void comboBadge.offsetWidth;
                 comboBadge.classList.add('pulse-combo');
 
-                // 25% Chance for Chest Event (Äá»•i Ä‘iá»ƒm)
+                // 25% Chance for Chest Event (Đổi điểm)
                 const isChestEvent = (!isBombQuestion && !isSteal && Math.random() < 0.25);
                 if (isChestEvent) {
                     setTimeout(() => {
@@ -948,17 +1516,17 @@
                 if (hasShield) {
                     hasShield = false;
                     playSound('magic');
-                    showFeedback(false, `ðŸ›¡ï¸ KhiÃªn ThÃ©p Ä‘Ã£ báº£o vá»‡ báº¡n! KhÃ´ng bá»‹ máº¥t máº¡ng!<br>${q.explanation}`);
+                    showFeedback(false, `🛡️ Khiên Thép đã bảo vệ bạn! Không bị mất mạng!<br>${q.explanation}`);
                 } else {
                     if (isBombQuestion) {
                         lives -= 2;
                         playSound('explosion');
                         triggerScreenShake();
-                        showFeedback(false, `ðŸ’¥ BÃ™Ã™Ã™M! BOM ÄÃƒ Ná»”! Báº¡n bá»‹ máº¥t 2 máº¡ng! ðŸ’”ðŸ’”<br>${q.explanation}`);
+                        showFeedback(false, `💥 BÙÙÙM! BOM ĐÃ NỔ! Bạn bị mất 2 mạng! 💔💔<br>${q.explanation}`);
                     } else {
                         lives--;
                         playSound('wrong');
-                        showFeedback(false, `Máº¥t 1 máº¡ng! ðŸ’”<br>${q.explanation}`);
+                        showFeedback(false, `Mất 1 mạng! 💔<br>${q.explanation}`);
                     }
                 }
 
@@ -997,21 +1565,21 @@
             if (hasShield) {
                 hasShield = false;
                 playSound('magic');
-                showFeedback(false, `ðŸ›¡ï¸ Háº¿t giá» nhÆ°ng KhiÃªn ThÃ©p Ä‘Ã£ báº£o há»™ máº¡ng sá»‘ng cá»§a báº¡n!<br>${q.explanation}`);
+                showFeedback(false, `🛡️ Hết giờ nhưng Khiên Thép đã bảo hộ mạng sống của bạn!<br>${q.explanation}`);
             } else if (isBombQuestion) {
                 lives -= 2;
                 playSound('explosion');
                 triggerScreenShake();
-                showFeedback(false, `ðŸ’¥ Háº¾T GIá»œ! BOM ÄÃƒ PHÃT Ná»”! Báº¡n máº¥t 2 máº¡ng! ðŸ’”ðŸ’”<br>${q.explanation}`);
+                showFeedback(false, `💥 HẾT GIỜ! BOM ĐÃ PHÁT NỔ! Bạn mất 2 mạng! 💔💔<br>${q.explanation}`);
             } else {
                 lives--;
                 playSound('wrong');
-                showFeedback(false, `Háº¿t giá»! Máº¥t 1 máº¡ng! ðŸ’”<br>${q.explanation}`);
+                showFeedback(false, `Hết giờ! Mất 1 mạng! 💔<br>${q.explanation}`);
             }
 
             mistakes.push({
                 q: q.question,
-                yourAns: "Háº¿t thá»i gian (KhÃ´ng chá»n)",
+                yourAns: "Hết thời gian (Không chọn)",
                 correctAns: q.options[q.correct],
                 exp: q.explanation
             });
@@ -1031,7 +1599,7 @@
             root.classList.add('screen-shake');
         }
 
-        // --- CHEST MODAL (RESET Má»ŒI LÃšC - KHÃ”NG BAO GIá»œ Bá»Š LIá»†T NÃšT) ---
+        // --- CHEST MODAL (RESET MỌI LÚC - KHÔNG BAO GIỜ BỊ LIỆT NÚT) ---
         function triggerChestModal() {
             playSound('magic');
             const modal = document.getElementById('chest-modal');
@@ -1054,9 +1622,9 @@
         function pickChest(chestNum) {
             playSound('coin');
             const rewards = [
-                { type: 'points', val: 200, text: 'ðŸ’° Äá»”I ÄIá»‚M MAY Máº®N: +200 Äiá»ƒm trá»±c tiáº¿p vÃ o quá»¹!' },
-                { type: 'multiplier', val: 2, text: 'ðŸ”¥ NHÃ‚N ÄÃ”I ÄIá»‚M THÆ¯á»žNG: ThÆ°á»Ÿng nÃ³ng thÃªm +150 Äiá»ƒm!' },
-                { type: 'shield', val: 1, text: 'ðŸ›¡ï¸ KHIÃŠN THÃ‰P: Miá»…n trá»« 1 láº§n máº¥t máº¡ng á»Ÿ cÃ¢u tiáº¿p theo!' }
+                { type: 'points', val: 200, text: '💰 ĐỔI ĐIỂM MAY MẮN: +200 Điểm trực tiếp vào quỹ!' },
+                { type: 'multiplier', val: 2, text: '🔥 NHÂN ĐÔI ĐIỂM THƯỞNG: Thưởng nóng thêm +150 Điểm!' },
+                { type: 'shield', val: 1, text: '🛡️ KHIÊN THÉP: Miễn trừ 1 lần mất mạng ở câu tiếp theo!' }
             ];
             const chosen = rewards[Math.floor(Math.random() * rewards.length)];
 
@@ -1072,7 +1640,7 @@
 
             const res = document.getElementById('chest-result');
             res.classList.remove('hidden');
-            res.innerHTML = `Báº¡n má»Ÿ <strong>RÆ°Æ¡ng ${chestNum}</strong>: ${chosen.text}`;
+            res.innerHTML = `Bạn mở <strong>Rương ${chestNum}</strong>: ${chosen.text}`;
 
             const chestBtns = document.querySelectorAll('.chest-btn');
             chestBtns.forEach(b => {
@@ -1090,10 +1658,10 @@
 
             if (isCorrect) {
                 box.classList.add('bg-emerald-500/10', 'border-emerald-500/30', 'text-emerald-700', 'dark:text-emerald-300');
-                box.innerHTML = `<span class="font-bold">âœ¨ CHÃNH XÃC!</span> ${msg}`;
+                box.innerHTML = `<span class="font-bold">✨ CHÍNH XÁC!</span> ${msg}`;
             } else {
                 box.classList.add('bg-red-500/10', 'border-red-500/30', 'text-red-700', 'dark:text-red-300');
-                box.innerHTML = `<span class="font-bold">âš ï¸ KHÃ”NG ÄÃšNG!</span> ${msg}`;
+                box.innerHTML = `<span class="font-bold">⚠️ KHÔNG ĐÚNG!</span> ${msg}`;
             }
         }
 
@@ -1106,7 +1674,7 @@
             // Direct quit & save without window.confirm to avoid iframe blocks
             clearInterval(timer);
             endGame(false);
-            showToast("ÄÃ£ dá»«ng tráº­n Ä‘áº¥u vÃ  ghi nháº­n káº¿t quáº£!");
+            showToast("Đã dừng trận đấu và ghi nhận kết quả!");
         }
 
         // --- 6. END GAME & LEADERBOARD ---
@@ -1131,11 +1699,11 @@
                 correct_ratio: `${correctCount}/${totalQuestions}`,
                 
             }]).then(({error}) => {
-                if (error) console.error("Lá»—i lÆ°u Ä‘iá»ƒm:", error);
+                if (error) console.error("Lỗi lưu điểm:", error);
             });
 
             document.getElementById('result-player').textContent = activePlayer;
-            document.getElementById('result-score').textContent = `${score} Ä‘`;
+            document.getElementById('result-score').textContent = `${score} đ`;
             document.getElementById('result-accuracy').textContent = `${correctCount}/${totalQuestions}`;
             document.getElementById('result-maxcombo').textContent = `${maxCombo}x`;
 
@@ -1146,24 +1714,24 @@
 
             if (isVictory) {
                 playSound('victory');
-                icon.textContent = "ðŸ†";
-                title.textContent = "CHIáº¾N THáº®NG TUYá»†T Äá»I!";
-                subtitle.textContent = "Báº¡n Ä‘Ã£ chinh phá»¥c toÃ n bá»™ cÃ¢u há»i vÃ  báº£o toÃ n Ä‘Æ°á»£c máº¡ng sá»‘ng!";
+                icon.textContent = "🏆";
+                title.textContent = "CHIẾN THẮNG TUYỆT ĐỐI!";
+                subtitle.textContent = "Bạn đã chinh phục toàn bộ câu hỏi và bảo toàn được mạng sống!";
             } else {
                 playSound('gameover');
-                icon.textContent = "ðŸ’€";
-                title.textContent = "Háº¾T Máº NG - Dá»ªNG BÆ¯á»šC!";
-                subtitle.textContent = "Äá»«ng náº£n lÃ²ng, hÃ£y xem láº¡i cÃ¡c cÃ¢u sai Ä‘á»ƒ bá»©t phÃ¡ á»Ÿ lÆ°á»£t Ä‘áº¥u sau!";
+                icon.textContent = "💀";
+                title.textContent = "HẾT MẠNG - DỪNG BƯỚC!";
+                subtitle.textContent = "Đừng nản lòng, hãy xem lại các câu sai để bứt phá ở lượt đấu sau!";
             }
 
             if (score >= 2500) {
-                badge.textContent = "Háº¡ng: Báº¬C THáº¦Y LÃ LUáº¬N DÃ‚N CHá»¦ ðŸ‘‘";
+                badge.textContent = "Hạng: BẬC THẦY LÝ LUẬN DÂN CHỦ 👑";
             } else if (score >= 1500) {
-                badge.textContent = "Háº¡ng: CHIáº¾N SÄ¨ DÃ‚N CHá»¦ XHCN â­";
+                badge.textContent = "Hạng: CHIẾN SĨ DÂN CHỦ XHCN ⭐";
             } else if (score >= 800) {
-                badge.textContent = "Háº¡ng: Äáº I BIá»‚U NHÃ‚N DÃ‚N TIÃŠN PHONG ðŸŽ–ï¸";
+                badge.textContent = "Hạng: ĐẠI BIỂU NHÂN DÂN TIÊN PHONG 🎖️";
             } else {
-                badge.textContent = "Háº¡ng: TÃ‚N BINH TÃŒM HIá»‚U DÃ‚N CHá»¦ ðŸ“–";
+                badge.textContent = "Hạng: TÂN BINH TÌM HIỂU DÂN CHỦ 📖";
             }
 
             renderMistakes();
@@ -1174,7 +1742,7 @@
             container.innerHTML = '';
 
             if (mistakes.length === 0) {
-                container.innerHTML = '<div class="p-3 bg-emerald-500/10 text-emerald-600 rounded-lg text-xs font-semibold">Xuáº¥t sáº¯c! Báº¡n khÃ´ng tráº£ lá»i sai báº¥t ká»³ cÃ¢u nÃ o! ðŸŽ¯</div>';
+                container.innerHTML = '<div class="p-3 bg-emerald-500/10 text-emerald-600 rounded-lg text-xs font-semibold">Xuất sắc! Bạn không trả lời sai bất kỳ câu nào! 🎯</div>';
                 return;
             }
 
@@ -1183,8 +1751,8 @@
                 card.className = 'p-3 rounded-lg border border-red-500/20 bg-red-500/5 text-xs space-y-1';
                 card.innerHTML = `
                     <div class="font-bold text-[var(--foreground)]">${idx + 1}. ${m.q}</div>
-                    <div class="text-red-500 font-semibold">âŒ Báº¡n chá»n: ${m.yourAns}</div>
-                    <div class="text-emerald-500 font-semibold">âœ”ï¸ ÄÃ¡p Ã¡n Ä‘Ãºng: ${m.correctAns}</div>
+                    <div class="text-red-500 font-semibold">❌ Bạn chọn: ${m.yourAns}</div>
+                    <div class="text-emerald-500 font-semibold">✔️ Đáp án đúng: ${m.correctAns}</div>
                     <div class="text-[var(--muted-foreground)] italic mt-1 bg-[var(--background)] p-1.5 rounded border border-[var(--border)]">${m.exp}</div>
                 `;
                 container.appendChild(card);
@@ -1196,10 +1764,10 @@
             const btn = document.getElementById('btn-toggle-mistakes');
             if (container.classList.contains('hidden')) {
                 container.classList.remove('hidden');
-                btn.textContent = "ðŸ”¼ Thu gá»n pháº§n xem láº¡i cÃ¢u sai";
+                btn.textContent = "🔼 Thu gọn phần xem lại câu sai";
             } else {
                 container.classList.add('hidden');
-                btn.textContent = "ðŸ” Xem láº¡i cÃ¡c cÃ¢u tráº£ lá»i sai vÃ  giáº£i thÃ­ch chuáº©n giÃ¡o trÃ¬nh";
+                btn.textContent = "🔍 Xem lại các câu trả lời sai và giải thích chuẩn giáo trình";
             }
         }
 
@@ -1226,7 +1794,7 @@
             document.getElementById('screen-leaderboard').classList.remove('hidden');
 
             const tbody = document.getElementById('leaderboard-tbody');
-            tbody.innerHTML = '<tr><td colspan="5" class="p-4 text-center text-[var(--muted-foreground)]"><span class="animate-pulse">Äang táº£i dá»¯ liá»‡u tá»« mÃ¡y chá»§ Supabase... â³</span></td></tr>';
+            tbody.innerHTML = '<tr><td colspan="5" class="p-4 text-center text-[var(--muted-foreground)]"><span class="animate-pulse">Đang tải dữ liệu từ máy chủ Supabase... ⏳</span></td></tr>';
 
             const { data, error } = await supabaseClient.from('leaderboard')
                 .select('*')
@@ -1236,7 +1804,7 @@
             tbody.innerHTML = '';
 
             if (error || !data || data.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="5" class="p-4 text-center text-[var(--muted-foreground)]">ChÆ°a cÃ³ ai ghi danh vÃ o Báº£ng vÃ ng. HÃ£y lÃ  ngÆ°á»i Ä‘áº§u tiÃªn!</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="5" class="p-4 text-center text-[var(--muted-foreground)]">Chưa có ai ghi danh vào Bảng vàng. Hãy là người đầu tiên!</td></tr>';
                 return;
             }
 
@@ -1244,15 +1812,15 @@
                 const tr = document.createElement('tr');
                 let medal = `${index + 1}`;
                 let rowBg = '';
-                if (index === 0) { medal = 'ðŸ¥‡ 1'; rowBg = 'bg-yellow-500/10 font-bold text-amber-500'; }
-                else if (index === 1) { medal = 'ðŸ¥ˆ 2'; rowBg = 'bg-gray-400/10 font-bold text-gray-400'; }
-                else if (index === 2) { medal = 'ðŸ¥‰ 3'; rowBg = 'bg-amber-700/10 font-bold text-amber-700'; }
+                if (index === 0) { medal = '🥇 1'; rowBg = 'bg-yellow-500/10 font-bold text-amber-500'; }
+                else if (index === 1) { medal = '🥈 2'; rowBg = 'bg-gray-400/10 font-bold text-gray-400'; }
+                else if (index === 2) { medal = '🥉 3'; rowBg = 'bg-amber-700/10 font-bold text-amber-700'; }
 
                 tr.className = rowBg;
                 tr.innerHTML = `
                     <td class="p-2.5 text-center">${medal}</td>
                     <td class="p-2.5 font-semibold">${item.player_name}</td>
-                    <td class="p-2.5 text-right font-mono font-black text-emerald-500">${item.score} Ä‘</td>
+                    <td class="p-2.5 text-right font-mono font-black text-emerald-500">${item.score} đ</td>
                     <td class="p-2.5 text-center text-[var(--muted-foreground)]">${item.correct_ratio}</td>
                     <td class="p-2.5 text-right text-[var(--muted-foreground)] text-xs">${item.date || new Date(item.created_at).toLocaleDateString('vi-VN')}</td>
                 `;
@@ -1261,21 +1829,21 @@
         }
 
         async function clearLeaderboard() {
-            if(prompt("Nháº­p máº­t kháº©u Admin Ä‘á»ƒ xÃ³a BXH:") !== "572001") { showToast("Sai máº­t kháº©u!"); return; }
+            if(prompt("Nhập mật khẩu Admin để xóa BXH:") !== "572001") { showToast("Sai mật khẩu!"); return; }
             
-            showToast("Äang xÃ³a BXH trÃªn Server...");
+            showToast("Đang xóa BXH trên Server...");
             // Supabase requires a filter to delete all, neq ensures all are deleted
             const { error } = await supabaseClient.from('leaderboard').delete().neq('id', '00000000-0000-0000-0000-000000000000');
-            if(error) { showToast("Lá»—i: " + error.message); return; }
+            if(error) { showToast("Lỗi: " + error.message); return; }
             
             showLeaderboardScreen();
-            showToast("ÄÃ£ xÃ³a sáº¡ch Báº£ng xáº¿p háº¡ng trÃªn Server!");
+            showToast("Đã xóa sạch Bảng xếp hạng trên Server!");
         }
 
         function showAdminScreen() {
             clearInterval(timer);
             // Password protection
-            if(prompt("Nháº­p máº­t kháº©u Admin:") !== "572001") { showToast("Sai máº­t kháº©u!"); return; }
+            if(prompt("Nhập mật khẩu Admin:") !== "572001") { showToast("Sai mật khẩu!"); return; }
             
             document.getElementById('screen-battle').classList.add('hidden');
             document.getElementById('screen-result').classList.add('hidden');
@@ -1289,14 +1857,14 @@
 
         function updateAdminQCount() {
             const count = rawQuestions.length + customQuestions.length;
-            document.getElementById('admin-q-count').textContent = `Äang cÃ³: ${rawQuestions.length} gá»‘c + ${customQuestions.length} thÃªm = ${count} cÃ¢u`;
+            document.getElementById('admin-q-count').textContent = `Đang có: ${rawQuestions.length} gốc + ${customQuestions.length} thêm = ${count} câu`;
         }
 
         function clearCustomQuestions() {
             customQuestions = [];
             saveStorage();
             updateAdminQCount();
-            showToast("ÄÃ£ xÃ³a cÃ¡c cÃ¢u há»i thÃªm!");
+            showToast("Đã xóa các câu hỏi thêm!");
         }
 
         function saveAdminSettings() {
@@ -1304,14 +1872,14 @@
             if (val > 0) {
                 gameSettings.qPerGame = val;
                 saveStorage();
-                showToast("ÄÃ£ lÆ°u cáº¥u hÃ¬nh!");
+                showToast("Đã lưu cấu hình!");
             }
         }
 
         function parseCSV() {
             const text = document.getElementById('admin-csv-input').value.trim();
             if (!text) {
-                showToast("ChÆ°a nháº­p ná»™i dung!");
+                showToast("Chưa nhập nội dung!");
                 return;
             }
             
@@ -1334,7 +1902,7 @@
                     if (isNaN(correctIdx) || correctIdx < 0 || correctIdx > 3) correctIdx = 0; // Fallback to 0
                     
                     const q = {
-                        round: "VÃ²ng Admin",
+                        round: "Vòng Admin",
                         type: "mcq",
                         question: parts[0].trim(),
                         options: [
@@ -1344,7 +1912,7 @@
                             parts[4].trim()
                         ],
                         correct: correctIdx,
-                        explanation: `Theo chuáº©n giÃ¡o trÃ¬nh: ÄÃ¡p Ã¡n Ä‘Ãºng lÃ  sá»‘ ${correctIdx + 1}`
+                        explanation: `Theo chuẩn giáo trình: Đáp án đúng là số ${correctIdx + 1}`
                     };
                     customQuestions.push(q);
                     added++;
@@ -1355,9 +1923,9 @@
                 saveStorage();
                 updateAdminQCount();
                 document.getElementById('admin-csv-input').value = "";
-                showToast(`ÄÃ£ náº¡p thÃ nh cÃ´ng ${added} cÃ¢u há»i má»›i!`);
+                showToast(`Đã nạp thành công ${added} câu hỏi mới!`);
             } else {
-                showToast("KhÃ´ng tÃ¬m tháº¥y cÃ¢u há»i há»£p lá»‡ trong dá»¯ liá»‡u!");
+                showToast("Không tìm thấy câu hỏi hợp lệ trong dữ liệu!");
             }
         }
 
@@ -1384,4 +1952,3 @@
     </script>
 </body>
 </html>
-
