@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đấu Trường Tri Thức: Dân Chủ & Dân Chủ XHCN</title>
+    <title>Äáº¥u TrÆ°á»ng Tri Thá»©c: DÃ¢n Chá»§ & DÃ¢n Chá»§ XHCN</title>
     <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
@@ -74,29 +74,29 @@
 
         <!-- Toast Notification (Zero Browser Modals) -->
         <div id="game-toast" class="hidden absolute top-4 left-1/2 -translate-x-1/2 z-50 px-4 py-2 rounded-xl bg-amber-500 text-black font-bold text-xs shadow-xl transition-all flex items-center gap-1.5 border border-amber-300">
-            <span>📢</span> <span id="toast-text">Thông báo</span>
+            <span>ðŸ“¢</span> <span id="toast-text">ThÃ´ng bÃ¡o</span>
         </div>
 
         <!-- Top Header & Controls -->
         <div class="flex justify-between items-center pb-3 border-b border-[var(--border)] mb-4">
             <div class="flex items-center gap-2">
-                <span class="text-2xl">🏛️</span>
+                <span class="text-2xl">ðŸ›ï¸</span>
                 <div>
                     <h1 id="lobby-title-online" class="text-lg md:text-xl font-bold bg-gradient-to-r from-red-500 via-amber-500 to-yellow-500 bg-clip-text text-transparent">
-                        ĐẤU TRƯỜNG DÂN CHỦ XHCN
+                        Äáº¤U TRÆ¯á»œNG DÃ‚N CHá»¦ XHCN
                     </h1>
-                    <p class="text-xs text-[var(--muted-foreground)]">Chủ nghĩa Xã hội Khoa học (MLN131) • Giáo trình 2021</p>
+                    <p class="text-xs text-[var(--muted-foreground)]">Chá»§ nghÄ©a XÃ£ há»™i Khoa há»c (MLN131) â€¢ GiÃ¡o trÃ¬nh 2021</p>
                 </div>
             </div>
             <div class="flex items-center gap-2">
-                <button type="button" id="audio-toggle" onclick="toggleAudio()" class="p-2 rounded-lg border border-[var(--border)] hover:bg-[var(--accent)] text-sm cursor-pointer" title="Bật/Tắt âm thanh">
-                    🔊
+                <button type="button" id="audio-toggle" onclick="toggleAudio()" class="p-2 rounded-lg border border-[var(--border)] hover:bg-[var(--accent)] text-sm cursor-pointer" title="Báº­t/Táº¯t Ã¢m thanh">
+                    ðŸ”Š
                 </button>
-                <button type="button" onclick="showAdminScreen()" class="px-3 py-1.5 rounded-lg border border-[var(--border)] hover:bg-[var(--accent)] font-semibold text-xs md:text-sm transition flex items-center gap-1 cursor-pointer" title="Cài đặt & Câu hỏi">
-                    ⚙️ Admin
+                <button type="button" onclick="showAdminScreen()" class="px-3 py-1.5 rounded-lg border border-[var(--border)] hover:bg-[var(--accent)] font-semibold text-xs md:text-sm transition flex items-center gap-1 cursor-pointer" title="CÃ i Ä‘áº·t & CÃ¢u há»i">
+                    âš™ï¸ Admin
                 </button>
                 <button type="button" onclick="showLeaderboardScreen()" class="px-3 py-1.5 rounded-lg border border-amber-500/40 bg-amber-500/10 text-amber-600 dark:text-amber-400 font-semibold text-xs md:text-sm hover:bg-amber-500/20 transition flex items-center gap-1 cursor-pointer">
-                    🏆 BXH
+                    ðŸ† BXH
                 </button>
             </div>
         </div>
@@ -105,20 +105,20 @@
         <div id="screen-lobby" class="space-y-5 py-2">
             <div class="bg-gradient-to-br from-red-900/10 via-amber-900/5 to-transparent p-5 rounded-xl border border-[var(--border)]">
                 <h2 class="text-base font-bold mb-1.5 flex items-center gap-2">
-                    <span>👤</span> Tên Người Chơi
+                    <span>ðŸ‘¤</span> TÃªn NgÆ°á»i ChÆ¡i
                 </h2>
                 <p class="text-xs text-[var(--muted-foreground)] mb-3">
-                    Nhập tên của bạn để bắt đầu và ghi danh vào Bảng vàng xếp hạng:
+                    Nháº­p tÃªn cá»§a báº¡n Ä‘á»ƒ báº¯t Ä‘áº§u vÃ  ghi danh vÃ o Báº£ng vÃ ng xáº¿p háº¡ng:
                 </p>
 
                 <!-- Direct Input Box -->
                 <div class="mb-3.5">
                     <div class="relative flex items-center">
-                        <input type="text" id="player-name-input" placeholder="Nhập tên của bạn (ví dụ: Hoàng, Linh, An...)" maxlength="20"
+                        <input type="text" id="player-name-input" placeholder="Nháº­p tÃªn cá»§a báº¡n (vÃ­ dá»¥: HoÃ ng, Linh, An...)" maxlength="20"
                             class="w-full pl-3.5 pr-12 py-2.5 text-sm rounded-xl border border-[var(--border)] bg-[var(--background)] focus:outline-none focus:ring-2 focus:ring-amber-500 font-bold"
                             oninput="onPlayerInputChanged()" onkeydown="if(event.key==='Enter') startBattle()">
                         <button type="button" onclick="startBattle()" class="absolute right-2 px-2.5 py-1 bg-amber-500 hover:bg-amber-400 text-black text-xs font-bold rounded-lg cursor-pointer">
-                            Vào ⚔️
+                            VÃ o âš”ï¸
                         </button>
                     </div>
                 </div>
@@ -126,8 +126,8 @@
                 <!-- Recent Players Tags (Quick Pick & 1-Click Delete) -->
                 <div id="saved-players-section" class="mb-3.5">
                     <div class="text-[11px] font-semibold text-[var(--muted-foreground)] mb-1.5 flex items-center justify-between">
-                        <span>Danh sách người chơi đã lưu:</span>
-                        <span class="text-[10px] text-amber-500/80">Bấm tên để chọn • Bấm × đỏ để xóa</span>
+                        <span>Danh sÃ¡ch ngÆ°á»i chÆ¡i Ä‘Ã£ lÆ°u:</span>
+                        <span class="text-[10px] text-amber-500/80">Báº¥m tÃªn Ä‘á»ƒ chá»n â€¢ Báº¥m Ã— Ä‘á» Ä‘á»ƒ xÃ³a</span>
                     </div>
                     <div id="saved-players-list" class="flex flex-wrap gap-2 min-h-[30px]">
                         <!-- Injected dynamically via JS -->
@@ -137,37 +137,37 @@
                 <!-- Active Player Banner -->
                 <div class="bg-[var(--background)] p-3 rounded-lg border border-[var(--border)] flex justify-between items-center">
                     <div>
-                        <span class="text-xs text-[var(--muted-foreground)]">Đang thi đấu với tư cách:</span>
-                        <div id="active-player-display" class="text-sm font-black text-amber-500">Người chơi 1</div>
+                        <span class="text-xs text-[var(--muted-foreground)]">Äang thi Ä‘áº¥u vá»›i tÆ° cÃ¡ch:</span>
+                        <div id="active-player-display" class="text-sm font-black text-amber-500">NgÆ°á»i chÆ¡i 1</div>
                     </div>
                     <div class="text-right">
-                        <span class="text-xs text-[var(--muted-foreground)]">Kỷ lục của bạn:</span>
-                        <div id="active-player-best" class="text-sm font-bold text-emerald-500">0 điểm</div>
+                        <span class="text-xs text-[var(--muted-foreground)]">Ká»· lá»¥c cá»§a báº¡n:</span>
+                        <div id="active-player-best" class="text-sm font-bold text-emerald-500">0 Ä‘iá»ƒm</div>
                     </div>
                 </div>
             </div>
 
-            <!-- Features Highlights (Bom, Cướp điểm, Đổi điểm) -->
+            <!-- Features Highlights (Bom, CÆ°á»›p Ä‘iá»ƒm, Äá»•i Ä‘iá»ƒm) -->
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs">
                 <div class="p-3 rounded-xl border border-red-500/30 bg-red-500/5 flex items-center gap-2.5">
-                    <span class="text-2xl">💣</span>
+                    <span class="text-2xl">ðŸ’£</span>
                     <div>
-                        <div class="font-bold text-red-500">Câu Hỏi Bom</div>
-                        <div class="text-[11px] text-[var(--muted-foreground)]">Chỉ có 8s! Đúng: +300đ & +1❤️, sai nổ mất 2❤️!</div>
+                        <div class="font-bold text-red-500">CÃ¢u Há»i Bom</div>
+                        <div class="text-[11px] text-[var(--muted-foreground)]">Chá»‰ cÃ³ 8s! ÄÃºng: +300Ä‘ & +1â¤ï¸, sai ná»• máº¥t 2â¤ï¸!</div>
                     </div>
                 </div>
                 <div class="p-3 rounded-xl border border-amber-500/30 bg-amber-500/5 flex items-center gap-2.5">
-                    <span class="text-2xl">🏴‍☠️</span>
+                    <span class="text-2xl">ðŸ´â€â˜ ï¸</span>
                     <div>
-                        <div class="font-bold text-amber-500">Cướp Điểm</div>
-                        <div class="text-[11px] text-[var(--muted-foreground)]">Cơ hội cướp ngẫu nhiên tới +300đ từ kho tài sản tư bản!</div>
+                        <div class="font-bold text-amber-500">CÆ°á»›p Äiá»ƒm</div>
+                        <div class="text-[11px] text-[var(--muted-foreground)]">CÆ¡ há»™i cÆ°á»›p ngáº«u nhiÃªn tá»›i +300Ä‘ tá»« kho tÃ i sáº£n tÆ° báº£n!</div>
                     </div>
                 </div>
                 <div class="p-3 rounded-xl border border-purple-500/30 bg-purple-500/5 flex items-center gap-2.5">
-                    <span class="text-2xl">🔄</span>
+                    <span class="text-2xl">ðŸ”„</span>
                     <div>
-                        <div class="font-bold text-purple-500">Rương Đổi Điểm</div>
-                        <div class="text-[11px] text-[var(--muted-foreground)]">Mở 3 rương bí ẩn: x2 điểm, đổi thưởng hoặc nhận Khiên 🛡️</div>
+                        <div class="font-bold text-purple-500">RÆ°Æ¡ng Äá»•i Äiá»ƒm</div>
+                        <div class="text-[11px] text-[var(--muted-foreground)]">Má»Ÿ 3 rÆ°Æ¡ng bÃ­ áº©n: x2 Ä‘iá»ƒm, Ä‘á»•i thÆ°á»Ÿng hoáº·c nháº­n KhiÃªn ðŸ›¡ï¸</div>
                     </div>
                 </div>
             </div>
@@ -177,12 +177,12 @@
                 <div class="font-bold text-[var(--foreground)] flex items-center gap-1">
                     <span>⚡</span> 3 Mạng (❤️❤️❤️) • Chuỗi Combo • <span id="display-q-per-game">30</span> Câu hỏi trích xuất chuẩn Giáo trình 2021
                 </div>
-                <p>Nguồn gốc Demoskratos • 3 Phương diện Mác-Lênin • Tư tưởng Hồ Chí Minh • 3 Nền dân chủ lịch sử • 3 Bản chất Dân chủ XHCN.</p>
+                <p>Nguá»“n gá»‘c Demoskratos â€¢ 3 PhÆ°Æ¡ng diá»‡n MÃ¡c-LÃªnin â€¢ TÆ° tÆ°á»Ÿng Há»“ ChÃ­ Minh â€¢ 3 Ná»n dÃ¢n chá»§ lá»‹ch sá»­ â€¢ 3 Báº£n cháº¥t DÃ¢n chá»§ XHCN.</p>
             </div>
 
             <div class="text-center pt-1">
                 <button type="button" onclick="startBattle()" class="w-full md:w-3/4 py-3.5 px-6 rounded-xl bg-gradient-to-r from-red-600 via-amber-600 to-yellow-600 hover:opacity-95 text-white font-black text-base shadow-lg btn-press flex items-center justify-center gap-2 mx-auto cursor-pointer">
-                    <span>⚔️</span> BẮT ĐẦU VÀO ĐẤU TRƯỜNG <span>⚔️</span>
+                    <span>âš”ï¸</span> Báº®T Äáº¦U VÃ€O Äáº¤U TRÆ¯á»œNG <span>âš”ï¸</span>
                 </button>
             </div>
         </div>
@@ -191,34 +191,34 @@
         <div id="screen-admin" class="hidden space-y-4 py-2">
             <div class="flex justify-between items-center pb-2 border-b border-[var(--border)]">
                 <h2 class="text-base md:text-lg font-bold flex items-center gap-2">
-                    <span>⚙️</span> ADMIN PANEL
+                    <span>âš™ï¸</span> ADMIN PANEL
                 </h2>
                 <button type="button" onclick="goToLobby()" class="text-xs px-3 py-1.5 rounded-lg border border-[var(--border)] hover:bg-[var(--accent)] cursor-pointer">
-                    ⬅️ Quay lại sảnh
+                    â¬…ï¸ Quay láº¡i sáº£nh
                 </button>
             </div>
 
             <div class="space-y-4">
                 <div class="p-4 rounded-xl border border-[var(--border)] bg-[var(--card)] space-y-3">
-                    <h3 class="font-bold text-sm text-amber-500">📥 Nạp câu hỏi từ file Blooket CSV/TSV</h3>
-                    <p class="text-xs text-[var(--muted-foreground)]">Dán nội dung từ file CSV (hoặc copy từ Excel) gồm 7 cột: Câu hỏi | Đ.án 1 | Đ.án 2 | Đ.án 3 | Đ.án 4 | Thời gian | Cột Đáp án Đúng (1-4). Bỏ qua dòng tiêu đề.</p>
-                    <textarea id="admin-csv-input" rows="5" class="w-full p-2.5 text-xs rounded-xl border border-[var(--border)] bg-[var(--background)] focus:outline-none focus:ring-2 focus:ring-amber-500" placeholder="Câu hỏi 1\tĐ.án 1\tĐ.án 2..."></textarea>
+                    <h3 class="font-bold text-sm text-amber-500">ðŸ“¥ Náº¡p cÃ¢u há»i tá»« file Blooket CSV/TSV</h3>
+                    <p class="text-xs text-[var(--muted-foreground)]">DÃ¡n ná»™i dung tá»« file CSV (hoáº·c copy tá»« Excel) gá»“m 7 cá»™t: CÃ¢u há»i | Ä.Ã¡n 1 | Ä.Ã¡n 2 | Ä.Ã¡n 3 | Ä.Ã¡n 4 | Thá»i gian | Cá»™t ÄÃ¡p Ã¡n ÄÃºng (1-4). Bá» qua dÃ²ng tiÃªu Ä‘á».</p>
+                    <textarea id="admin-csv-input" rows="5" class="w-full p-2.5 text-xs rounded-xl border border-[var(--border)] bg-[var(--background)] focus:outline-none focus:ring-2 focus:ring-amber-500" placeholder="CÃ¢u há»i 1\tÄ.Ã¡n 1\tÄ.Ã¡n 2..."></textarea>
                     <div class="flex justify-between items-center">
-                        <span id="admin-q-count" class="text-xs font-bold text-emerald-500">Đang có: 16 câu gốc</span>
+                        <span id="admin-q-count" class="text-xs font-bold text-emerald-500">Äang cÃ³: 16 cÃ¢u gá»‘c</span>
                         <div class="space-x-2">
-                            <button type="button" onclick="clearCustomQuestions()" class="text-xs text-red-500 hover:underline cursor-pointer">Xóa câu hỏi thêm</button>
-                            <button type="button" onclick="parseCSV()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-lg cursor-pointer">Nhập CSV</button>
+                            <button type="button" onclick="clearCustomQuestions()" class="text-xs text-red-500 hover:underline cursor-pointer">XÃ³a cÃ¢u há»i thÃªm</button>
+                            <button type="button" onclick="parseCSV()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-lg cursor-pointer">Nháº­p CSV</button>
                         </div>
                     </div>
                 </div>
 
                 <div class="p-4 rounded-xl border border-[var(--border)] bg-[var(--card)] space-y-3">
-                    <h3 class="font-bold text-sm text-blue-500">⚙️ Cấu hình lượt chơi</h3>
+                    <h3 class="font-bold text-sm text-blue-500">âš™ï¸ Cáº¥u hÃ¬nh lÆ°á»£t chÆ¡i</h3>
                     <div class="flex items-center gap-3">
                         <label class="text-xs">Số câu hỏi mỗi ván (chọn ngẫu nhiên):</label>
                         <input type="number" id="admin-q-per-game" min="5" max="100" value="30" class="w-20 p-1.5 text-xs rounded-lg border border-[var(--border)] bg-[var(--background)]">
                     </div>
-                    <button type="button" onclick="saveAdminSettings()" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold rounded-lg cursor-pointer">Lưu Cấu Hình</button>
+                    <button type="button" onclick="saveAdminSettings()" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold rounded-lg cursor-pointer">LÆ°u Cáº¥u HÃ¬nh</button>
                 </div>
             </div>
         </div>
@@ -228,13 +228,13 @@
             <!-- HUD Status Bar -->
             <div class="flex flex-wrap justify-between items-center gap-2 p-2.5 bg-[var(--background)] rounded-xl border border-[var(--border)] text-xs md:text-sm font-semibold">
                 <div class="flex items-center gap-2">
-                    <span class="px-2 py-0.5 bg-amber-500/10 text-amber-500 rounded-md border border-amber-500/20 text-xs" id="hud-player">Người chơi</span>
-                    <span class="text-red-500 font-bold tracking-wider" id="hud-lives">❤️❤️❤️</span>
-                    <span id="hud-shield" class="hidden text-blue-500 text-xs font-bold bg-blue-500/10 px-1.5 py-0.5 rounded border border-blue-500/30">🛡️ Khiên Thép</span>
+                    <span class="px-2 py-0.5 bg-amber-500/10 text-amber-500 rounded-md border border-amber-500/20 text-xs" id="hud-player">NgÆ°á»i chÆ¡i</span>
+                    <span class="text-red-500 font-bold tracking-wider" id="hud-lives">â¤ï¸â¤ï¸â¤ï¸</span>
+                    <span id="hud-shield" class="hidden text-blue-500 text-xs font-bold bg-blue-500/10 px-1.5 py-0.5 rounded border border-blue-500/30">ðŸ›¡ï¸ KhiÃªn ThÃ©p</span>
                 </div>
                 <div class="flex items-center gap-3">
                     <span class="text-orange-500 text-xs md:text-sm font-bold" id="hud-combo">Combo: 0x</span>
-                    <span class="text-emerald-500 font-black text-base" id="hud-score">0 đ</span>
+                    <span class="text-emerald-500 font-black text-base" id="hud-score">0 Ä‘</span>
                     <span class="text-[var(--muted-foreground)] text-xs font-mono" id="hud-progress">1/16</span>
                 </div>
             </div>
@@ -247,23 +247,23 @@
             <!-- Bomb Banner (Shown on bomb questions) -->
             <div id="bomb-banner" class="hidden p-2.5 rounded-xl border border-red-500 bg-red-500/15 text-red-600 dark:text-red-300 font-black text-xs flex items-center justify-between bomb-pulse">
                 <div class="flex items-center gap-1.5">
-                    <span class="text-xl">💣</span>
-                    <span>CÂU HỎI BOM NỔ CHẬM! (8 GIÂY)</span>
+                    <span class="text-xl">ðŸ’£</span>
+                    <span>CÃ‚U Há»ŽI BOM Ná»” CHáº¬M! (8 GIÃ‚Y)</span>
                 </div>
-                <span class="text-[11px] font-normal">Đúng: +300đ & +1❤️ • Sai/Hết giờ: NỔ MẤT 2❤️!</span>
+                <span class="text-[11px] font-normal">ÄÃºng: +300Ä‘ & +1â¤ï¸ â€¢ Sai/Háº¿t giá»: Ná»” Máº¤T 2â¤ï¸!</span>
             </div>
 
             <!-- Question Card -->
             <div id="question-card" class="bg-[var(--background)]/90 p-4 md:p-5 rounded-xl border border-[var(--border)] shadow-sm space-y-3 transition-all">
                 <div class="flex justify-between items-start gap-2">
                     <span id="question-badge" class="px-2 py-0.5 rounded-md text-[11px] font-bold bg-blue-500/10 text-blue-500 border border-blue-500/20">
-                        Vòng 1
+                        VÃ²ng 1
                     </span>
                     <span id="question-timer-num" class="text-xs font-mono font-black text-amber-500">15s</span>
                 </div>
 
                 <h3 id="question-title" class="text-sm md:text-base font-bold leading-snug">
-                    Nội dung câu hỏi...
+                    Ná»™i dung cÃ¢u há»i...
                 </h3>
 
                 <!-- Answers Options Container -->
@@ -277,24 +277,24 @@
                 <!-- Injected via JS -->
             </div>
 
-            <!-- Special Event Modal: CHEST SWAP (ĐỔI ĐIỂM) -->
+            <!-- Special Event Modal: CHEST SWAP (Äá»”I ÄIá»‚M) -->
             <div id="chest-modal" class="hidden p-4 rounded-xl border border-purple-500/40 bg-purple-950/30 backdrop-blur-md text-center space-y-3 gold-glow">
                 <div class="text-xs font-bold text-purple-400 uppercase tracking-wide flex items-center justify-center gap-1">
-                    <span>✨</span> SỰ KIỆN ĐỔI ĐIỂM BÍ ẨN! <span>✨</span>
+                    <span>âœ¨</span> Sá»° KIá»†N Äá»”I ÄIá»‚M BÃ áº¨N! <span>âœ¨</span>
                 </div>
-                <p class="text-xs text-[var(--muted-foreground)]">Hãy chọn 1 trong 3 chiếc rương may mắn để thay đổi cục diện:</p>
+                <p class="text-xs text-[var(--muted-foreground)]">HÃ£y chá»n 1 trong 3 chiáº¿c rÆ°Æ¡ng may máº¯n Ä‘á»ƒ thay Ä‘á»•i cá»¥c diá»‡n:</p>
                 <div class="grid grid-cols-3 gap-2.5 py-1">
                     <button type="button" onclick="pickChest(1)" class="chest-btn p-3 rounded-xl border border-purple-500/30 bg-purple-500/15 hover:bg-purple-500/30 btn-press text-center cursor-pointer">
-                        <div class="text-3xl mb-1 pointer-events-none">🎁</div>
-                        <div class="text-xs font-bold text-purple-200 pointer-events-none">Rương 1</div>
+                        <div class="text-3xl mb-1 pointer-events-none">ðŸŽ</div>
+                        <div class="text-xs font-bold text-purple-200 pointer-events-none">RÆ°Æ¡ng 1</div>
                     </button>
                     <button type="button" onclick="pickChest(2)" class="chest-btn p-3 rounded-xl border border-purple-500/30 bg-purple-500/15 hover:bg-purple-500/30 btn-press text-center cursor-pointer">
-                        <div class="text-3xl mb-1 pointer-events-none">🎁</div>
-                        <div class="text-xs font-bold text-purple-200 pointer-events-none">Rương 2</div>
+                        <div class="text-3xl mb-1 pointer-events-none">ðŸŽ</div>
+                        <div class="text-xs font-bold text-purple-200 pointer-events-none">RÆ°Æ¡ng 2</div>
                     </button>
                     <button type="button" onclick="pickChest(3)" class="chest-btn p-3 rounded-xl border border-purple-500/30 bg-purple-500/15 hover:bg-purple-500/30 btn-press text-center cursor-pointer">
-                        <div class="text-3xl mb-1 pointer-events-none">🎁</div>
-                        <div class="text-xs font-bold text-purple-200 pointer-events-none">Rương 3</div>
+                        <div class="text-3xl mb-1 pointer-events-none">ðŸŽ</div>
+                        <div class="text-xs font-bold text-purple-200 pointer-events-none">RÆ°Æ¡ng 3</div>
                     </button>
                 </div>
                 <div id="chest-result" class="hidden text-xs font-bold text-amber-400 p-2 rounded bg-purple-900/40 border border-purple-500/30"></div>
@@ -303,10 +303,10 @@
             <!-- Bottom Navigation -->
             <div class="flex justify-between items-center pt-1">
                 <button type="button" onclick="quitGamePrompt()" class="text-xs text-[var(--muted-foreground)] hover:text-red-500 transition cursor-pointer p-1">
-                    🏳️ Dừng & Lưu điểm
+                    ðŸ³ï¸ Dá»«ng & LÆ°u Ä‘iá»ƒm
                 </button>
                 <button type="button" id="btn-next-question" onclick="nextQuestion()" class="hidden px-5 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs md:text-sm btn-press shadow-md cursor-pointer">
-                    Tiếp theo ➡️
+                    Tiáº¿p theo âž¡ï¸
                 </button>
             </div>
         </div>
@@ -314,38 +314,38 @@
         <!-- ================= SCREEN 3: RESULT & SUMMARY ================= -->
         <div id="screen-result" class="hidden space-y-5 py-3 text-center">
             <div class="p-5 rounded-2xl bg-[var(--background)] border border-[var(--border)] space-y-2.5">
-                <div id="result-icon" class="text-4xl">🏆</div>
-                <h2 id="result-title" class="text-xl md:text-2xl font-black text-amber-500">CHIẾN THẮNG ĐẤU TRƯỜNG!</h2>
-                <p id="result-subtitle" class="text-xs text-[var(--muted-foreground)]">Bạn đã xuất sắc hoàn thành trọn vẹn các thử thách</p>
+                <div id="result-icon" class="text-4xl">ðŸ†</div>
+                <h2 id="result-title" class="text-xl md:text-2xl font-black text-amber-500">CHIáº¾N THáº®NG Äáº¤U TRÆ¯á»œNG!</h2>
+                <p id="result-subtitle" class="text-xs text-[var(--muted-foreground)]">Báº¡n Ä‘Ã£ xuáº¥t sáº¯c hoÃ n thÃ nh trá»n váº¹n cÃ¡c thá»­ thÃ¡ch</p>
 
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 py-2">
                     <div class="p-2.5 rounded-xl bg-[var(--card)] border border-[var(--border)]">
-                        <div class="text-[11px] text-[var(--muted-foreground)]">Người chơi</div>
+                        <div class="text-[11px] text-[var(--muted-foreground)]">NgÆ°á»i chÆ¡i</div>
                         <div id="result-player" class="font-bold text-xs md:text-sm truncate">---</div>
                     </div>
                     <div class="p-2.5 rounded-xl bg-[var(--card)] border border-[var(--border)]">
-                        <div class="text-[11px] text-[var(--muted-foreground)]">Tổng Điểm</div>
+                        <div class="text-[11px] text-[var(--muted-foreground)]">Tá»•ng Äiá»ƒm</div>
                         <div id="result-score" class="font-black text-sm md:text-base text-emerald-500">0</div>
                     </div>
                     <div class="p-2.5 rounded-xl bg-[var(--card)] border border-[var(--border)]">
-                        <div class="text-[11px] text-[var(--muted-foreground)]">Đúng / Tổng</div>
+                        <div class="text-[11px] text-[var(--muted-foreground)]">ÄÃºng / Tá»•ng</div>
                         <div id="result-accuracy" class="font-bold text-xs md:text-sm text-blue-500">0/0</div>
                     </div>
                     <div class="p-2.5 rounded-xl bg-[var(--card)] border border-[var(--border)]">
-                        <div class="text-[11px] text-[var(--muted-foreground)]">Combo lớn nhất</div>
+                        <div class="text-[11px] text-[var(--muted-foreground)]">Combo lá»›n nháº¥t</div>
                         <div id="result-maxcombo" class="font-bold text-xs md:text-sm text-orange-500">0x</div>
                     </div>
                 </div>
 
                 <div id="rank-badge" class="inline-block px-3.5 py-1 rounded-full text-xs font-bold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/30">
-                    Danh hiệu: Học giả Dân chủ XHCN
+                    Danh hiá»‡u: Há»c giáº£ DÃ¢n chá»§ XHCN
                 </div>
             </div>
 
             <!-- Mistakes review -->
             <div class="text-left">
                 <button type="button" onclick="toggleMistakes()" id="btn-toggle-mistakes" class="text-xs font-semibold text-amber-500 hover:underline flex items-center gap-1 cursor-pointer">
-                    🔍 Xem lại các câu trả lời sai và giải thích chuẩn giáo trình
+                    ðŸ” Xem láº¡i cÃ¡c cÃ¢u tráº£ lá»i sai vÃ  giáº£i thÃ­ch chuáº©n giÃ¡o trÃ¬nh
                 </button>
                 <div id="mistakes-container" class="hidden mt-2.5 space-y-2.5 max-h-56 overflow-y-auto pr-1">
                     <!-- Injected via JS -->
@@ -354,13 +354,13 @@
 
             <div class="flex flex-col sm:flex-row justify-center gap-2 pt-1">
                 <button type="button" onclick="restartGame()" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs md:text-sm btn-press shadow cursor-pointer">
-                    🔄 Đấu lại ngay
+                    ðŸ”„ Äáº¥u láº¡i ngay
                 </button>
                 <button type="button" onclick="showLeaderboardScreen()" class="px-5 py-2.5 rounded-xl border border-amber-500/40 bg-amber-500/10 text-amber-600 dark:text-amber-400 font-bold text-xs md:text-sm btn-press cursor-pointer">
-                    🏆 Xem Bảng Xếp Hạng
+                    ðŸ† Xem Báº£ng Xáº¿p Háº¡ng
                 </button>
                 <button type="button" onclick="goToLobby()" class="px-5 py-2.5 rounded-xl border border-[var(--border)] hover:bg-[var(--accent)] font-semibold text-xs md:text-sm btn-press cursor-pointer">
-                    👥 Đổi người chơi
+                    ðŸ‘¥ Äá»•i ngÆ°á»i chÆ¡i
                 </button>
             </div>
         </div>
@@ -369,10 +369,10 @@
         <div id="screen-leaderboard" class="hidden space-y-4 py-2">
             <div class="flex justify-between items-center">
                 <h2 class="text-base md:text-lg font-bold flex items-center gap-2">
-                    <span>🏆</span> BẢNG VÀNG XẾP HẠNG
+                    <span>ðŸ†</span> Báº¢NG VÃ€NG Xáº¾P Háº NG
                 </h2>
                 <button type="button" onclick="goToLobby()" class="text-xs px-3 py-1.5 rounded-lg border border-[var(--border)] hover:bg-[var(--accent)] cursor-pointer">
-                    ⬅️ Quay lại sảnh
+                    â¬…ï¸ Quay láº¡i sáº£nh
                 </button>
             </div>
 
@@ -380,11 +380,11 @@
                 <table class="w-full text-left text-xs md:text-sm">
                     <thead class="bg-[var(--card)] border-b border-[var(--border)] text-[var(--muted-foreground)] uppercase text-[10px] md:text-xs sticky top-0">
                         <tr>
-                            <th class="p-2.5 text-center">Hạng</th>
-                            <th class="p-2.5">Tên Người Chơi</th>
-                            <th class="p-2.5 text-right">Điểm Số</th>
-                            <th class="p-2.5 text-center">Đúng</th>
-                            <th class="p-2.5 text-right">Ngày thi</th>
+                            <th class="p-2.5 text-center">Háº¡ng</th>
+                            <th class="p-2.5">TÃªn NgÆ°á»i ChÆ¡i</th>
+                            <th class="p-2.5 text-right">Äiá»ƒm Sá»‘</th>
+                            <th class="p-2.5 text-center">ÄÃºng</th>
+                            <th class="p-2.5 text-right">NgÃ y thi</th>
                         </tr>
                     </thead>
                     <tbody id="leaderboard-tbody" class="divide-y divide-[var(--border)]">
@@ -395,10 +395,10 @@
 
             <div class="flex justify-between items-center pt-1 text-xs">
                 <button type="button" id="btn-clear-lb" onclick="clearLeaderboard()" class="text-red-500 hover:underline cursor-pointer">
-                    🗑️ Xóa toàn bộ BXH
+                    ðŸ—‘ï¸ XÃ³a toÃ n bá»™ BXH
                 </button>
                 <button type="button" onclick="goToLobby()" class="px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-bold btn-press cursor-pointer">
-                    🎮 Chơi Ngay
+                    ðŸŽ® ChÆ¡i Ngay
                 </button>
             </div>
         </div>
@@ -521,8 +521,8 @@
 
         function toggleAudio() {
             audioEnabled = !audioEnabled;
-            document.getElementById('audio-toggle').textContent = audioEnabled ? '🔊' : '🔇';
-            showToast(audioEnabled ? "Đã bật âm thanh 🔊" : "Đã tắt âm thanh 🔇");
+            document.getElementById('audio-toggle').textContent = audioEnabled ? 'ðŸ”Š' : 'ðŸ”‡';
+            showToast(audioEnabled ? "ÄÃ£ báº­t Ã¢m thanh ðŸ”Š" : "ÄÃ£ táº¯t Ã¢m thanh ðŸ”‡");
         }
 
         // --- 3. 16 QUESTIONS (GIÁO TRÌNH 2021) ---
@@ -561,7 +561,7 @@
 
         // --- 4. STATE MANAGEMENT ---
         let players = [];
-        let activePlayer = "Người chơi 1";
+        let activePlayer = "NgÆ°á»i chÆ¡i 1";
         
         // === SUPABASE INITIALIZATION ===
         const SUPABASE_URL = 'https://hlycdtmluupavmwhuttn.supabase.co';
@@ -576,7 +576,7 @@
             const state = room.presenceState();
             const count = Object.keys(state).length;
             const titleEl = document.getElementById('lobby-title-online');
-            if(titleEl) titleEl.innerHTML = `ĐẤU TRƯỜNG DÂN CHỦ XHCN <span class="text-[10px] px-2 py-0.5 bg-emerald-500/20 text-emerald-500 rounded-full ml-1 inline-flex items-center gap-1">🟢 ${count} Online</span>`;
+            if(titleEl) titleEl.innerHTML = `Äáº¤U TRÆ¯á»œNG DÃ‚N CHá»¦ XHCN <span class="text-[10px] px-2 py-0.5 bg-emerald-500/20 text-emerald-500 rounded-full ml-1 inline-flex items-center gap-1">ðŸŸ¢ ${count} Online</span>`;
         });
         room.subscribe(async (status) => {
             if (status === 'SUBSCRIBED') {
@@ -617,11 +617,11 @@
                 if (storedPlayers) {
                     players = JSON.parse(storedPlayers);
                 } else {
-                    players = ["Học Viên 1"];
+                    players = ["Há»c ViÃªn 1"];
                 }
 
                 players = players.filter(p => p && typeof p === 'string' && p.trim().length > 0);
-                if (players.length === 0) players = ["Học Viên 1"];
+                if (players.length === 0) players = ["Há»c ViÃªn 1"];
 
                 const storedLB = localStorage.getItem('mln_leaderboard');
                 if (storedLB) leaderboard = JSON.parse(storedLB);
@@ -639,8 +639,8 @@
                     activePlayer = players[0];
                 }
             } catch(e) {
-                players = ["Học Viên 1"];
-                activePlayer = "Học Viên 1";
+                players = ["Há»c ViÃªn 1"];
+                activePlayer = "Há»c ViÃªn 1";
             }
             updatePlayerUI();
         }
@@ -663,7 +663,7 @@
                 input.value = activePlayer;
             }
 
-            document.getElementById('active-player-display').textContent = activePlayer || "Chưa nhập tên";
+            document.getElementById('active-player-display').textContent = activePlayer || "ChÆ°a nháº­p tÃªn";
 
             const listContainer = document.getElementById('saved-players-list');
             listContainer.innerHTML = '';
@@ -689,7 +689,7 @@
                 delBtn.type = "button";
                 delBtn.className = 'text-xs text-red-500 hover:text-white hover:bg-red-500 rounded-full w-5 h-5 flex items-center justify-center font-black transition cursor-pointer p-0';
                 delBtn.innerHTML = '&times;';
-                delBtn.title = `Xóa '${name}'`;
+                delBtn.title = `XÃ³a '${name}'`;
                 delBtn.onclick = (e) => {
                     e.stopPropagation(); // Don't trigger chip click
                     deleteSavedPlayer(name);
@@ -704,9 +704,9 @@
             if (activePlayer) {
                 const pScores = leaderboard.filter(item => item.name === activePlayer).map(item => item.score);
                 const best = pScores.length > 0 ? Math.max(...pScores) : 0;
-                document.getElementById('active-player-best').textContent = `${best} điểm`;
+                document.getElementById('active-player-best').textContent = `${best} Ä‘iá»ƒm`;
             } else {
-                document.getElementById('active-player-best').textContent = "0 điểm";
+                document.getElementById('active-player-best').textContent = "0 Ä‘iá»ƒm";
             }
         }
 
@@ -718,7 +718,7 @@
                 document.getElementById('active-player-display').textContent = activePlayer;
                 const pScores = leaderboard.filter(item => item.name === activePlayer).map(item => item.score);
                 const best = pScores.length > 0 ? Math.max(...pScores) : 0;
-                document.getElementById('active-player-best').textContent = `${best} điểm`;
+                document.getElementById('active-player-best').textContent = `${best} Ä‘iá»ƒm`;
             }
         }
 
@@ -726,24 +726,24 @@
             activePlayer = name;
             saveStorage();
             updatePlayerUI();
-            showToast(`Đã chọn: ${name}`);
+            showToast(`ÄÃ£ chá»n: ${name}`);
         }
 
         function deleteSavedPlayer(name) {
             // Direct delete without browser confirm popup (avoids iframe blocking!)
             players = players.filter(p => p !== name);
             if (activePlayer === name) {
-                activePlayer = players.length > 0 ? players[0] : "Học Viên 1";
+                activePlayer = players.length > 0 ? players[0] : "Há»c ViÃªn 1";
             }
             saveStorage();
             updatePlayerUI();
-            showToast(`Đã xóa '${name}' khỏi danh sách!`);
+            showToast(`ÄÃ£ xÃ³a '${name}' khá»i danh sÃ¡ch!`);
         }
 
         // --- 5. GAMEPLAY FLOW ---
         function startBattle() {
             const input = document.getElementById('player-name-input');
-            const name = (input ? input.value.trim() : "") || activePlayer || "Học Viên MLN";
+            const name = (input ? input.value.trim() : "") || activePlayer || "Há»c ViÃªn MLN";
             activePlayer = name;
 
             if (!players.includes(name)) {
@@ -783,14 +783,14 @@
 
         function renderHUD() {
             lives = Math.max(0, lives);
-            document.getElementById('hud-player').textContent = `👤 ${activePlayer}`;
-            document.getElementById('hud-score').textContent = `${score} đ`;
+            document.getElementById('hud-player').textContent = `ðŸ‘¤ ${activePlayer}`;
+            document.getElementById('hud-score').textContent = `${score} Ä‘`;
             document.getElementById('hud-combo').textContent = `Combo: ${combo}x`;
             document.getElementById('hud-progress').textContent = `${currentQuestionIndex + 1}/${currentQuestions.length}`;
 
             let hearts = "";
-            for (let i = 0; i < lives; i++) hearts += "❤️";
-            for (let i = lives; i < 3; i++) hearts += "🖤";
+            for (let i = 0; i < lives; i++) hearts += "â¤ï¸";
+            for (let i = lives; i < 3; i++) hearts += "ðŸ–¤";
             document.getElementById('hud-lives').textContent = hearts;
 
             const shieldElem = document.getElementById('hud-shield');
@@ -823,7 +823,7 @@
                 maxTime = 15;
             }
 
-            document.getElementById('question-badge').textContent = isBombQuestion ? '💣 CÂU HỎI BOM' : q.round;
+            document.getElementById('question-badge').textContent = isBombQuestion ? 'ðŸ’£ CÃ‚U Há»ŽI BOM' : q.round;
             document.getElementById('question-title').textContent = q.question;
             document.getElementById('instant-feedback').classList.add('hidden');
             document.getElementById('chest-modal').classList.add('hidden');
@@ -837,7 +837,7 @@
                 const btn = document.createElement('button');
                 btn.type = 'button';
                 btn.className = 'w-full text-left p-3.5 rounded-xl border border-[var(--border)] bg-[var(--card)] hover:bg-[var(--accent)] font-medium text-xs md:text-sm btn-press transition-colors flex items-center justify-between cursor-pointer';
-                btn.innerHTML = `<span class="pointer-events-none">${opt}</span><span class="text-xs text-[var(--muted-foreground)] opacity-60 font-mono pointer-events-none">Phím ${idx + 1}</span>`;
+                btn.innerHTML = `<span class="pointer-events-none">${opt}</span><span class="text-xs text-[var(--muted-foreground)] opacity-60 font-mono pointer-events-none">PhÃ­m ${idx + 1}</span>`;
                 btn.onclick = () => submitAnswer(idx, btn);
                 container.appendChild(btn);
             });
@@ -909,29 +909,29 @@
                     earned += 250;
                     if (lives < 3) lives++;
                     playSound('victory');
-                    extraMsg = `<br><span class="text-emerald-400 font-bold">🛡️ GỠ BOM XUẤT SẮC! Thưởng nóng +250đ & Hồi 1 ❤️!</span>`;
+                    extraMsg = `<br><span class="text-emerald-400 font-bold">ðŸ›¡ï¸ Gá»  BOM XUáº¤T Sáº®C! ThÆ°á»Ÿng nÃ³ng +250Ä‘ & Há»“i 1 â¤ï¸!</span>`;
                 } else {
                     playSound('correct');
                 }
 
-                // 25% Chance for Lucky Steal (Cướp điểm)
+                // 25% Chance for Lucky Steal (CÆ°á»›p Ä‘iá»ƒm)
                 const isSteal = (!isBombQuestion && Math.random() < 0.25);
                 if (isSteal) {
                     const stolenPoints = Math.floor(Math.random() * 150) + 150;
                     earned += stolenPoints;
                     playSound('coin');
-                    extraMsg += `<br><span class="text-amber-400 font-bold gold-glow inline-block p-1 rounded">🏴‍☠️ KÍCH HOẠT CƯỚP ĐIỂM: Bạn vừa tịch thu kho của bọn bóc lột, cướp được +${stolenPoints}đ! 💰</span>`;
+                    extraMsg += `<br><span class="text-amber-400 font-bold gold-glow inline-block p-1 rounded">ðŸ´â€â˜ ï¸ KÃCH HOáº T CÆ¯á»šP ÄIá»‚M: Báº¡n vá»«a tá»‹ch thu kho cá»§a bá»n bÃ³c lá»™t, cÆ°á»›p Ä‘Æ°á»£c +${stolenPoints}Ä‘! ðŸ’°</span>`;
                 }
 
                 score += earned;
-                showFeedback(true, `+${earned} điểm (Combo ${combo}x) 🔥${extraMsg}<br>${q.explanation}`);
+                showFeedback(true, `+${earned} Ä‘iá»ƒm (Combo ${combo}x) ðŸ”¥${extraMsg}<br>${q.explanation}`);
 
                 const comboBadge = document.getElementById('hud-combo');
                 comboBadge.classList.remove('pulse-combo');
                 void comboBadge.offsetWidth;
                 comboBadge.classList.add('pulse-combo');
 
-                // 25% Chance for Chest Event (Đổi điểm)
+                // 25% Chance for Chest Event (Äá»•i Ä‘iá»ƒm)
                 const isChestEvent = (!isBombQuestion && !isSteal && Math.random() < 0.25);
                 if (isChestEvent) {
                     setTimeout(() => {
@@ -948,17 +948,17 @@
                 if (hasShield) {
                     hasShield = false;
                     playSound('magic');
-                    showFeedback(false, `🛡️ Khiên Thép đã bảo vệ bạn! Không bị mất mạng!<br>${q.explanation}`);
+                    showFeedback(false, `ðŸ›¡ï¸ KhiÃªn ThÃ©p Ä‘Ã£ báº£o vá»‡ báº¡n! KhÃ´ng bá»‹ máº¥t máº¡ng!<br>${q.explanation}`);
                 } else {
                     if (isBombQuestion) {
                         lives -= 2;
                         playSound('explosion');
                         triggerScreenShake();
-                        showFeedback(false, `💥 BÙÙÙM! BOM ĐÃ NỔ! Bạn bị mất 2 mạng! 💔💔<br>${q.explanation}`);
+                        showFeedback(false, `ðŸ’¥ BÃ™Ã™Ã™M! BOM ÄÃƒ Ná»”! Báº¡n bá»‹ máº¥t 2 máº¡ng! ðŸ’”ðŸ’”<br>${q.explanation}`);
                     } else {
                         lives--;
                         playSound('wrong');
-                        showFeedback(false, `Mất 1 mạng! 💔<br>${q.explanation}`);
+                        showFeedback(false, `Máº¥t 1 máº¡ng! ðŸ’”<br>${q.explanation}`);
                     }
                 }
 
@@ -997,21 +997,21 @@
             if (hasShield) {
                 hasShield = false;
                 playSound('magic');
-                showFeedback(false, `🛡️ Hết giờ nhưng Khiên Thép đã bảo hộ mạng sống của bạn!<br>${q.explanation}`);
+                showFeedback(false, `ðŸ›¡ï¸ Háº¿t giá» nhÆ°ng KhiÃªn ThÃ©p Ä‘Ã£ báº£o há»™ máº¡ng sá»‘ng cá»§a báº¡n!<br>${q.explanation}`);
             } else if (isBombQuestion) {
                 lives -= 2;
                 playSound('explosion');
                 triggerScreenShake();
-                showFeedback(false, `💥 HẾT GIỜ! BOM ĐÃ PHÁT NỔ! Bạn mất 2 mạng! 💔💔<br>${q.explanation}`);
+                showFeedback(false, `ðŸ’¥ Háº¾T GIá»œ! BOM ÄÃƒ PHÃT Ná»”! Báº¡n máº¥t 2 máº¡ng! ðŸ’”ðŸ’”<br>${q.explanation}`);
             } else {
                 lives--;
                 playSound('wrong');
-                showFeedback(false, `Hết giờ! Mất 1 mạng! 💔<br>${q.explanation}`);
+                showFeedback(false, `Háº¿t giá»! Máº¥t 1 máº¡ng! ðŸ’”<br>${q.explanation}`);
             }
 
             mistakes.push({
                 q: q.question,
-                yourAns: "Hết thời gian (Không chọn)",
+                yourAns: "Háº¿t thá»i gian (KhÃ´ng chá»n)",
                 correctAns: q.options[q.correct],
                 exp: q.explanation
             });
@@ -1031,7 +1031,7 @@
             root.classList.add('screen-shake');
         }
 
-        // --- CHEST MODAL (RESET MỌI LÚC - KHÔNG BAO GIỜ BỊ LIỆT NÚT) ---
+        // --- CHEST MODAL (RESET Má»ŒI LÃšC - KHÃ”NG BAO GIá»œ Bá»Š LIá»†T NÃšT) ---
         function triggerChestModal() {
             playSound('magic');
             const modal = document.getElementById('chest-modal');
@@ -1054,9 +1054,9 @@
         function pickChest(chestNum) {
             playSound('coin');
             const rewards = [
-                { type: 'points', val: 200, text: '💰 ĐỔI ĐIỂM MAY MẮN: +200 Điểm trực tiếp vào quỹ!' },
-                { type: 'multiplier', val: 2, text: '🔥 NHÂN ĐÔI ĐIỂM THƯỞNG: Thưởng nóng thêm +150 Điểm!' },
-                { type: 'shield', val: 1, text: '🛡️ KHIÊN THÉP: Miễn trừ 1 lần mất mạng ở câu tiếp theo!' }
+                { type: 'points', val: 200, text: 'ðŸ’° Äá»”I ÄIá»‚M MAY Máº®N: +200 Äiá»ƒm trá»±c tiáº¿p vÃ o quá»¹!' },
+                { type: 'multiplier', val: 2, text: 'ðŸ”¥ NHÃ‚N ÄÃ”I ÄIá»‚M THÆ¯á»žNG: ThÆ°á»Ÿng nÃ³ng thÃªm +150 Äiá»ƒm!' },
+                { type: 'shield', val: 1, text: 'ðŸ›¡ï¸ KHIÃŠN THÃ‰P: Miá»…n trá»« 1 láº§n máº¥t máº¡ng á»Ÿ cÃ¢u tiáº¿p theo!' }
             ];
             const chosen = rewards[Math.floor(Math.random() * rewards.length)];
 
@@ -1072,7 +1072,7 @@
 
             const res = document.getElementById('chest-result');
             res.classList.remove('hidden');
-            res.innerHTML = `Bạn mở <strong>Rương ${chestNum}</strong>: ${chosen.text}`;
+            res.innerHTML = `Báº¡n má»Ÿ <strong>RÆ°Æ¡ng ${chestNum}</strong>: ${chosen.text}`;
 
             const chestBtns = document.querySelectorAll('.chest-btn');
             chestBtns.forEach(b => {
@@ -1090,10 +1090,10 @@
 
             if (isCorrect) {
                 box.classList.add('bg-emerald-500/10', 'border-emerald-500/30', 'text-emerald-700', 'dark:text-emerald-300');
-                box.innerHTML = `<span class="font-bold">✨ CHÍNH XÁC!</span> ${msg}`;
+                box.innerHTML = `<span class="font-bold">âœ¨ CHÃNH XÃC!</span> ${msg}`;
             } else {
                 box.classList.add('bg-red-500/10', 'border-red-500/30', 'text-red-700', 'dark:text-red-300');
-                box.innerHTML = `<span class="font-bold">⚠️ KHÔNG ĐÚNG!</span> ${msg}`;
+                box.innerHTML = `<span class="font-bold">âš ï¸ KHÃ”NG ÄÃšNG!</span> ${msg}`;
             }
         }
 
@@ -1106,7 +1106,7 @@
             // Direct quit & save without window.confirm to avoid iframe blocks
             clearInterval(timer);
             endGame(false);
-            showToast("Đã dừng trận đấu và ghi nhận kết quả!");
+            showToast("ÄÃ£ dá»«ng tráº­n Ä‘áº¥u vÃ  ghi nháº­n káº¿t quáº£!");
         }
 
         // --- 6. END GAME & LEADERBOARD ---
@@ -1131,11 +1131,11 @@
                 correct_ratio: `${correctCount}/${totalQuestions}`,
                 
             }]).then(({error}) => {
-                if (error) console.error("Lỗi lưu điểm:", error);
+                if (error) console.error("Lá»—i lÆ°u Ä‘iá»ƒm:", error);
             });
 
             document.getElementById('result-player').textContent = activePlayer;
-            document.getElementById('result-score').textContent = `${score} đ`;
+            document.getElementById('result-score').textContent = `${score} Ä‘`;
             document.getElementById('result-accuracy').textContent = `${correctCount}/${totalQuestions}`;
             document.getElementById('result-maxcombo').textContent = `${maxCombo}x`;
 
@@ -1146,24 +1146,24 @@
 
             if (isVictory) {
                 playSound('victory');
-                icon.textContent = "🏆";
-                title.textContent = "CHIẾN THẮNG TUYỆT ĐỐI!";
-                subtitle.textContent = "Bạn đã chinh phục toàn bộ câu hỏi và bảo toàn được mạng sống!";
+                icon.textContent = "ðŸ†";
+                title.textContent = "CHIáº¾N THáº®NG TUYá»†T Äá»I!";
+                subtitle.textContent = "Báº¡n Ä‘Ã£ chinh phá»¥c toÃ n bá»™ cÃ¢u há»i vÃ  báº£o toÃ n Ä‘Æ°á»£c máº¡ng sá»‘ng!";
             } else {
                 playSound('gameover');
-                icon.textContent = "💀";
-                title.textContent = "HẾT MẠNG - DỪNG BƯỚC!";
-                subtitle.textContent = "Đừng nản lòng, hãy xem lại các câu sai để bứt phá ở lượt đấu sau!";
+                icon.textContent = "ðŸ’€";
+                title.textContent = "Háº¾T Máº NG - Dá»ªNG BÆ¯á»šC!";
+                subtitle.textContent = "Äá»«ng náº£n lÃ²ng, hÃ£y xem láº¡i cÃ¡c cÃ¢u sai Ä‘á»ƒ bá»©t phÃ¡ á»Ÿ lÆ°á»£t Ä‘áº¥u sau!";
             }
 
             if (score >= 2500) {
-                badge.textContent = "Hạng: BẬC THẦY LÝ LUẬN DÂN CHỦ 👑";
+                badge.textContent = "Háº¡ng: Báº¬C THáº¦Y LÃ LUáº¬N DÃ‚N CHá»¦ ðŸ‘‘";
             } else if (score >= 1500) {
-                badge.textContent = "Hạng: CHIẾN SĨ DÂN CHỦ XHCN ⭐";
+                badge.textContent = "Háº¡ng: CHIáº¾N SÄ¨ DÃ‚N CHá»¦ XHCN â­";
             } else if (score >= 800) {
-                badge.textContent = "Hạng: ĐẠI BIỂU NHÂN DÂN TIÊN PHONG 🎖️";
+                badge.textContent = "Háº¡ng: Äáº I BIá»‚U NHÃ‚N DÃ‚N TIÃŠN PHONG ðŸŽ–ï¸";
             } else {
-                badge.textContent = "Hạng: TÂN BINH TÌM HIỂU DÂN CHỦ 📖";
+                badge.textContent = "Háº¡ng: TÃ‚N BINH TÃŒM HIá»‚U DÃ‚N CHá»¦ ðŸ“–";
             }
 
             renderMistakes();
@@ -1174,7 +1174,7 @@
             container.innerHTML = '';
 
             if (mistakes.length === 0) {
-                container.innerHTML = '<div class="p-3 bg-emerald-500/10 text-emerald-600 rounded-lg text-xs font-semibold">Xuất sắc! Bạn không trả lời sai bất kỳ câu nào! 🎯</div>';
+                container.innerHTML = '<div class="p-3 bg-emerald-500/10 text-emerald-600 rounded-lg text-xs font-semibold">Xuáº¥t sáº¯c! Báº¡n khÃ´ng tráº£ lá»i sai báº¥t ká»³ cÃ¢u nÃ o! ðŸŽ¯</div>';
                 return;
             }
 
@@ -1183,8 +1183,8 @@
                 card.className = 'p-3 rounded-lg border border-red-500/20 bg-red-500/5 text-xs space-y-1';
                 card.innerHTML = `
                     <div class="font-bold text-[var(--foreground)]">${idx + 1}. ${m.q}</div>
-                    <div class="text-red-500 font-semibold">❌ Bạn chọn: ${m.yourAns}</div>
-                    <div class="text-emerald-500 font-semibold">✔️ Đáp án đúng: ${m.correctAns}</div>
+                    <div class="text-red-500 font-semibold">âŒ Báº¡n chá»n: ${m.yourAns}</div>
+                    <div class="text-emerald-500 font-semibold">âœ”ï¸ ÄÃ¡p Ã¡n Ä‘Ãºng: ${m.correctAns}</div>
                     <div class="text-[var(--muted-foreground)] italic mt-1 bg-[var(--background)] p-1.5 rounded border border-[var(--border)]">${m.exp}</div>
                 `;
                 container.appendChild(card);
@@ -1196,10 +1196,10 @@
             const btn = document.getElementById('btn-toggle-mistakes');
             if (container.classList.contains('hidden')) {
                 container.classList.remove('hidden');
-                btn.textContent = "🔼 Thu gọn phần xem lại câu sai";
+                btn.textContent = "ðŸ”¼ Thu gá»n pháº§n xem láº¡i cÃ¢u sai";
             } else {
                 container.classList.add('hidden');
-                btn.textContent = "🔍 Xem lại các câu trả lời sai và giải thích chuẩn giáo trình";
+                btn.textContent = "ðŸ” Xem láº¡i cÃ¡c cÃ¢u tráº£ lá»i sai vÃ  giáº£i thÃ­ch chuáº©n giÃ¡o trÃ¬nh";
             }
         }
 
@@ -1226,7 +1226,7 @@
             document.getElementById('screen-leaderboard').classList.remove('hidden');
 
             const tbody = document.getElementById('leaderboard-tbody');
-            tbody.innerHTML = '<tr><td colspan="5" class="p-4 text-center text-[var(--muted-foreground)]"><span class="animate-pulse">Đang tải dữ liệu từ máy chủ Supabase... ⏳</span></td></tr>';
+            tbody.innerHTML = '<tr><td colspan="5" class="p-4 text-center text-[var(--muted-foreground)]"><span class="animate-pulse">Äang táº£i dá»¯ liá»‡u tá»« mÃ¡y chá»§ Supabase... â³</span></td></tr>';
 
             const { data, error } = await supabaseClient.from('leaderboard')
                 .select('*')
@@ -1236,7 +1236,7 @@
             tbody.innerHTML = '';
 
             if (error || !data || data.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="5" class="p-4 text-center text-[var(--muted-foreground)]">Chưa có ai ghi danh vào Bảng vàng. Hãy là người đầu tiên!</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="5" class="p-4 text-center text-[var(--muted-foreground)]">ChÆ°a cÃ³ ai ghi danh vÃ o Báº£ng vÃ ng. HÃ£y lÃ  ngÆ°á»i Ä‘áº§u tiÃªn!</td></tr>';
                 return;
             }
 
@@ -1244,15 +1244,15 @@
                 const tr = document.createElement('tr');
                 let medal = `${index + 1}`;
                 let rowBg = '';
-                if (index === 0) { medal = '🥇 1'; rowBg = 'bg-yellow-500/10 font-bold text-amber-500'; }
-                else if (index === 1) { medal = '🥈 2'; rowBg = 'bg-gray-400/10 font-bold text-gray-400'; }
-                else if (index === 2) { medal = '🥉 3'; rowBg = 'bg-amber-700/10 font-bold text-amber-700'; }
+                if (index === 0) { medal = 'ðŸ¥‡ 1'; rowBg = 'bg-yellow-500/10 font-bold text-amber-500'; }
+                else if (index === 1) { medal = 'ðŸ¥ˆ 2'; rowBg = 'bg-gray-400/10 font-bold text-gray-400'; }
+                else if (index === 2) { medal = 'ðŸ¥‰ 3'; rowBg = 'bg-amber-700/10 font-bold text-amber-700'; }
 
                 tr.className = rowBg;
                 tr.innerHTML = `
                     <td class="p-2.5 text-center">${medal}</td>
                     <td class="p-2.5 font-semibold">${item.player_name}</td>
-                    <td class="p-2.5 text-right font-mono font-black text-emerald-500">${item.score} đ</td>
+                    <td class="p-2.5 text-right font-mono font-black text-emerald-500">${item.score} Ä‘</td>
                     <td class="p-2.5 text-center text-[var(--muted-foreground)]">${item.correct_ratio}</td>
                     <td class="p-2.5 text-right text-[var(--muted-foreground)] text-xs">${item.date || new Date(item.created_at).toLocaleDateString('vi-VN')}</td>
                 `;
@@ -1261,21 +1261,21 @@
         }
 
         async function clearLeaderboard() {
-            if(prompt("Nhập mật khẩu Admin để xóa BXH:") !== "572001") { showToast("Sai mật khẩu!"); return; }
+            if(prompt("Nháº­p máº­t kháº©u Admin Ä‘á»ƒ xÃ³a BXH:") !== "572001") { showToast("Sai máº­t kháº©u!"); return; }
             
-            showToast("Đang xóa BXH trên Server...");
+            showToast("Äang xÃ³a BXH trÃªn Server...");
             // Supabase requires a filter to delete all, neq ensures all are deleted
             const { error } = await supabaseClient.from('leaderboard').delete().neq('id', '00000000-0000-0000-0000-000000000000');
-            if(error) { showToast("Lỗi: " + error.message); return; }
+            if(error) { showToast("Lá»—i: " + error.message); return; }
             
             showLeaderboardScreen();
-            showToast("Đã xóa sạch Bảng xếp hạng trên Server!");
+            showToast("ÄÃ£ xÃ³a sáº¡ch Báº£ng xáº¿p háº¡ng trÃªn Server!");
         }
 
         function showAdminScreen() {
             clearInterval(timer);
             // Password protection
-            if(prompt("Nhập mật khẩu Admin:") !== "572001") { showToast("Sai mật khẩu!"); return; }
+            if(prompt("Nháº­p máº­t kháº©u Admin:") !== "572001") { showToast("Sai máº­t kháº©u!"); return; }
             
             document.getElementById('screen-battle').classList.add('hidden');
             document.getElementById('screen-result').classList.add('hidden');
@@ -1289,14 +1289,14 @@
 
         function updateAdminQCount() {
             const count = rawQuestions.length + customQuestions.length;
-            document.getElementById('admin-q-count').textContent = `Đang có: ${rawQuestions.length} gốc + ${customQuestions.length} thêm = ${count} câu`;
+            document.getElementById('admin-q-count').textContent = `Äang cÃ³: ${rawQuestions.length} gá»‘c + ${customQuestions.length} thÃªm = ${count} cÃ¢u`;
         }
 
         function clearCustomQuestions() {
             customQuestions = [];
             saveStorage();
             updateAdminQCount();
-            showToast("Đã xóa các câu hỏi thêm!");
+            showToast("ÄÃ£ xÃ³a cÃ¡c cÃ¢u há»i thÃªm!");
         }
 
         function saveAdminSettings() {
@@ -1304,14 +1304,14 @@
             if (val > 0) {
                 gameSettings.qPerGame = val;
                 saveStorage();
-                showToast("Đã lưu cấu hình!");
+                showToast("ÄÃ£ lÆ°u cáº¥u hÃ¬nh!");
             }
         }
 
         function parseCSV() {
             const text = document.getElementById('admin-csv-input').value.trim();
             if (!text) {
-                showToast("Chưa nhập nội dung!");
+                showToast("ChÆ°a nháº­p ná»™i dung!");
                 return;
             }
             
@@ -1334,7 +1334,7 @@
                     if (isNaN(correctIdx) || correctIdx < 0 || correctIdx > 3) correctIdx = 0; // Fallback to 0
                     
                     const q = {
-                        round: "Vòng Admin",
+                        round: "VÃ²ng Admin",
                         type: "mcq",
                         question: parts[0].trim(),
                         options: [
@@ -1344,7 +1344,7 @@
                             parts[4].trim()
                         ],
                         correct: correctIdx,
-                        explanation: `Theo chuẩn giáo trình: Đáp án đúng là số ${correctIdx + 1}`
+                        explanation: `Theo chuáº©n giÃ¡o trÃ¬nh: ÄÃ¡p Ã¡n Ä‘Ãºng lÃ  sá»‘ ${correctIdx + 1}`
                     };
                     customQuestions.push(q);
                     added++;
@@ -1355,9 +1355,9 @@
                 saveStorage();
                 updateAdminQCount();
                 document.getElementById('admin-csv-input').value = "";
-                showToast(`Đã nạp thành công ${added} câu hỏi mới!`);
+                showToast(`ÄÃ£ náº¡p thÃ nh cÃ´ng ${added} cÃ¢u há»i má»›i!`);
             } else {
-                showToast("Không tìm thấy câu hỏi hợp lệ trong dữ liệu!");
+                showToast("KhÃ´ng tÃ¬m tháº¥y cÃ¢u há»i há»£p lá»‡ trong dá»¯ liá»‡u!");
             }
         }
 
