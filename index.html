@@ -1,0 +1,1954 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đấu Trường Tri Thức: Xây Dựng Đảng Trong Sạch, Vững Mạnh</title>
+    <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        .btn-press {
+            transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-press:hover {
+            transform: translateY(-2px);
+        }
+        .btn-press:active {
+            transform: translateY(1px);
+        }
+        .correct-anim {
+            background-color: #059669 !important;
+            color: #ffffff !important;
+            border-color: #10b981 !important;
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+        }
+        .wrong-anim {
+            background-color: #dc2626 !important;
+            color: #ffffff !important;
+            border-color: #ef4444 !important;
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+        }
+        .pulse-combo {
+            animation: pulse-combo 0.4s ease-in-out;
+        }
+        @keyframes pulse-combo {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.18); }
+            100% { transform: scale(1); }
+        }
+        .bomb-pulse {
+            animation: bomb-glow 0.8s infinite alternate;
+        }
+        @keyframes bomb-glow {
+            0% { border-color: rgba(239, 68, 68, 0.4); box-shadow: 0 0 5px rgba(239, 68, 68, 0.2); }
+            100% { border-color: rgba(239, 68, 68, 1); box-shadow: 0 0 20px rgba(239, 68, 68, 0.6); }
+        }
+        .screen-shake {
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-2px, 0, 0); }
+            20%, 80% { transform: translate3d(4px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-6px, 0, 0); }
+            40%, 60% { transform: translate3d(6px, 0, 0); }
+        }
+        .gold-glow {
+            animation: gold-shine 1s ease-in-out infinite alternate;
+        }
+        @keyframes gold-shine {
+            0% { box-shadow: 0 0 10px rgba(245, 158, 11, 0.3); }
+            100% { box-shadow: 0 0 25px rgba(245, 158, 11, 0.8); }
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(150, 150, 150, 0.3);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-transparent text-[var(--foreground)] antialiased p-2 md:p-4 font-sans">
+    <div id="game-root" class="bg-[var(--card)] text-[var(--foreground)] border border-[var(--border)] rounded-2xl p-4 md:p-6 shadow-xl max-w-3xl mx-auto backdrop-blur-md relative overflow-hidden">
+
+        <!-- Toast Notification (Zero Browser Modals) -->
+        <div id="game-toast" class="hidden absolute top-4 left-1/2 -translate-x-1/2 z-50 px-4 py-2 rounded-xl bg-amber-500 text-black font-bold text-xs shadow-xl transition-all flex items-center gap-1.5 border border-amber-300">
+            <span>📢</span> <span id="toast-text">Thông báo</span>
+        </div>
+
+        <!-- Top Header & Controls -->
+        <div class="flex justify-between items-center pb-3 border-b border-[var(--border)] mb-4">
+            <div class="flex items-center gap-2">
+                <span class="text-2xl">🏛️</span>
+                <div>
+                    <h1 id="lobby-title-online" class="text-lg md:text-xl font-bold bg-gradient-to-r from-red-500 via-amber-500 to-yellow-500 bg-clip-text text-transparent">
+                        ĐẤU TRƯỜNG: ĐẢNG TRONG SẠCH, VỮNG MẠNH
+                    </h1>
+                    <p class="text-xs text-[var(--muted-foreground)]">Tư tưởng Hồ Chí Minh • Mục 4.1.2: Xây dựng Đảng trong sạch, vững mạnh</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-2">
+                <button type="button" id="audio-toggle" onclick="toggleAudio()" class="p-2 rounded-lg border border-[var(--border)] hover:bg-[var(--accent)] text-sm cursor-pointer" title="Bật/Tắt âm thanh">
+                    🔊
+                </button>
+                <button type="button" onclick="showAdminScreen()" class="px-3 py-1.5 rounded-lg border border-[var(--border)] hover:bg-[var(--accent)] font-semibold text-xs md:text-sm transition flex items-center gap-1 cursor-pointer" title="Cài đặt & Câu hỏi">
+                    ⚙️ Admin
+                </button>
+                <button type="button" onclick="showLeaderboardScreen()" class="px-3 py-1.5 rounded-lg border border-amber-500/40 bg-amber-500/10 text-amber-600 dark:text-amber-400 font-semibold text-xs md:text-sm hover:bg-amber-500/20 transition flex items-center gap-1 cursor-pointer">
+                    🏆 BXH
+                </button>
+            </div>
+        </div>
+
+        <!-- ================= SCREEN 1: LOBBY ================= -->
+        <div id="screen-lobby" class="space-y-5 py-2">
+            <div class="bg-gradient-to-br from-red-900/10 via-amber-900/5 to-transparent p-5 rounded-xl border border-[var(--border)]">
+                <h2 class="text-base font-bold mb-1.5 flex items-center gap-2">
+                    <span>👤</span> Tên Người Chơi
+                </h2>
+                <p class="text-xs text-[var(--muted-foreground)] mb-3">
+                    Nhập tên của bạn để bắt đầu và ghi danh vào Bảng vàng xếp hạng:
+                </p>
+
+                <!-- Direct Input Box -->
+                <div class="mb-3.5">
+                    <div class="relative flex items-center">
+                        <input type="text" id="player-name-input" placeholder="Nhập tên của bạn (ví dụ: Hoàng, Linh, An...)" maxlength="20"
+                            class="w-full pl-3.5 pr-12 py-2.5 text-sm rounded-xl border border-[var(--border)] bg-[var(--background)] focus:outline-none focus:ring-2 focus:ring-amber-500 font-bold"
+                            oninput="onPlayerInputChanged()" onkeydown="if(event.key==='Enter') startBattle()">
+                        <button type="button" onclick="startBattle()" class="absolute right-2 px-2.5 py-1 bg-amber-500 hover:bg-amber-400 text-black text-xs font-bold rounded-lg cursor-pointer">
+                            Vào ⚔️
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Recent Players Tags (Quick Pick & 1-Click Delete) -->
+                <div id="saved-players-section" class="mb-3.5">
+                    <div class="text-[11px] font-semibold text-[var(--muted-foreground)] mb-1.5 flex items-center justify-between">
+                        <span>Danh sách người chơi đã lưu:</span>
+                        <span class="text-[10px] text-amber-500/80">Bấm tên để chọn • Bấm × đỏ để xóa</span>
+                    </div>
+                    <div id="saved-players-list" class="flex flex-wrap gap-2 min-h-[30px]">
+                        <!-- Injected dynamically via JS -->
+                    </div>
+                </div>
+
+                <!-- Active Player Banner -->
+                <div class="bg-[var(--background)] p-3 rounded-lg border border-[var(--border)] flex justify-between items-center">
+                    <div>
+                        <span class="text-xs text-[var(--muted-foreground)]">Đang thi đấu với tư cách:</span>
+                        <div id="active-player-display" class="text-sm font-black text-amber-500">Người chơi 1</div>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xs text-[var(--muted-foreground)]">Kỷ lục của bạn:</span>
+                        <div id="active-player-best" class="text-sm font-bold text-emerald-500">0 điểm</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features Highlights (Bom, Cướp điểm, Đổi điểm) -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs">
+                <div class="p-3 rounded-xl border border-red-500/30 bg-red-500/5 flex items-center gap-2.5">
+                    <span class="text-2xl">💣</span>
+                    <div>
+                        <div class="font-bold text-red-500">Câu Hỏi Bom</div>
+                        <div class="text-[11px] text-[var(--muted-foreground)]">Chỉ có 8s! Đúng: +300đ & +1❤️, sai nổ mất 2❤️!</div>
+                    </div>
+                </div>
+                <div class="p-3 rounded-xl border border-amber-500/30 bg-amber-500/5 flex items-center gap-2.5">
+                    <span class="text-2xl">🏴‍☠️</span>
+                    <div>
+                        <div class="font-bold text-amber-500">Cướp Điểm</div>
+                        <div class="text-[11px] text-[var(--muted-foreground)]">Cơ hội cướp ngẫu nhiên tới +300đ từ kho tài sản tư bản!</div>
+                    </div>
+                </div>
+                <div class="p-3 rounded-xl border border-purple-500/30 bg-purple-500/5 flex items-center gap-2.5">
+                    <span class="text-2xl">🔄</span>
+                    <div>
+                        <div class="font-bold text-purple-500">Rương Đổi Điểm</div>
+                        <div class="text-[11px] text-[var(--muted-foreground)]">Mở 3 rương bí ẩn: x2 điểm, đổi thưởng hoặc nhận Khiên 🛡️</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rules quick check -->
+            <div class="p-3.5 rounded-xl border border-[var(--border)] bg-[var(--background)]/60 text-xs space-y-1 text-[var(--muted-foreground)]">
+                <div class="font-bold text-[var(--foreground)] flex items-center gap-1">
+                    <span>⚡</span> 3 Mạng (❤️❤️❤️) • Chuỗi Combo • <span id="display-q-per-game">30</span> Câu hỏi trích xuất chuẩn Giáo trình 2021
+                </div>
+                <p>Bản chất của Đảng • Tính văn minh & Đạo đức • Tập trung dân chủ • Tự phê bình và phê bình • Gắn bó máu thịt với nhân dân.</p>
+            </div>
+
+            <div class="text-center pt-1">
+                <button type="button" onclick="startBattle()" class="w-full md:w-3/4 py-3.5 px-6 rounded-xl bg-gradient-to-r from-red-600 via-amber-600 to-yellow-600 hover:opacity-95 text-white font-black text-base shadow-lg btn-press flex items-center justify-center gap-2 mx-auto cursor-pointer">
+                    <span>⚔️</span> BẮT ĐẦU VÀO ĐẤU TRƯỜNG <span>⚔️</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- ================= SCREEN ADMIN ================= -->
+        <div id="screen-admin" class="hidden space-y-4 py-2">
+            <div class="flex justify-between items-center pb-2 border-b border-[var(--border)]">
+                <h2 class="text-base md:text-lg font-bold flex items-center gap-2">
+                    <span>⚙️</span> ADMIN PANEL
+                </h2>
+                <button type="button" onclick="goToLobby()" class="text-xs px-3 py-1.5 rounded-lg border border-[var(--border)] hover:bg-[var(--accent)] cursor-pointer">
+                    ⬅️ Quay lại sảnh
+                </button>
+            </div>
+
+            <div class="space-y-4">
+                <div class="p-4 rounded-xl border border-[var(--border)] bg-[var(--card)] space-y-3">
+                    <h3 class="font-bold text-sm text-amber-500">📥 Nạp câu hỏi từ file Blooket CSV/TSV</h3>
+                    <p class="text-xs text-[var(--muted-foreground)]">Dán nội dung từ file CSV (hoặc copy từ Excel) gồm 7 cột: Câu hỏi | Đ.án 1 | Đ.án 2 | Đ.án 3 | Đ.án 4 | Thời gian | Cột Đáp án Đúng (1-4). Bỏ qua dòng tiêu đề.</p>
+                    <textarea id="admin-csv-input" rows="5" class="w-full p-2.5 text-xs rounded-xl border border-[var(--border)] bg-[var(--background)] focus:outline-none focus:ring-2 focus:ring-amber-500" placeholder="Câu hỏi 1\tĐ.án 1\tĐ.án 2..."></textarea>
+                    <div class="flex justify-between items-center">
+                        <span id="admin-q-count" class="text-xs font-bold text-emerald-500">Đang có: 16 câu gốc</span>
+                        <div class="space-x-2">
+                            <button type="button" onclick="clearCustomQuestions()" class="text-xs text-red-500 hover:underline cursor-pointer">Xóa câu hỏi thêm</button>
+                            <button type="button" onclick="parseCSV()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-lg cursor-pointer">Nhập CSV</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-4 rounded-xl border border-[var(--border)] bg-[var(--card)] space-y-3">
+                    <h3 class="font-bold text-sm text-blue-500">⚙️ Cấu hình lượt chơi</h3>
+                    <div class="flex items-center gap-3">
+                        <label class="text-xs">Số câu hỏi mỗi ván (chọn ngẫu nhiên):</label>
+                        <input type="number" id="admin-q-per-game" min="5" max="100" value="16" class="w-20 p-1.5 text-xs rounded-lg border border-[var(--border)] bg-[var(--background)]">
+                    </div>
+                    <button type="button" onclick="saveAdminSettings()" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold rounded-lg cursor-pointer">Lưu Cấu Hình</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= SCREEN 2: BATTLE ARENA ================= -->
+        <div id="screen-battle" class="hidden space-y-3.5">
+            <!-- HUD Status Bar -->
+            <div class="flex flex-wrap justify-between items-center gap-2 p-2.5 bg-[var(--background)] rounded-xl border border-[var(--border)] text-xs md:text-sm font-semibold">
+                <div class="flex items-center gap-2">
+                    <span class="px-2 py-0.5 bg-amber-500/10 text-amber-500 rounded-md border border-amber-500/20 text-xs" id="hud-player">Người chơi</span>
+                    <span class="text-red-500 font-bold tracking-wider" id="hud-lives">❤️❤️❤️</span>
+                    <span id="hud-shield" class="hidden text-blue-500 text-xs font-bold bg-blue-500/10 px-1.5 py-0.5 rounded border border-blue-500/30">🛡️ Khiên Thép</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="text-orange-500 text-xs md:text-sm font-bold" id="hud-combo">Combo: 0x</span>
+                    <span class="text-emerald-500 font-black text-base" id="hud-score">0 đ</span>
+                    <span class="text-[var(--muted-foreground)] text-xs font-mono" id="hud-progress">1/16</span>
+                </div>
+            </div>
+
+            <!-- Timer Bar -->
+            <div class="w-full bg-gray-200 dark:bg-gray-800 h-2 rounded-full overflow-hidden">
+                <div id="timer-bar" class="h-full bg-emerald-500 transition-all duration-100 ease-linear" style="width: 100%;"></div>
+            </div>
+
+            <!-- Bomb Banner (Shown on bomb questions) -->
+            <div id="bomb-banner" class="hidden p-2.5 rounded-xl border border-red-500 bg-red-500/15 text-red-600 dark:text-red-300 font-black text-xs flex items-center justify-between bomb-pulse">
+                <div class="flex items-center gap-1.5">
+                    <span class="text-xl">💣</span>
+                    <span>CÂU HỎI BOM NỔ CHẬM! (8 GIÂY)</span>
+                </div>
+                <span class="text-[11px] font-normal">Đúng: +300đ & +1❤️ • Sai/Hết giờ: NỔ MẤT 2❤️!</span>
+            </div>
+
+            <!-- Question Card -->
+            <div id="question-card" class="bg-[var(--background)]/90 p-4 md:p-5 rounded-xl border border-[var(--border)] shadow-sm space-y-3 transition-all">
+                <div class="flex justify-between items-start gap-2">
+                    <span id="question-badge" class="px-2 py-0.5 rounded-md text-[11px] font-bold bg-blue-500/10 text-blue-500 border border-blue-500/20">
+                        Vòng 1
+                    </span>
+                    <span id="question-timer-num" class="text-xs font-mono font-black text-amber-500">15s</span>
+                </div>
+
+                <h3 id="question-title" class="text-sm md:text-base font-bold leading-snug">
+                    Nội dung câu hỏi...
+                </h3>
+
+                <!-- Answers Options Container -->
+                <div id="answers-container" class="space-y-2 pt-1">
+                    <!-- Injected dynamically -->
+                </div>
+            </div>
+
+            <!-- Instant Feedback Box -->
+            <div id="instant-feedback" class="hidden p-3 rounded-xl text-xs md:text-sm font-medium border">
+                <!-- Injected via JS -->
+            </div>
+
+            <!-- Special Event Modal: CHEST SWAP (ĐỔI ĐIỂM) -->
+            <div id="chest-modal" class="hidden p-4 rounded-xl border border-purple-500/40 bg-purple-950/30 backdrop-blur-md text-center space-y-3 gold-glow">
+                <div class="text-xs font-bold text-purple-400 uppercase tracking-wide flex items-center justify-center gap-1">
+                    <span>✨</span> SỰ KIỆN ĐỔI ĐIỂM BÍ ẨN! <span>✨</span>
+                </div>
+                <p class="text-xs text-[var(--muted-foreground)]">Hãy chọn 1 trong 3 chiếc rương may mắn để thay đổi cục diện:</p>
+                <div class="grid grid-cols-3 gap-2.5 py-1">
+                    <button type="button" onclick="pickChest(1)" class="chest-btn p-3 rounded-xl border border-purple-500/30 bg-purple-500/15 hover:bg-purple-500/30 btn-press text-center cursor-pointer">
+                        <div class="text-3xl mb-1 pointer-events-none">🎁</div>
+                        <div class="text-xs font-bold text-purple-200 pointer-events-none">Rương 1</div>
+                    </button>
+                    <button type="button" onclick="pickChest(2)" class="chest-btn p-3 rounded-xl border border-purple-500/30 bg-purple-500/15 hover:bg-purple-500/30 btn-press text-center cursor-pointer">
+                        <div class="text-3xl mb-1 pointer-events-none">🎁</div>
+                        <div class="text-xs font-bold text-purple-200 pointer-events-none">Rương 2</div>
+                    </button>
+                    <button type="button" onclick="pickChest(3)" class="chest-btn p-3 rounded-xl border border-purple-500/30 bg-purple-500/15 hover:bg-purple-500/30 btn-press text-center cursor-pointer">
+                        <div class="text-3xl mb-1 pointer-events-none">🎁</div>
+                        <div class="text-xs font-bold text-purple-200 pointer-events-none">Rương 3</div>
+                    </button>
+                </div>
+                <div id="chest-result" class="hidden text-xs font-bold text-amber-400 p-2 rounded bg-purple-900/40 border border-purple-500/30"></div>
+            </div>
+
+            <!-- Bottom Navigation -->
+            <div class="flex justify-between items-center pt-1">
+                <button type="button" onclick="quitGamePrompt()" class="text-xs text-[var(--muted-foreground)] hover:text-red-500 transition cursor-pointer p-1">
+                    🏳️ Dừng & Lưu điểm
+                </button>
+                <button type="button" id="btn-next-question" onclick="nextQuestion()" class="hidden px-5 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs md:text-sm btn-press shadow-md cursor-pointer">
+                    Tiếp theo ➡️
+                </button>
+            </div>
+        </div>
+
+        <!-- ================= SCREEN 3: RESULT & SUMMARY ================= -->
+        <div id="screen-result" class="hidden space-y-5 py-3 text-center">
+            <div class="p-5 rounded-2xl bg-[var(--background)] border border-[var(--border)] space-y-2.5">
+                <div id="result-icon" class="text-4xl">🏆</div>
+                <h2 id="result-title" class="text-xl md:text-2xl font-black text-amber-500">CHIẾN THẮNG ĐẤU TRƯỜNG!</h2>
+                <p id="result-subtitle" class="text-xs text-[var(--muted-foreground)]">Bạn đã xuất sắc hoàn thành trọn vẹn các thử thách</p>
+
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 py-2">
+                    <div class="p-2.5 rounded-xl bg-[var(--card)] border border-[var(--border)]">
+                        <div class="text-[11px] text-[var(--muted-foreground)]">Người chơi</div>
+                        <div id="result-player" class="font-bold text-xs md:text-sm truncate">---</div>
+                    </div>
+                    <div class="p-2.5 rounded-xl bg-[var(--card)] border border-[var(--border)]">
+                        <div class="text-[11px] text-[var(--muted-foreground)]">Tổng Điểm</div>
+                        <div id="result-score" class="font-black text-sm md:text-base text-emerald-500">0</div>
+                    </div>
+                    <div class="p-2.5 rounded-xl bg-[var(--card)] border border-[var(--border)]">
+                        <div class="text-[11px] text-[var(--muted-foreground)]">Đúng / Tổng</div>
+                        <div id="result-accuracy" class="font-bold text-xs md:text-sm text-blue-500">0/0</div>
+                    </div>
+                    <div class="p-2.5 rounded-xl bg-[var(--card)] border border-[var(--border)]">
+                        <div class="text-[11px] text-[var(--muted-foreground)]">Combo lớn nhất</div>
+                        <div id="result-maxcombo" class="font-bold text-xs md:text-sm text-orange-500">0x</div>
+                    </div>
+                </div>
+
+                <div id="rank-badge" class="inline-block px-3.5 py-1 rounded-full text-xs font-bold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/30">
+                    Danh hiệu: Học giả Dân chủ XHCN
+                </div>
+            </div>
+
+            <!-- Mistakes review -->
+            <div class="text-left">
+                <button type="button" onclick="toggleMistakes()" id="btn-toggle-mistakes" class="text-xs font-semibold text-amber-500 hover:underline flex items-center gap-1 cursor-pointer">
+                    🔍 Xem lại các câu trả lời sai và giải thích chuẩn giáo trình
+                </button>
+                <div id="mistakes-container" class="hidden mt-2.5 space-y-2.5 max-h-56 overflow-y-auto pr-1">
+                    <!-- Injected via JS -->
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row justify-center gap-2 pt-1">
+                <button type="button" onclick="restartGame()" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs md:text-sm btn-press shadow cursor-pointer">
+                    🔄 Đấu lại ngay
+                </button>
+                <button type="button" onclick="showLeaderboardScreen()" class="px-5 py-2.5 rounded-xl border border-amber-500/40 bg-amber-500/10 text-amber-600 dark:text-amber-400 font-bold text-xs md:text-sm btn-press cursor-pointer">
+                    🏆 Xem Bảng Xếp Hạng
+                </button>
+                <button type="button" onclick="goToLobby()" class="px-5 py-2.5 rounded-xl border border-[var(--border)] hover:bg-[var(--accent)] font-semibold text-xs md:text-sm btn-press cursor-pointer">
+                    👥 Đổi người chơi
+                </button>
+            </div>
+        </div>
+
+        <!-- ================= SCREEN 4: LEADERBOARD ================= -->
+        <div id="screen-leaderboard" class="hidden space-y-4 py-2">
+            <div class="flex justify-between items-center">
+                <h2 class="text-base md:text-lg font-bold flex items-center gap-2">
+                    <span>🏆</span> BẢNG VÀNG XẾP HẠNG
+                </h2>
+                <button type="button" onclick="goToLobby()" class="text-xs px-3 py-1.5 rounded-lg border border-[var(--border)] hover:bg-[var(--accent)] cursor-pointer">
+                    ⬅️ Quay lại sảnh
+                </button>
+            </div>
+
+            <div class="overflow-x-auto rounded-xl border border-[var(--border)] bg-[var(--background)] max-h-72 overflow-y-auto">
+                <table class="w-full text-left text-xs md:text-sm">
+                    <thead class="bg-[var(--card)] border-b border-[var(--border)] text-[var(--muted-foreground)] uppercase text-[10px] md:text-xs sticky top-0">
+                        <tr>
+                            <th class="p-2.5 text-center">Hạng</th>
+                            <th class="p-2.5">Tên Người Chơi</th>
+                            <th class="p-2.5 text-right">Điểm Số</th>
+                            <th class="p-2.5 text-center">Đúng</th>
+                            <th class="p-2.5 text-right">Ngày thi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leaderboard-tbody" class="divide-y divide-[var(--border)]">
+                        <!-- Injected via JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="flex justify-between items-center pt-1 text-xs">
+                <button type="button" id="btn-clear-lb" onclick="clearLeaderboard()" class="text-red-500 hover:underline cursor-pointer">
+                    🗑️ Xóa toàn bộ BXH
+                </button>
+                <button type="button" onclick="goToLobby()" class="px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-bold btn-press cursor-pointer">
+                    🎮 Chơi Ngay
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ================= JAVASCRIPT ================= -->
+    <script>
+        // --- 1. TOAST HELPER (Zero Browser alert/confirm blocks) ---
+        function showToast(msg) {
+            const t = document.getElementById('game-toast');
+            const txt = document.getElementById('toast-text');
+            if (!t || !txt) return;
+            txt.textContent = msg;
+            t.classList.remove('hidden');
+            setTimeout(() => {
+                t.classList.add('hidden');
+            }, 2500);
+        }
+
+        // --- 2. WEB AUDIO API ---
+        let audioEnabled = true;
+        function playSound(type) {
+            if (!audioEnabled) return;
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                if (type === 'correct') {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.connect(gain); gain.connect(ctx.destination);
+                    osc.frequency.setValueAtTime(523.25, ctx.currentTime);
+                    osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.08);
+                    osc.frequency.setValueAtTime(783.99, ctx.currentTime + 0.16);
+                    gain.gain.setValueAtTime(0.15, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+                    osc.start(); osc.stop(ctx.currentTime + 0.3);
+                } else if (type === 'wrong') {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'sawtooth';
+                    osc.connect(gain); gain.connect(ctx.destination);
+                    osc.frequency.setValueAtTime(220, ctx.currentTime);
+                    osc.frequency.setValueAtTime(140, ctx.currentTime + 0.15);
+                    gain.gain.setValueAtTime(0.2, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.35);
+                    osc.start(); osc.stop(ctx.currentTime + 0.35);
+                } else if (type === 'tick') {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'sine';
+                    osc.connect(gain); gain.connect(ctx.destination);
+                    osc.frequency.setValueAtTime(880, ctx.currentTime);
+                    gain.gain.setValueAtTime(0.03, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.03);
+                    osc.start(); osc.stop(ctx.currentTime + 0.03);
+                } else if (type === 'explosion') {
+                    const bufferSize = ctx.sampleRate * 0.4;
+                    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+                    const data = buffer.getChannelData(0);
+                    for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+                    const noise = ctx.createBufferSource();
+                    noise.buffer = buffer;
+                    const filter = ctx.createBiquadFilter();
+                    filter.type = 'lowpass';
+                    filter.frequency.setValueAtTime(700, ctx.currentTime);
+                    filter.frequency.linearRampToValueAtTime(60, ctx.currentTime + 0.4);
+                    const gain = ctx.createGain();
+                    gain.gain.setValueAtTime(0.4, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4);
+                    noise.connect(filter); filter.connect(gain); gain.connect(ctx.destination);
+                    noise.start(); noise.stop(ctx.currentTime + 0.4);
+                } else if (type === 'coin') {
+                    [987.77, 1318.51, 1567.98, 1975.53].forEach((freq, idx) => {
+                        const osc = ctx.createOscillator();
+                        const gain = ctx.createGain();
+                        osc.connect(gain); gain.connect(ctx.destination);
+                        osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.07);
+                        gain.gain.setValueAtTime(0.12, ctx.currentTime + idx * 0.07);
+                        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + idx * 0.07 + 0.18);
+                        osc.start(ctx.currentTime + idx * 0.07);
+                        osc.stop(ctx.currentTime + idx * 0.07 + 0.18);
+                    });
+                } else if (type === 'magic') {
+                    [440, 554.37, 659.25, 880, 1108.73].forEach((freq, idx) => {
+                        const osc = ctx.createOscillator();
+                        const gain = ctx.createGain();
+                        osc.connect(gain); gain.connect(ctx.destination);
+                        osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.06);
+                        gain.gain.setValueAtTime(0.1, ctx.currentTime + idx * 0.06);
+                        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + idx * 0.06 + 0.22);
+                        osc.start(ctx.currentTime + idx * 0.06);
+                        osc.stop(ctx.currentTime + idx * 0.06 + 0.22);
+                    });
+                } else if (type === 'gameover') {
+                    [330, 293.66, 261.63, 220].forEach((freq, idx) => {
+                        const osc = ctx.createOscillator();
+                        const gain = ctx.createGain();
+                        osc.type = 'triangle';
+                        osc.connect(gain); gain.connect(ctx.destination);
+                        osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.12);
+                        gain.gain.setValueAtTime(0.15, ctx.currentTime + idx * 0.12);
+                        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + idx * 0.12 + 0.2);
+                        osc.start(ctx.currentTime + idx * 0.12);
+                        osc.stop(ctx.currentTime + idx * 0.12 + 0.2);
+                    });
+                } else if (type === 'victory') {
+                    [523.25, 659.25, 783.99, 1046.5].forEach((freq, idx) => {
+                        const osc = ctx.createOscillator();
+                        const gain = ctx.createGain();
+                        osc.connect(gain); gain.connect(ctx.destination);
+                        osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.1);
+                        gain.gain.setValueAtTime(0.15, ctx.currentTime + idx * 0.1);
+                        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + idx * 0.1 + 0.3);
+                        osc.start(ctx.currentTime + idx * 0.1);
+                        osc.stop(ctx.currentTime + idx * 0.1 + 0.3);
+                    });
+                }
+            } catch(e){}
+        }
+
+        function toggleAudio() {
+            audioEnabled = !audioEnabled;
+            document.getElementById('audio-toggle').textContent = audioEnabled ? '🔊' : '🔇';
+            showToast(audioEnabled ? "Đã bật âm thanh 🔊" : "Đã tắt âm thanh 🔇");
+        }
+
+        // --- 3. 16 QUESTIONS (GIÁO TRÌNH 2021) ---
+        const rawQuestions = [
+    {
+        round: "Vòng 1: Khởi động",
+        type: "mcq",
+        question: "Từ 'Demoskratos' ở Hy Lạp cổ đại dịch theo nghĩa gốc là gì?",
+        options: [
+            "Quyền lực của toàn thể vua chúa và tăng lữ",
+            "Nhân dân cai trị / Quyền lực thuộc về nhân dân",
+            "Sự bình đẳng tự do tuyệt đối không cần pháp luật",
+            "Hình thức bầu cử thương mại của các quý tộc"
+        ],
+        correct: 1,
+        explanation: "Trong tiếng Hy Lạp: 'Demos' là nhân dân, 'Kratos' là cai trị. Dân chủ hiểu căn bản là quyền lực thuộc về nhân dân."
+    },
+    {
+        round: "Vòng 1: Khởi động",
+        type: "mcq",
+        question: "Theo Chủ nghĩa Mác - Lênin, dân chủ được xem xét dưới những phương diện cơ bản nào?",
+        options: [
+            "Chỉ duy nhất ở phương diện đạo đức học",
+            "Quyền lực, chế độ chính trị - nhà nước, và nguyên tắc tổ chức quản lý",
+            "Phương thức phân phối lợi nhuận kinh tế tư nhân",
+            "Một nghi thức tâm linh trong đời sống văn hóa"
+        ],
+        correct: 1,
+        explanation: "Giáo trình nêu 3 phương diện: (1) Quyền lực thuộc về nhân dân; (2) Là hình thái/chính thể nhà nước; (3) Là nguyên tắc tổ chức quản lý (tập trung dân chủ)."
+    },
+    {
+        round: "Vòng 1: Khởi động",
+        type: "mcq",
+        question: "Chủ nghĩa Mác - Lênin khẳng định dân chủ là một phạm trù lịch sử VÀ một phạm trù vĩnh viễn vì sao?",
+        options: [
+            "Là phạm trù lịch sử khi gắn với nhà nước; là phạm trù vĩnh viễn khi là giá trị xã hội của loài người",
+            "Vì dân chủ không bao giờ biến đổi qua các thời kỳ lịch sử",
+            "Vì nó ra đời cùng với vũ trụ và sẽ tồn tại mãi mãi",
+            "Vì mọi chế độ xã hội đều áp dụng mô hình dân chủ giống hệt nhau"
+        ],
+        correct: 0,
+        explanation: "Với tư cách hình thái nhà nước, dân chủ là phạm trù lịch sử (mất đi khi nhà nước tiêu vong). Nhưng với tư cách giá trị nhân loại, nó tồn tại chừng nào con người còn tồn tại."
+    },
+    {
+        round: "Vòng 2: Tư tưởng HCM",
+        type: "mcq",
+        question: "Điền từ còn thiếu vào câu nói nổi tiếng của Chủ tịch Hồ Chí Minh: 'Chế độ ta là chế độ dân chủ, tức là nhân dân là người chủ, mà Chính phủ là người ________ của nhân dân.'",
+        options: [
+            "cha mẹ hiền từ",
+            "lãnh đạo tối cao",
+            "đày tớ trung thành",
+            "quan chức cách mạng"
+        ],
+        correct: 2,
+        explanation: "Bác khẳng định Chính phủ là 'đày tớ trung thành' của nhân dân, chứ tuyệt đối không phải là 'làm quan cách mạng'."
+    },
+    {
+        round: "Vòng 2: Tư tưởng HCM",
+        type: "mcq",
+        question: "Theo tư tưởng Hồ Chí Minh, trong các lĩnh vực của đời sống, hai lĩnh vực dân chủ quan trọng hàng đầu và nổi bật nhất là:",
+        options: [
+            "Dân chủ trong kinh tế và Dân chủ trong chính trị",
+            "Dân chủ trong tôn giáo và Dân chủ trong tín ngưỡng",
+            "Dân chủ trong gia đình và Dân chủ ngoài xã hội",
+            "Dân chủ trong quân sự và Dân chủ trong ngoại giao"
+        ],
+        correct: 0,
+        explanation: "Giáo trình trang 128 - 129 chỉ rõ: Dân chủ trong kinh tế và chính trị là hai lĩnh vực quan trọng hàng đầu, quyết định dân chủ trong văn hóa - xã hội."
+    },
+    {
+        round: "Vòng 2: Tư tưởng HCM",
+        type: "mcq",
+        question: "Bác Hồ từng viết: 'Trong chế độ dân chủ xã hội chủ nghĩa thì bao nhiêu quyền lực đều là của dân, bao nhiêu sức mạnh đều ở nơi dân, bao nhiêu lợi ích đều là vì dân.' Điều này đúng hay sai?",
+        options: [
+            "ĐÚNG",
+            "SAI",
+            "Chỉ đúng một nửa",
+            "Chỉ áp dụng trong thời chiến"
+        ],
+        correct: 0,
+        explanation: "Hoàn toàn ĐÚNG! Đây là luận điểm nổi tiếng của Chủ tịch Hồ Chí Minh về bản chất thực sự của dân chủ ở nước ta."
+    },
+    {
+        round: "Vòng 3: Tiến trình Lịch sử",
+        type: "mcq",
+        question: "Hình thức sơ khai đầu tiên của dân chủ trong thời kỳ Cộng sản nguyên thủy được Ăngghen gọi là gì?",
+        options: [
+            "Dân chủ đại nghị",
+            "Dân chủ nguyên thủy (hoặc Dân chủ quân sự)",
+            "Dân chủ tập trung",
+            "Dân chủ tư sản sơ khai"
+        ],
+        correct: 1,
+        explanation: "Ph. Ăngghen gọi là 'dân chủ nguyên thủy' hay 'dân chủ quân sự', nơi mọi người biểu quyết bầu thủ lĩnh qua Đại hội nhân dân bằng cách giơ tay hoặc hoan hô."
+    },
+    {
+        round: "Vòng 3: Tiến trình Lịch sử",
+        type: "mcq",
+        question: "Trong lịch sử nhân loại, dưới thời kỳ Phong kiến có tồn tại nền dân chủ phong kiến không?",
+        options: [
+            "Có, rất phát triển",
+            "KHÔNG CÓ",
+            "Chỉ có ở phương Tây",
+            "Chỉ có ở phương Đông"
+        ],
+        correct: 1,
+        explanation: "Trong chế độ phong kiến KHÔNG CÓ nền dân chủ, mà bị thay thế hoàn toàn bởi chế độ độc tài chuyên chế của vua chúa."
+    },
+    {
+        round: "Vòng 3: Tiến trình Lịch sử",
+        type: "mcq",
+        question: "Tại sao nền Dân chủ Tư sản dù là bước tiến vĩ đại nhưng vẫn chưa phải là nền dân chủ hoàn thiện nhất?",
+        options: [
+            "Vì không cho phép thành lập các đảng phái chính trị",
+            "Vì xây dựng trên nền tảng chế độ tư hữu về tư liệu sản xuất, phục vụ thiểu số",
+            "Vì nền dân chủ tư sản không có hiến pháp và pháp luật",
+            "Vì giai cấp tư sản không biết ứng dụng khoa học kỹ thuật"
+        ],
+        correct: 1,
+        explanation: "Do dựa trên sở hữu tư nhân về tư liệu sản xuất, quyền lực cốt lõi vẫn nằm trong tay những kẻ nắm tư bản, chiếm đa số của cải."
+    },
+    {
+        round: "Vòng 3: Tiến trình Lịch sử",
+        type: "mcq",
+        question: "Tính đến nay, lịch sử nhân loại đã trải qua bao nhiêu NỀN (chế độ) dân chủ chính thức có nhà nước?",
+        options: [
+            "2 nền dân chủ (Tư sản và XHCN)",
+            "3 nền dân chủ (Chủ nô, Tư sản, Xã hội chủ nghĩa)",
+            "4 nền dân chủ (Nguyên thủy, Chủ nô, Phong kiến, Tư sản)",
+            "5 nền dân chủ tương ứng 5 hình thái kinh tế - xã hội"
+        ],
+        correct: 1,
+        explanation: "Có 3 nền dân chủ gắn với nhà nước: Dân chủ chủ nô, Dân chủ tư sản và Dân chủ XHCN (Dân chủ nguyên thủy chưa có nhà nước, phong kiến không có dân chủ)."
+    },
+    {
+        round: "Vòng 4: Dân chủ XHCN",
+        type: "mcq",
+        question: "Nền dân chủ XHCN được phôi thai từ thực tiễn lịch sử nào và chính thức xác lập sau cuộc cách mạng nào?",
+        options: [
+            "Phôi thai từ Cách mạng Pháp 1789, xác lập sau CTTG 1",
+            "Phôi thai từ Công xã Pari 1871, chính thức xác lập sau Cách mạng Tháng Mười Nga 1917",
+            "Phôi thai từ Phong trào Hiến chương Anh, xác lập sau CMXHCN",
+            "Phôi thai từ Tuyên ngôn Độc lập Mỹ, xác lập sau CTTG 2"
+        ],
+        correct: 1,
+        explanation: "Giáo trình trang 133: Phôi thai từ thực tiễn Công xã Pari (1871) và chính thức xác lập sau Cách mạng Xã hội chủ nghĩa Tháng Mười Nga (1917)."
+    },
+    {
+        round: "Vòng 4: Dân chủ XHCN",
+        type: "mcq",
+        question: "V.I. Lênin từng so sánh mức độ dân chủ giữa hai chế độ: 'Chế độ dân chủ vô sản so với bất cứ chế độ dân chủ tư sản nào, cũng dân chủ hơn gấp ________.'",
+        options: [
+            "mười lần",
+            "trăm lần",
+            "ngàn lần",
+            "triệu lần"
+        ],
+        correct: 3,
+        explanation: "Lênin khẳng định: Dân chủ vô sản dân chủ hơn gấp triệu lần vì nó là nền dân chủ của đại đa số nhân dân lao động thay vì của thiểu số nhà giàu."
+    },
+    {
+        round: "Vòng 5: Ba Bản Chất",
+        type: "mcq",
+        question: "Về BẢN CHẤT CHÍNH TRỊ, nền dân chủ XHCN có đặc trưng nổi bật nào?",
+        options: [
+            "Thực hiện cơ chế đa nguyên chính trị, đa đảng đối lập",
+            "Mang tính nhất nguyên chính trị dưới sự lãnh đạo duy nhất của Đảng Cộng sản",
+            "Không cần có nhà nước và pháp luật quản lý",
+            "Mọi quyết định đều do các nghiệp đoàn quốc tế tự ý phê chuẩn"
+        ],
+        correct: 1,
+        explanation: "Nền dân chủ XHCN mang tính nhất nguyên về chính trị, do Đảng Cộng sản (đội tiên phong của giai cấp công nhân) lãnh đạo để bảo vệ lợi ích nhân dân."
+    },
+    {
+        round: "Vòng 5: Ba Bản Chất",
+        type: "mcq",
+        question: "Về BẢN CHẤT KINH TẾ, nền dân chủ XHCN dựa trên nền tảng sở hữu nào?",
+        options: [
+            "Chế độ tư hữu tư bản chủ nghĩa hoàn toàn",
+            "Chế độ công hữu về các tư liệu sản xuất chủ yếu",
+            "Chế độ phân phối cào bằng bình quân chủ nghĩa",
+            "Phụ thuộc hoàn toàn vào viện trợ của các tổ chức tài chính"
+        ],
+        correct: 1,
+        explanation: "Bản chất kinh tế của dân chủ XHCN là dựa trên chế độ công hữu về tư liệu sản xuất chủ yếu và thực hiện phân phối theo lao động là chủ đạo."
+    },
+    {
+        round: "Vòng 5: Ba Bản Chất",
+        type: "mcq",
+        question: "Về BẢN CHẤT TƯ TƯỞNG - VĂN HÓA, nền dân chủ XHCN lấy hệ tư tưởng nào làm chủ đạo?",
+        options: [
+            "Chủ nghĩa thực dụng và chủ nghĩa cá nhân",
+            "Hệ tư tưởng Mác - Lênin (hệ tư tưởng của giai cấp công nhân)",
+            "Thần quyền tôn giáo của thời trung cổ",
+            "Các trào lưu triết học siêu hình Tây Âu"
+        ],
+        correct: 1,
+        explanation: "Lấy hệ tư tưởng Mác - Lênin làm chủ đạo, đồng thời kế thừa tinh hoa văn hóa truyền thống dân tộc và nhân loại."
+    },
+    {
+        round: "Vòng 5: Ba Bản Chất",
+        type: "mcq",
+        question: "Theo V.I. Lênin, khi xã hội tiến đến chủ nghĩa cộng sản hoàn thiện, nền dân chủ XHCN với tư cách một hình thái nhà nước sẽ ra sao?",
+        options: [
+            "Sẽ trở thành vĩnh cửu không bao giờ mất đi",
+            "Sẽ tự tiêu vong (mất đi tính chính trị, trở thành tập quán tự quản)",
+            "Sẽ bị giai cấp tư sản lật đổ hoàn toàn",
+            "Sẽ biến thành một chế độ quân chủ chuyên chế mới"
+        ],
+        correct: 1,
+        explanation: "Khi không còn giai cấp, nhà nước tiêu vong thì dân chủ với tư cách chế độ nhà nước cũng tiêu vong, tính chính trị mất đi, trở thành thói quen tự quản."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Thuật ngữ 'Demos' trong tiếng Hy Lạp cổ đại có nghĩa là gì?",
+        options: [
+            "Tự do",
+            "Nhà nước",
+            "Nhân dân",
+            "Cai trị"
+        ],
+        correct: 2,
+        explanation: "Demos có nghĩa là Nhân dân."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Thuật ngữ 'Kratos' trong tiếng Hy Lạp cổ đại có nghĩa là gì?",
+        options: [
+            "Nhân dân",
+            "Bình đẳng",
+            "Cai trị",
+            "Tự do"
+        ],
+        correct: 2,
+        explanation: "Kratos có nghĩa là Cai trị hoặc Quyền lực."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Trong chế độ cộng sản nguyên thủy, cơ quan quyền lực cao nhất của thị tộc là gì?",
+        options: [
+            "Hội đồng trưởng lão",
+            "Đại hội nhân dân",
+            "Tù trưởng",
+            "Nhà nước"
+        ],
+        correct: 1,
+        explanation: "Đại hội nhân dân là cơ quan quyền lực cao nhất thời kỳ chưa có nhà nước."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Đặc trưng của 'dân chủ quân sự' trong thời kỳ nguyên thủy là gì?",
+        options: [
+            "Bốc thăm",
+            "Bầu ra thủ lĩnh quân sự",
+            "Cử tri bầu cử",
+            "Cha truyền con nối"
+        ],
+        correct: 1,
+        explanation: "Dân chủ quân sự xoay quanh việc bầu ra thủ lĩnh quân sự để chỉ huy chiến đấu."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Sự xuất hiện của chế độ tư hữu đã dẫn đến sự ra đời của nền dân chủ nào?",
+        options: [
+            "Dân chủ tư sản",
+            "Dân chủ nguyên thủy",
+            "Dân chủ XHCN",
+            "Dân chủ chủ nô"
+        ],
+        correct: 3,
+        explanation: "Sự tư hữu và giai cấp ra đời dẫn đến nhà nước chủ nô và nền dân chủ đầu tiên là Dân chủ chủ nô."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Nền dân chủ tư sản ra đời đánh dấu bước phát triển lịch sử so với chế độ nào?",
+        options: [
+            "Chế độ phong kiến",
+            "Chế độ chiếm hữu nô lệ",
+            "Chế độ XHCN",
+            "Chế độ cộng sản nguyên thủy"
+        ],
+        correct: 0,
+        explanation: "Nó đã lật đổ chế độ phong kiến chuyên chế không có dân chủ."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Nền dân chủ vô sản (XHCN) khác biệt căn bản với các nền dân chủ trước đó ở điểm nào?",
+        options: [
+            "Xóa bỏ hoàn toàn nhà nước",
+            "Là nền dân chủ của đa số",
+            "Không có giai cấp lãnh đạo",
+            "Là nền dân chủ của thiểu số"
+        ],
+        correct: 1,
+        explanation: "Lần đầu tiên trong lịch sử, quyền lực thuộc về đa số nhân dân lao động."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "V.I. Lênin cho rằng chế độ dân chủ vô sản là hình thức nhà nước bảo vệ lợi ích cho ai?",
+        options: [
+            "Tầng lớp trí thức",
+            "Đại đa số nhân dân lao động",
+            "Toàn bộ xã hội kể cả tư sản",
+            "Giai cấp công nhân"
+        ],
+        correct: 1,
+        explanation: "Bảo vệ lợi ích cho đại đa số nhân dân lao động."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Sự khác biệt về mặt bản chất chính trị giữa dân chủ XHCN và dân chủ tư sản là gì?",
+        options: [
+            "Nhất nguyên và đa nguyên chính trị",
+            "Chế độ tư hữu và công hữu",
+            "Tư tưởng Mác-Lênin và tư tưởng tư sản",
+            "Xóa bỏ giai cấp và duy trì giai cấp"
+        ],
+        correct: 0,
+        explanation: "Dân chủ XHCN là nhất nguyên chính trị do Đảng Cộng sản lãnh đạo, trái ngược đa nguyên của dân chủ tư sản."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Bản chất chính trị của nền dân chủ XHCN thể hiện ở việc nhân dân tham gia quản lý nhà nước thông qua yếu tố nào?",
+        options: [
+            "Bằng cách mua phiếu bầu",
+            "Chỉ thông qua biểu tình",
+            "Thông qua các đại diện do họ bầu ra",
+            "Thông qua vua chúa"
+        ],
+        correct: 2,
+        explanation: "Nhân dân quản lý nhà nước thông qua các cơ quan đại diện do mình bầu ra."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Động lực chủ yếu để xây dựng nền dân chủ XHCN là gì?",
+        options: [
+            "Lợi ích của nhân dân",
+            "Sự ép buộc của pháp luật",
+            "Viện trợ kinh tế",
+            "Áp lực từ quốc tế"
+        ],
+        correct: 0,
+        explanation: "Lợi ích của nhân dân chính là động lực chủ yếu để tiến hành xây dựng và phát triển dân chủ XHCN."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Sự phát triển của nền dân chủ XHCN gắn liền với quá trình nào?",
+        options: [
+            "Mở rộng chủ nghĩa tư bản",
+            "Xây dựng CNXH",
+            "Chiến tranh giai cấp liên tục",
+            "Xóa bỏ triệt để văn hóa truyền thống"
+        ],
+        correct: 1,
+        explanation: "Sự phát triển của nó luôn gắn liền và là một phần của công cuộc xây dựng CNXH."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Chế độ công hữu về tư liệu sản xuất trong dân chủ XHCN nhằm mục đích gì?",
+        options: [
+            "Khuyến khích cạnh tranh tư bản",
+            "Làm bần cùng hóa giai cấp tư sản",
+            "Thỏa mãn nhu cầu vật chất và tinh thần của nhân dân",
+            "Tập trung tài sản cho nhà nước"
+        ],
+        correct: 2,
+        explanation: "Công hữu để hướng tới thỏa mãn nhu cầu của đại đa số nhân dân."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Trong nền dân chủ XHCN, dân chủ vừa là mục tiêu, vừa là gì của công cuộc xây dựng CNXH?",
+        options: [
+            "Hệ quả",
+            "Động lực",
+            "Biện pháp",
+            "Phương tiện"
+        ],
+        correct: 1,
+        explanation: "Dân chủ vừa là mục tiêu, vừa là động lực của CNXH."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Quá trình tự tiêu vong của nền dân chủ XHCN gắn liền với sự tiêu vong của yếu tố nào?",
+        options: [
+            "Nhà nước",
+            "Tôn giáo",
+            "Xã hội loài người",
+            "Nền kinh tế hàng hóa"
+        ],
+        correct: 0,
+        explanation: "Dân chủ (với tư cách là chế độ nhà nước) sẽ tiêu vong cùng lúc với sự tiêu vong của nhà nước khi lên CSCN."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "'Dân chủ là một hình thức nhà nước, một trong những hình thái nhà nước' là câu nói của ai?",
+        options: [
+            "C. Mác",
+            "Hồ Chí Minh",
+            "V.I. Lênin",
+            "Ph. Ăngghen"
+        ],
+        correct: 2,
+        explanation: "Đây là câu nói kinh điển của V.I. Lênin."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Dân chủ vô sản không phải là chế độ dân chủ cho mọi người mà là dân chủ đối với ai?",
+        options: [
+            "Giai cấp bóc lột",
+            "Nhân dân lao động",
+            "Tầng lớp trí thức",
+            "Giai cấp công nhân"
+        ],
+        correct: 1,
+        explanation: "Dân chủ đối với nhân dân lao động (đa số) và chuyên chính với bọn bóc lột (thiểu số)."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Theo Lênin, dân chủ vô sản thực hiện việc chuyên chính đối với lực lượng nào?",
+        options: [
+            "Đảng phái đối lập",
+            "Nông dân",
+            "Bọn bóc lột",
+            "Trí thức"
+        ],
+        correct: 2,
+        explanation: "Phải thực hiện chuyên chính (trấn áp) đối với bọn bóc lột."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Nền dân chủ XHCN không ngừng mở rộng quá trình gì của nhân dân?",
+        options: [
+            "Tham gia lực lượng vũ trang",
+            "Tham gia đóng thuế",
+            "Tham gia biểu tình",
+            "Tham gia quản lý nhà nước và xã hội"
+        ],
+        correct: 3,
+        explanation: "Bản chất chính trị là mở rộng quyền tham gia quản lý nhà nước của nhân dân."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Mác và Ăngghen khẳng định bước thứ nhất trong cuộc cách mạng công nhân là gì?",
+        options: [
+            "Phá bỏ toàn bộ nhà máy",
+            "Xóa bỏ ngay nhà nước",
+            "Biến vô sản thành giai cấp thống trị, giành lấy dân chủ",
+            "Tịch thu tài sản"
+        ],
+        correct: 2,
+        explanation: "Bước đầu tiên là giành chính quyền, thiết lập chuyên chính vô sản và nền dân chủ."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Trong chế độ dân chủ tư sản, tính chất 'dân chủ' bị hạn chế cốt lõi bởi yếu tố nào?",
+        options: [
+            "Hiến pháp quy định",
+            "Quyền tự do ngôn luận",
+            "Chế độ bầu cử phổ thông",
+            "Quyền sở hữu tư nhân về tư liệu sản xuất"
+        ],
+        correct: 3,
+        explanation: "Đây là nguyên nhân gốc rễ khiến quyền lực chỉ tập trung vào tay thiểu số tư sản."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Nền dân chủ XHCN phát triển đỉnh cao khi xã hội bước vào giai đoạn nào?",
+        options: [
+            "Chủ nghĩa xã hội",
+            "Chủ nghĩa cộng sản",
+            "Cách mạng công nghiệp",
+            "Thời kỳ quá độ"
+        ],
+        correct: 1,
+        explanation: "Phát triển tới đỉnh cao và cũng là lúc nó tự tiêu vong trong giai đoạn cộng sản chủ nghĩa."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Dân chủ XHCN là nền dân chủ mang bản chất của giai cấp nào?",
+        options: [
+            "Toàn dân",
+            "Giai cấp nông dân",
+            "Giai cấp công nhân",
+            "Tầng lớp trí thức"
+        ],
+        correct: 2,
+        explanation: "Luôn mang bản chất của giai cấp công nhân."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Dân chủ XHCN loại bỏ triệt để các tư tưởng, văn hóa nào?",
+        options: [
+            "Tư tưởng bóc lột, lạc hậu",
+            "Văn hóa tôn giáo",
+            "Tư tưởng dân tộc",
+            "Văn hóa phương Tây"
+        ],
+        correct: 0,
+        explanation: "Loại bỏ tư tưởng bóc lột và kế thừa tinh hoa nhân loại."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Mối quan hệ giữa dân chủ và chuyên chính trong nhà nước vô sản là gì?",
+        options: [
+            "Đối lập hoàn toàn",
+            "Triệt tiêu lẫn nhau",
+            "Thống nhất biện chứng",
+            "Chỉ có dân chủ không có chuyên chính"
+        ],
+        correct: 2,
+        explanation: "Dân chủ với nhân dân và chuyên chính với kẻ thù là hai mặt thống nhất biện chứng."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Điểm khác biệt lớn nhất về văn hóa - xã hội của dân chủ XHCN so với các nền dân chủ trước là sự kết hợp hài hòa lợi ích nào?",
+        options: [
+            "Của nhà nước và quốc tế",
+            "Cá nhân, tập thể và toàn xã hội",
+            "Của vua và dân",
+            "Của chủ và thợ"
+        ],
+        correct: 1,
+        explanation: "Sự kết hợp hài hòa các lợi ích giữa cá nhân, tập thể và toàn xã hội."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Nền dân chủ XHCN có kế thừa các giá trị dân chủ tư sản không?",
+        options: [
+            "Có kế thừa có chọn lọc",
+            "Không kế thừa",
+            "Kế thừa nguyên bản",
+            "Kế thừa và phủ định hoàn toàn"
+        ],
+        correct: 0,
+        explanation: "Kế thừa có chọn lọc những giá trị tiến bộ của nhân loại, bao gồm cả của dân chủ tư sản."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Ai là người trực tiếp lãnh đạo quá trình xây dựng nền dân chủ XHCN?",
+        options: [
+            "Mặt trận Tổ quốc",
+            "Các tổ chức CT-XH",
+            "Nhà nước",
+            "Đảng Cộng sản"
+        ],
+        correct: 3,
+        explanation: "Đảng Cộng sản là lực lượng nòng cốt lãnh đạo xây dựng dân chủ XHCN."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Lênin cho rằng, để tiến tới chủ nghĩa cộng sản, nhất thiết phải trải qua quá trình gì?",
+        options: [
+            "Chuyên chính vô sản",
+            "Hòa hợp giai cấp",
+            "Xóa bỏ đồng tiền",
+            "Cách mạng bạo lực liên tục"
+        ],
+        correct: 0,
+        explanation: "Chuyên chính vô sản là tất yếu để xây dựng thành công CNXH và tiến tới CSCN."
+    },
+    {
+        round: "Vòng Bổ Sung",
+        type: "mcq",
+        question: "Về mặt tổ chức quản lý xã hội, dân chủ XHCN thực hiện nguyên tắc nào để đảm bảo sự thống nhất?",
+        options: [
+            "Phân quyền cục bộ",
+            "Tập trung dân chủ",
+            "Độc tài cá nhân",
+            "Tự do vô tổ chức"
+        ],
+        correct: 1,
+        explanation: "Tập trung dân chủ là nguyên tắc cơ bản trong quản lý nhà nước và xã hội."
+    }
+];
+
+        // --- 4. STATE MANAGEMENT ---
+        let players = [];
+        let activePlayer = "Người chơi 1";
+        
+        // === SUPABASE INITIALIZATION ===
+        const SUPABASE_URL = 'https://hlycdtmluupavmwhuttn.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_xBkMMXvr6uYZ4tSSOpOAjg_BApgf6yg';
+        const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // --- ONLINE PRESENCE TRACKING ---
+        const room = supabaseClient.channel('online_users', {
+            config: { presence: { key: 'user' } }
+        });
+        room.on('presence', { event: 'sync' }, () => {
+            const state = room.presenceState();
+            const count = Object.keys(state).length;
+            const titleEl = document.getElementById('lobby-title-online');
+            if(titleEl) titleEl.innerHTML = `ĐẤU TRƯỜNG: ĐẢNG TRONG SẠCH, VỮNG MẠNH <span class="text-[10px] px-2 py-0.5 bg-emerald-500/20 text-emerald-500 rounded-full ml-1 inline-flex items-center gap-1">🟢 ${count} Online</span>`;
+        });
+        room.subscribe(async (status) => {
+            if (status === 'SUBSCRIBED') {
+                await room.track({ online_at: new Date().toISOString() });
+            }
+        });
+
+        // --- REALTIME LEADERBOARD AUTO-REFRESH ---
+        supabaseClient.channel('public:leaderboard').on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'leaderboard' }, payload => {
+            if (!document.getElementById('screen-leaderboard').classList.contains('hidden')) {
+                showLeaderboardScreen(); 
+            }
+        }).subscribe();
+
+        let leaderboard = [];
+
+        let customQuestions = [];
+        let gameSettings = { qPerGame: 30 };
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let combo = 0;
+        let maxCombo = 0;
+        let lives = 3;
+        let hasShield = false;
+        let timer = null;
+        let timeLeft = 15;
+        let maxTime = 15;
+        let isBombQuestion = false;
+        let currentQuestions = [];
+        let mistakes = [];
+        let canAnswer = true;
+        let clearConfirm = false;
+
+        function loadStorage() {
+            try {
+                const storedPlayers = localStorage.getItem('mln_players');
+                if (storedPlayers) {
+                    players = JSON.parse(storedPlayers);
+                } else {
+                    players = ["Học Viên 1"];
+                }
+
+                players = players.filter(p => p && typeof p === 'string' && p.trim().length > 0);
+                if (players.length === 0) players = ["Học Viên 1"];
+
+                const storedLB = localStorage.getItem('mln_leaderboard');
+                if (storedLB) leaderboard = JSON.parse(storedLB);
+
+                const storedCustomQ = localStorage.getItem('mln_custom_questions');
+                if (storedCustomQ) customQuestions = JSON.parse(storedCustomQ);
+
+                const storedSettings = localStorage.getItem('mln_settings');
+                if (storedSettings) { const saved = JSON.parse(storedSettings); gameSettings = { ...saved, qPerGame: Math.max(saved.qPerGame || 0, 30) }; } else { gameSettings = { qPerGame: 30 }; }
+
+                const lastActive = localStorage.getItem('mln_active_player');
+                if (lastActive && players.includes(lastActive)) {
+                    activePlayer = lastActive;
+                } else {
+                    activePlayer = players[0];
+                }
+            } catch(e) {
+                players = ["Học Viên 1"];
+                activePlayer = "Học Viên 1";
+            }
+            updatePlayerUI();
+        }
+
+        function saveStorage() {
+            try {
+                localStorage.setItem('mln_players', JSON.stringify(players));
+                localStorage.setItem('mln_leaderboard', JSON.stringify(leaderboard));
+                localStorage.setItem('mln_custom_questions', JSON.stringify(customQuestions));
+                localStorage.setItem('mln_settings', JSON.stringify(gameSettings));
+                if (activePlayer) localStorage.setItem('mln_active_player', activePlayer);
+            } catch(e) {}
+        }
+
+        function updatePlayerUI() {
+            const qDisplay = document.getElementById("display-q-per-game");
+            if(qDisplay) qDisplay.textContent = gameSettings.qPerGame;
+            const input = document.getElementById('player-name-input');
+            if (input && activePlayer) {
+                input.value = activePlayer;
+            }
+
+            document.getElementById('active-player-display').textContent = activePlayer || "Chưa nhập tên";
+
+            const listContainer = document.getElementById('saved-players-list');
+            listContainer.innerHTML = '';
+
+            players.forEach(name => {
+                const chip = document.createElement('div');
+                const isSelected = (name === activePlayer);
+                chip.className = `inline-flex items-center gap-2 pl-3 pr-2 py-1 rounded-xl border text-xs font-semibold cursor-pointer transition ${
+                    isSelected 
+                        ? 'bg-amber-500/20 border-amber-500 text-amber-500 shadow-sm' 
+                        : 'bg-[var(--card)] border-[var(--border)] text-[var(--muted-foreground)] hover:border-amber-500/50'
+                }`;
+
+                // Entire chip selects player
+                chip.onclick = () => selectSavedPlayer(name);
+
+                const nameSpan = document.createElement('span');
+                nameSpan.textContent = name;
+                nameSpan.className = "pointer-events-none";
+
+                // Red X delete button
+                const delBtn = document.createElement('button');
+                delBtn.type = "button";
+                delBtn.className = 'text-xs text-red-500 hover:text-white hover:bg-red-500 rounded-full w-5 h-5 flex items-center justify-center font-black transition cursor-pointer p-0';
+                delBtn.innerHTML = '&times;';
+                delBtn.title = `Xóa '${name}'`;
+                delBtn.onclick = (e) => {
+                    e.stopPropagation(); // Don't trigger chip click
+                    deleteSavedPlayer(name);
+                };
+
+                chip.appendChild(nameSpan);
+                chip.appendChild(delBtn);
+                listContainer.appendChild(chip);
+            });
+
+            // Personal best score
+            if (activePlayer) {
+                const pScores = leaderboard.filter(item => item.name === activePlayer).map(item => item.score);
+                const best = pScores.length > 0 ? Math.max(...pScores) : 0;
+                document.getElementById('active-player-best').textContent = `${best} điểm`;
+            } else {
+                document.getElementById('active-player-best').textContent = "0 điểm";
+            }
+        }
+
+        function onPlayerInputChanged() {
+            const input = document.getElementById('player-name-input');
+            const val = input.value.trim();
+            if (val) {
+                activePlayer = val;
+                document.getElementById('active-player-display').textContent = activePlayer;
+                const pScores = leaderboard.filter(item => item.name === activePlayer).map(item => item.score);
+                const best = pScores.length > 0 ? Math.max(...pScores) : 0;
+                document.getElementById('active-player-best').textContent = `${best} điểm`;
+            }
+        }
+
+        function selectSavedPlayer(name) {
+            activePlayer = name;
+            saveStorage();
+            updatePlayerUI();
+            showToast(`Đã chọn: ${name}`);
+        }
+
+        function deleteSavedPlayer(name) {
+            // Direct delete without browser confirm popup (avoids iframe blocking!)
+            players = players.filter(p => p !== name);
+            if (activePlayer === name) {
+                activePlayer = players.length > 0 ? players[0] : "Học Viên 1";
+            }
+            saveStorage();
+            updatePlayerUI();
+            showToast(`Đã xóa '${name}' khỏi danh sách!`);
+        }
+
+        // --- 5. GAMEPLAY FLOW ---
+        function startBattle() {
+            const input = document.getElementById('player-name-input');
+            const name = (input ? input.value.trim() : "") || activePlayer || "Học Viên MLN";
+            activePlayer = name;
+
+            if (!players.includes(name)) {
+                players.push(name);
+            }
+            saveStorage();
+
+            let pool = [...rawQuestions, ...customQuestions];
+            pool.sort(() => Math.random() - 0.5);
+            
+            // Limit to qPerGame
+            let limit = parseInt(gameSettings.qPerGame) || 16;
+            if (limit > pool.length) limit = pool.length;
+            currentQuestions = pool.slice(0, limit);
+
+            // Assign bombs randomly (~20% chance but at least 1-2 if limit is large)
+            currentQuestions.forEach(q => {
+                q.isBomb = (Math.random() < 0.2);
+            });
+
+            currentQuestionIndex = 0;
+            score = 0;
+            combo = 0;
+            maxCombo = 0;
+            lives = 3;
+            hasShield = false;
+            mistakes = [];
+
+            document.getElementById('screen-lobby').classList.add('hidden');
+            document.getElementById('screen-result').classList.add('hidden');
+            document.getElementById('screen-leaderboard').classList.add('hidden');
+            document.getElementById('screen-battle').classList.remove('hidden');
+
+            renderHUD();
+            loadQuestion();
+        }
+
+        function renderHUD() {
+            lives = Math.max(0, lives);
+            document.getElementById('hud-player').textContent = `👤 ${activePlayer}`;
+            document.getElementById('hud-score').textContent = `${score} đ`;
+            document.getElementById('hud-combo').textContent = `Combo: ${combo}x`;
+            document.getElementById('hud-progress').textContent = `${currentQuestionIndex + 1}/${currentQuestions.length}`;
+
+            let hearts = "";
+            for (let i = 0; i < lives; i++) hearts += "❤️";
+            for (let i = lives; i < 3; i++) hearts += "🖤";
+            document.getElementById('hud-lives').textContent = hearts;
+
+            const shieldElem = document.getElementById('hud-shield');
+            if (hasShield) {
+                shieldElem.classList.remove('hidden');
+            } else {
+                shieldElem.classList.add('hidden');
+            }
+        }
+
+        function loadQuestion() {
+            if (currentQuestionIndex >= currentQuestions.length || lives <= 0) {
+                endGame(lives > 0);
+                return;
+            }
+
+            canAnswer = true;
+            const q = currentQuestions[currentQuestionIndex];
+            isBombQuestion = !!q.isBomb;
+
+            const bombBanner = document.getElementById('bomb-banner');
+            const qCard = document.getElementById('question-card');
+            if (isBombQuestion) {
+                bombBanner.classList.remove('hidden');
+                qCard.classList.add('bomb-pulse', 'border-red-500');
+                maxTime = 8;
+            } else {
+                bombBanner.classList.add('hidden');
+                qCard.classList.remove('bomb-pulse', 'border-red-500');
+                maxTime = 15;
+            }
+
+            document.getElementById('question-badge').textContent = isBombQuestion ? '💣 CÂU HỎI BOM' : q.round;
+            document.getElementById('question-title').textContent = q.question;
+            document.getElementById('instant-feedback').classList.add('hidden');
+            document.getElementById('chest-modal').classList.add('hidden');
+            document.getElementById('btn-next-question').classList.add('hidden');
+
+            // Render Answers
+            const container = document.getElementById('answers-container');
+            container.innerHTML = '';
+
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'w-full text-left p-3.5 rounded-xl border border-[var(--border)] bg-[var(--card)] hover:bg-[var(--accent)] font-medium text-xs md:text-sm btn-press transition-colors flex items-center justify-between cursor-pointer';
+                btn.innerHTML = `<span class="pointer-events-none">${opt}</span><span class="text-xs text-[var(--muted-foreground)] opacity-60 font-mono pointer-events-none">Phím ${idx + 1}</span>`;
+                btn.onclick = () => submitAnswer(idx, btn);
+                container.appendChild(btn);
+            });
+
+            renderHUD();
+            startTimer();
+        }
+
+        function startTimer() {
+            clearInterval(timer);
+            timeLeft = maxTime;
+            updateTimerDisplay();
+
+            timer = setInterval(() => {
+                timeLeft -= 0.1;
+                if (timeLeft <= 3.5 && timeLeft > 0.5) {
+                    if (Math.floor(timeLeft * 10) % 10 === 0) playSound('tick');
+                }
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    timeOutAnswer();
+                }
+                updateTimerDisplay();
+            }, 100);
+        }
+
+        function updateTimerDisplay() {
+            const bar = document.getElementById('timer-bar');
+            const num = document.getElementById('question-timer-num');
+            const pct = Math.max(0, (timeLeft / maxTime) * 100);
+            bar.style.width = `${pct}%`;
+            num.textContent = `${Math.ceil(Math.max(0, timeLeft))}s`;
+
+            if (pct > 50) {
+                bar.className = 'h-full bg-emerald-500 transition-all duration-100 ease-linear';
+            } else if (pct > 25) {
+                bar.className = 'h-full bg-amber-500 transition-all duration-100 ease-linear';
+            } else {
+                bar.className = 'h-full bg-red-500 transition-all duration-100 ease-linear';
+            }
+        }
+
+        function submitAnswer(chosenIdx, clickedBtn) {
+            if (!canAnswer) return;
+            canAnswer = false;
+            clearInterval(timer);
+
+            const q = currentQuestions[currentQuestionIndex];
+            const buttons = document.querySelectorAll('#answers-container button');
+
+            // Disable all answer buttons visually
+            buttons.forEach(b => {
+                b.classList.remove('btn-press', 'hover:bg-[var(--accent)]');
+                b.classList.add('cursor-default');
+            });
+
+            if (chosenIdx === q.correct) {
+                clickedBtn.classList.add('correct-anim');
+                combo++;
+                if (combo > maxCombo) maxCombo = combo;
+
+                const timeBonus = Math.floor(timeLeft * 4);
+                const multiplier = 1 + (combo - 1) * 0.25;
+                let earned = Math.round((100 + timeBonus) * multiplier);
+
+                let extraMsg = "";
+
+                if (isBombQuestion) {
+                    earned += 250;
+                    if (lives < 3) lives++;
+                    playSound('victory');
+                    extraMsg = `<br><span class="text-emerald-400 font-bold">🛡️ GỠ BOM XUẤT SẮC! Thưởng nóng +250đ & Hồi 1 ❤️!</span>`;
+                } else {
+                    playSound('correct');
+                }
+
+                // 25% Chance for Lucky Steal (Cướp điểm)
+                const isSteal = (!isBombQuestion && Math.random() < 0.25);
+                if (isSteal) {
+                    const stolenPoints = Math.floor(Math.random() * 150) + 150;
+                    earned += stolenPoints;
+                    playSound('coin');
+                    extraMsg += `<br><span class="text-amber-400 font-bold gold-glow inline-block p-1 rounded">🏴‍☠️ KÍCH HOẠT CƯỚP ĐIỂM: Bạn vừa tịch thu kho của bọn bóc lột, cướp được +${stolenPoints}đ! 💰</span>`;
+                }
+
+                score += earned;
+                showFeedback(true, `+${earned} điểm (Combo ${combo}x) 🔥${extraMsg}<br>${q.explanation}`);
+
+                const comboBadge = document.getElementById('hud-combo');
+                comboBadge.classList.remove('pulse-combo');
+                void comboBadge.offsetWidth;
+                comboBadge.classList.add('pulse-combo');
+
+                // 25% Chance for Chest Event (Đổi điểm)
+                const isChestEvent = (!isBombQuestion && !isSteal && Math.random() < 0.25);
+                if (isChestEvent) {
+                    setTimeout(() => {
+                        triggerChestModal();
+                    }, 400);
+                } else {
+                    document.getElementById('btn-next-question').classList.remove('hidden');
+                }
+            } else {
+                clickedBtn.classList.add('wrong-anim');
+                buttons[q.correct].classList.add('correct-anim');
+                combo = 0;
+
+                if (hasShield) {
+                    hasShield = false;
+                    playSound('magic');
+                    showFeedback(false, `🛡️ Khiên Thép đã bảo vệ bạn! Không bị mất mạng!<br>${q.explanation}`);
+                } else {
+                    if (isBombQuestion) {
+                        lives -= 2;
+                        playSound('explosion');
+                        triggerScreenShake();
+                        showFeedback(false, `💥 BÙÙÙM! BOM ĐÃ NỔ! Bạn bị mất 2 mạng! 💔💔<br>${q.explanation}`);
+                    } else {
+                        lives--;
+                        playSound('wrong');
+                        showFeedback(false, `Mất 1 mạng! 💔<br>${q.explanation}`);
+                    }
+                }
+
+                mistakes.push({
+                    q: q.question,
+                    yourAns: q.options[chosenIdx],
+                    correctAns: q.options[q.correct],
+                    exp: q.explanation
+                });
+
+                document.getElementById('btn-next-question').classList.remove('hidden');
+
+                if (lives <= 0) {
+                    setTimeout(() => endGame(false), 1300);
+                }
+            }
+
+            renderHUD();
+        }
+
+        function timeOutAnswer() {
+            if (!canAnswer) return;
+            canAnswer = false;
+
+            const q = currentQuestions[currentQuestionIndex];
+            const buttons = document.querySelectorAll('#answers-container button');
+            buttons[q.correct].classList.add('correct-anim');
+
+            buttons.forEach(b => {
+                b.classList.remove('btn-press', 'hover:bg-[var(--accent)]');
+                b.classList.add('cursor-default');
+            });
+
+            combo = 0;
+
+            if (hasShield) {
+                hasShield = false;
+                playSound('magic');
+                showFeedback(false, `🛡️ Hết giờ nhưng Khiên Thép đã bảo hộ mạng sống của bạn!<br>${q.explanation}`);
+            } else if (isBombQuestion) {
+                lives -= 2;
+                playSound('explosion');
+                triggerScreenShake();
+                showFeedback(false, `💥 HẾT GIỜ! BOM ĐÃ PHÁT NỔ! Bạn mất 2 mạng! 💔💔<br>${q.explanation}`);
+            } else {
+                lives--;
+                playSound('wrong');
+                showFeedback(false, `Hết giờ! Mất 1 mạng! 💔<br>${q.explanation}`);
+            }
+
+            mistakes.push({
+                q: q.question,
+                yourAns: "Hết thời gian (Không chọn)",
+                correctAns: q.options[q.correct],
+                exp: q.explanation
+            });
+
+            renderHUD();
+            document.getElementById('btn-next-question').classList.remove('hidden');
+
+            if (lives <= 0) {
+                setTimeout(() => endGame(false), 1300);
+            }
+        }
+
+        function triggerScreenShake() {
+            const root = document.getElementById('game-root');
+            root.classList.remove('screen-shake');
+            void root.offsetWidth;
+            root.classList.add('screen-shake');
+        }
+
+        // --- CHEST MODAL (RESET MỌI LÚC - KHÔNG BAO GIỜ BỊ LIỆT NÚT) ---
+        function triggerChestModal() {
+            playSound('magic');
+            const modal = document.getElementById('chest-modal');
+            const res = document.getElementById('chest-result');
+            modal.classList.remove('hidden');
+            res.classList.add('hidden');
+
+            // CRITICAL FIX: Re-enable all chest buttons every single time
+            const chestBtns = document.querySelectorAll('.chest-btn');
+            chestBtns.forEach(b => {
+                b.disabled = false;
+                b.classList.remove('opacity-40', 'cursor-not-allowed');
+                b.classList.add('cursor-pointer', 'btn-press');
+            });
+
+            // Always make Next button visible so player can never be trapped
+            document.getElementById('btn-next-question').classList.remove('hidden');
+        }
+
+        function pickChest(chestNum) {
+            playSound('coin');
+            const rewards = [
+                { type: 'points', val: 200, text: '💰 ĐỔI ĐIỂM MAY MẮN: +200 Điểm trực tiếp vào quỹ!' },
+                { type: 'multiplier', val: 2, text: '🔥 NHÂN ĐÔI ĐIỂM THƯỞNG: Thưởng nóng thêm +150 Điểm!' },
+                { type: 'shield', val: 1, text: '🛡️ KHIÊN THÉP: Miễn trừ 1 lần mất mạng ở câu tiếp theo!' }
+            ];
+            const chosen = rewards[Math.floor(Math.random() * rewards.length)];
+
+            if (chosen.type === 'points') {
+                score += chosen.val;
+            } else if (chosen.type === 'multiplier') {
+                score += 150;
+            } else if (chosen.type === 'shield') {
+                hasShield = true;
+            }
+
+            renderHUD();
+
+            const res = document.getElementById('chest-result');
+            res.classList.remove('hidden');
+            res.innerHTML = `Bạn mở <strong>Rương ${chestNum}</strong>: ${chosen.text}`;
+
+            const chestBtns = document.querySelectorAll('.chest-btn');
+            chestBtns.forEach(b => {
+                b.disabled = true;
+                b.classList.add('opacity-40', 'cursor-not-allowed');
+                b.classList.remove('cursor-pointer', 'btn-press');
+            });
+
+            document.getElementById('btn-next-question').classList.remove('hidden');
+        }
+
+        function showFeedback(isCorrect, msg) {
+            const box = document.getElementById('instant-feedback');
+            box.classList.remove('hidden', 'bg-emerald-500/10', 'border-emerald-500/30', 'text-emerald-700', 'dark:text-emerald-300', 'bg-red-500/10', 'border-red-500/30', 'text-red-700', 'dark:text-red-300');
+
+            if (isCorrect) {
+                box.classList.add('bg-emerald-500/10', 'border-emerald-500/30', 'text-emerald-700', 'dark:text-emerald-300');
+                box.innerHTML = `<span class="font-bold">✨ CHÍNH XÁC!</span> ${msg}`;
+            } else {
+                box.classList.add('bg-red-500/10', 'border-red-500/30', 'text-red-700', 'dark:text-red-300');
+                box.innerHTML = `<span class="font-bold">⚠️ KHÔNG ĐÚNG!</span> ${msg}`;
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            loadQuestion();
+        }
+
+        function quitGamePrompt() {
+            // Direct quit & save without window.confirm to avoid iframe blocks
+            clearInterval(timer);
+            endGame(false);
+            showToast("Đã dừng trận đấu và ghi nhận kết quả!");
+        }
+
+        // --- 6. END GAME & LEADERBOARD ---
+        function endGame(isVictory) {
+            clearInterval(timer);
+            document.getElementById('screen-battle').classList.add('hidden');
+            document.getElementById('screen-result').classList.remove('hidden');
+
+            const totalQuestions = currentQuestions.length;
+            const answeredCount = currentQuestionIndex; const correctCount = Math.max(0, answeredCount - mistakes.length);
+            const entry = {
+                name: activePlayer,
+                score: score,
+                correct: `${correctCount}/${totalQuestions}`,
+                date: new Date().toLocaleDateString('vi-VN')
+            };
+
+            // Push to Supabase instead of local storage
+            supabaseClient.from('leaderboard').insert([{
+                player_name: activePlayer,
+                score: score,
+                correct_ratio: `${correctCount}/${totalQuestions}`,
+                
+            }]).then(({error}) => {
+                if (error) console.error("Lỗi lưu điểm:", error);
+            });
+
+            document.getElementById('result-player').textContent = activePlayer;
+            document.getElementById('result-score').textContent = `${score} đ`;
+            document.getElementById('result-accuracy').textContent = `${correctCount}/${totalQuestions}`;
+            document.getElementById('result-maxcombo').textContent = `${maxCombo}x`;
+
+            const icon = document.getElementById('result-icon');
+            const title = document.getElementById('result-title');
+            const subtitle = document.getElementById('result-subtitle');
+            const badge = document.getElementById('rank-badge');
+
+            if (isVictory) {
+                playSound('victory');
+                icon.textContent = "🏆";
+                title.textContent = "CHIẾN THẮNG TUYỆT ĐỐI!";
+                subtitle.textContent = "Bạn đã chinh phục toàn bộ câu hỏi và bảo toàn được mạng sống!";
+            } else {
+                playSound('gameover');
+                icon.textContent = "💀";
+                title.textContent = "HẾT MẠNG - DỪNG BƯỚC!";
+                subtitle.textContent = "Đừng nản lòng, hãy xem lại các câu sai để bứt phá ở lượt đấu sau!";
+            }
+
+            if (score >= 2500) {
+                badge.textContent = "Hạng: ĐẢNG VIÊN TIÊN PHONG GƯƠNG MẪU 👑";
+            } else if (score >= 1500) {
+                badge.textContent = "Hạng: BẬC THẦY LÝ LUẬN VỀ ĐẢNG ⭐";
+            } else if (score >= 800) {
+                badge.textContent = "Hạng: CHIẾN SĨ XÂY DỰNG ĐẢNG VỮNG MẠNH 🎖️";
+            } else {
+                badge.textContent = "Hạng: TÂN BINH TÌM HIỂU TƯ TƯỞNG HCM 📖";
+            }
+
+            renderMistakes();
+        }
+
+        function renderMistakes() {
+            const container = document.getElementById('mistakes-container');
+            container.innerHTML = '';
+
+            if (mistakes.length === 0) {
+                container.innerHTML = '<div class="p-3 bg-emerald-500/10 text-emerald-600 rounded-lg text-xs font-semibold">Xuất sắc! Bạn không trả lời sai bất kỳ câu nào! 🎯</div>';
+                return;
+            }
+
+            mistakes.forEach((m, idx) => {
+                const card = document.createElement('div');
+                card.className = 'p-3 rounded-lg border border-red-500/20 bg-red-500/5 text-xs space-y-1';
+                card.innerHTML = `
+                    <div class="font-bold text-[var(--foreground)]">${idx + 1}. ${m.q}</div>
+                    <div class="text-red-500 font-semibold">❌ Bạn chọn: ${m.yourAns}</div>
+                    <div class="text-emerald-500 font-semibold">✔️ Đáp án đúng: ${m.correctAns}</div>
+                    <div class="text-[var(--muted-foreground)] italic mt-1 bg-[var(--background)] p-1.5 rounded border border-[var(--border)]">${m.exp}</div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function toggleMistakes() {
+            const container = document.getElementById('mistakes-container');
+            const btn = document.getElementById('btn-toggle-mistakes');
+            if (container.classList.contains('hidden')) {
+                container.classList.remove('hidden');
+                btn.textContent = "🔼 Thu gọn phần xem lại câu sai";
+            } else {
+                container.classList.add('hidden');
+                btn.textContent = "🔍 Xem lại các câu trả lời sai và giải thích chuẩn giáo trình";
+            }
+        }
+
+        function restartGame() {
+            startBattle();
+        }
+
+        function goToLobby() {
+            clearInterval(timer);
+            document.getElementById('screen-battle').classList.add('hidden');
+            document.getElementById('screen-result').classList.add('hidden');
+            document.getElementById('screen-leaderboard').classList.add('hidden');
+            document.getElementById('screen-admin').classList.add('hidden');
+            document.getElementById('screen-lobby').classList.remove('hidden');
+            updatePlayerUI();
+        }
+
+        async function showLeaderboardScreen() {
+            clearInterval(timer);
+            document.getElementById('screen-battle').classList.add('hidden');
+            document.getElementById('screen-result').classList.add('hidden');
+            document.getElementById('screen-lobby').classList.add('hidden');
+            document.getElementById('screen-admin').classList.add('hidden');
+            document.getElementById('screen-leaderboard').classList.remove('hidden');
+
+            const tbody = document.getElementById('leaderboard-tbody');
+            tbody.innerHTML = '<tr><td colspan="5" class="p-4 text-center text-[var(--muted-foreground)]"><span class="animate-pulse">Đang tải dữ liệu từ máy chủ Supabase... ⏳</span></td></tr>';
+
+            const { data, error } = await supabaseClient.from('leaderboard')
+                .select('*')
+                .order('score', { ascending: false })
+                .limit(50);
+
+            tbody.innerHTML = '';
+
+            if (error || !data || data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" class="p-4 text-center text-[var(--muted-foreground)]">Chưa có ai ghi danh vào Bảng vàng. Hãy là người đầu tiên!</td></tr>';
+                return;
+            }
+
+            data.forEach((item, index) => {
+                const tr = document.createElement('tr');
+                let medal = `${index + 1}`;
+                let rowBg = '';
+                if (index === 0) { medal = '🥇 1'; rowBg = 'bg-yellow-500/10 font-bold text-amber-500'; }
+                else if (index === 1) { medal = '🥈 2'; rowBg = 'bg-gray-400/10 font-bold text-gray-400'; }
+                else if (index === 2) { medal = '🥉 3'; rowBg = 'bg-amber-700/10 font-bold text-amber-700'; }
+
+                tr.className = rowBg;
+                tr.innerHTML = `
+                    <td class="p-2.5 text-center">${medal}</td>
+                    <td class="p-2.5 font-semibold">${item.player_name}</td>
+                    <td class="p-2.5 text-right font-mono font-black text-emerald-500">${item.score} đ</td>
+                    <td class="p-2.5 text-center text-[var(--muted-foreground)]">${item.correct_ratio}</td>
+                    <td class="p-2.5 text-right text-[var(--muted-foreground)] text-xs">${item.date || new Date(item.created_at).toLocaleDateString('vi-VN')}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        async function clearLeaderboard() {
+            if(prompt("Nhập mật khẩu Admin để xóa BXH:") !== "572001") { showToast("Sai mật khẩu!"); return; }
+            
+            showToast("Đang xóa BXH trên Server...");
+            // Supabase requires a filter to delete all, neq ensures all are deleted
+            const { error } = await supabaseClient.from('leaderboard').delete().neq('id', '00000000-0000-0000-0000-000000000000');
+            if(error) { showToast("Lỗi: " + error.message); return; }
+            
+            showLeaderboardScreen();
+            showToast("Đã xóa sạch Bảng xếp hạng trên Server!");
+        }
+
+        function showAdminScreen() {
+            clearInterval(timer);
+            // Password protection
+            if(prompt("Nhập mật khẩu Admin:") !== "572001") { showToast("Sai mật khẩu!"); return; }
+            
+            document.getElementById('screen-battle').classList.add('hidden');
+            document.getElementById('screen-result').classList.add('hidden');
+            document.getElementById('screen-lobby').classList.add('hidden');
+            document.getElementById('screen-leaderboard').classList.add('hidden');
+            document.getElementById('screen-admin').classList.remove('hidden');
+            
+            document.getElementById('admin-q-per-game').value = gameSettings.qPerGame;
+            updateAdminQCount();
+        }
+
+        function updateAdminQCount() {
+            const count = rawQuestions.length + customQuestions.length;
+            document.getElementById('admin-q-count').textContent = `Đang có: ${rawQuestions.length} gốc + ${customQuestions.length} thêm = ${count} câu`;
+        }
+
+        function clearCustomQuestions() {
+            customQuestions = [];
+            saveStorage();
+            updateAdminQCount();
+            showToast("Đã xóa các câu hỏi thêm!");
+        }
+
+        function saveAdminSettings() {
+            const val = parseInt(document.getElementById('admin-q-per-game').value);
+            if (val > 0) {
+                gameSettings.qPerGame = val;
+                saveStorage();
+                showToast("Đã lưu cấu hình!");
+            }
+        }
+
+        function parseCSV() {
+            const text = document.getElementById('admin-csv-input').value.trim();
+            if (!text) {
+                showToast("Chưa nhập nội dung!");
+                return;
+            }
+            
+            const lines = text.split('\n');
+            let added = 0;
+            
+            for (let i = 0; i < lines.length; i++) {
+                const line = lines[i].trim();
+                if (!line) continue;
+                
+                // Allow Tab or Comma separated
+                const sep = line.includes('\t') ? '\t' : ',';
+                const parts = line.split(sep);
+                
+                // Skip header or malformed lines
+                if (parts.length < 7 || parts[0].toLowerCase().includes('question text')) continue;
+                
+                try {
+                    let correctIdx = parseInt(parts[6].trim()) - 1; // 1-based to 0-based
+                    if (isNaN(correctIdx) || correctIdx < 0 || correctIdx > 3) correctIdx = 0; // Fallback to 0
+                    
+                    const q = {
+                        round: "Vòng Admin",
+                        type: "mcq",
+                        question: parts[0].trim(),
+                        options: [
+                            parts[1].trim(),
+                            parts[2].trim(),
+                            parts[3].trim(),
+                            parts[4].trim()
+                        ],
+                        correct: correctIdx,
+                        explanation: `Theo chuẩn giáo trình: Đáp án đúng là số ${correctIdx + 1}`
+                    };
+                    customQuestions.push(q);
+                    added++;
+                } catch(e) {}
+            }
+            
+            if (added > 0) {
+                saveStorage();
+                updateAdminQCount();
+                document.getElementById('admin-csv-input').value = "";
+                showToast(`Đã nạp thành công ${added} câu hỏi mới!`);
+            } else {
+                showToast("Không tìm thấy câu hỏi hợp lệ trong dữ liệu!");
+            }
+        }
+
+        // Hotkeys (1, 2, 3, 4, Enter, Space)
+        window.addEventListener('keydown', (e) => {
+            if (!canAnswer) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    const nextBtn = document.getElementById('btn-next-question');
+                    if (!nextBtn.classList.contains('hidden')) nextQuestion();
+                }
+                return;
+            }
+            const keyNum = parseInt(e.key);
+            if (keyNum >= 1 && keyNum <= 4) {
+                const buttons = document.querySelectorAll('#answers-container button');
+                if (buttons[keyNum - 1]) {
+                    buttons[keyNum - 1].click();
+                }
+            }
+        });
+
+        // Initialize
+        loadStorage();
+    </script>
+</body>
+</html>
