@@ -123,16 +123,7 @@
                     </div>
                 </div>
 
-                <!-- Recent Players Tags (Quick Pick & 1-Click Delete) -->
-                <div id="saved-players-section" class="mb-3.5">
-                    <div class="text-[11px] font-semibold text-[var(--muted-foreground)] mb-1.5 flex items-center justify-between">
-                        <span>Danh sách người chơi đã lưu:</span>
-                        <span class="text-[10px] text-amber-500/80">Bấm tên để chọn • Bấm × đỏ để xóa</span>
-                    </div>
-                    <div id="saved-players-list" class="flex flex-wrap gap-2 min-h-[30px]">
-                        <!-- Injected dynamically via JS -->
-                    </div>
-                </div>
+
 
                 <!-- Active Player Banner -->
                 <div class="bg-[var(--background)] p-3 rounded-lg border border-[var(--border)] flex justify-between items-center">
@@ -1234,39 +1225,39 @@
             document.getElementById('active-player-display').textContent = activePlayer || "Chưa nhập tên";
 
             const listContainer = document.getElementById('saved-players-list');
-            listContainer.innerHTML = '';
+            if (listContainer) {
+                listContainer.innerHTML = '';
 
-            players.forEach(name => {
-                const chip = document.createElement('div');
-                const isSelected = (name === activePlayer);
-                chip.className = `inline-flex items-center gap-2 pl-3 pr-2 py-1 rounded-xl border text-xs font-semibold cursor-pointer transition ${
-                    isSelected 
-                        ? 'bg-amber-500/20 border-amber-500 text-amber-500 shadow-sm' 
-                        : 'bg-[var(--card)] border-[var(--border)] text-[var(--muted-foreground)] hover:border-amber-500/50'
-                }`;
+                players.forEach(name => {
+                    const chip = document.createElement('div');
+                    const isSelected = (name === activePlayer);
+                    chip.className = `inline-flex items-center gap-2 pl-3 pr-2 py-1 rounded-xl border text-xs font-semibold cursor-pointer transition ${
+                        isSelected 
+                            ? 'bg-amber-500/20 border-amber-500 text-amber-500 shadow-sm' 
+                            : 'bg-[var(--card)] border-[var(--border)] text-[var(--muted-foreground)] hover:border-amber-500/50'
+                    }`;
 
-                // Entire chip selects player
-                chip.onclick = () => selectSavedPlayer(name);
+                    chip.onclick = () => selectSavedPlayer(name);
 
-                const nameSpan = document.createElement('span');
-                nameSpan.textContent = name;
-                nameSpan.className = "pointer-events-none";
+                    const nameSpan = document.createElement('span');
+                    nameSpan.textContent = name;
+                    nameSpan.className = "pointer-events-none";
 
-                // Red X delete button
-                const delBtn = document.createElement('button');
-                delBtn.type = "button";
-                delBtn.className = 'text-xs text-red-500 hover:text-white hover:bg-red-500 rounded-full w-5 h-5 flex items-center justify-center font-black transition cursor-pointer p-0';
-                delBtn.innerHTML = '&times;';
-                delBtn.title = `Xóa '${name}'`;
-                delBtn.onclick = (e) => {
-                    e.stopPropagation(); // Don't trigger chip click
-                    deleteSavedPlayer(name);
-                };
+                    const delBtn = document.createElement('button');
+                    delBtn.type = "button";
+                    delBtn.className = 'text-xs text-red-500 hover:text-white hover:bg-red-500 rounded-full w-5 h-5 flex items-center justify-center font-black transition cursor-pointer p-0';
+                    delBtn.innerHTML = '&times;';
+                    delBtn.title = `Xóa '${name}'`;
+                    delBtn.onclick = (e) => {
+                        e.stopPropagation();
+                        deleteSavedPlayer(name);
+                    };
 
-                chip.appendChild(nameSpan);
-                chip.appendChild(delBtn);
-                listContainer.appendChild(chip);
-            });
+                    chip.appendChild(nameSpan);
+                    chip.appendChild(delBtn);
+                    listContainer.appendChild(chip);
+                });
+            }
 
             // Personal best score
             if (activePlayer) {
