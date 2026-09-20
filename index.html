@@ -735,7 +735,7 @@
         // --- 5. GAMEPLAY FLOW ---
         function startBattle() {
             const input = document.getElementById('player-name-input');
-            const name = (input ? input.value.trim() : "") || activePlayer || "Học Viên MLN";
+            const name = (input ? input.value.trim() : "") || activePlayer || "Học Viên";
             activePlayer = name;
 
             if (!players.includes(name)) {
@@ -743,7 +743,7 @@
             }
             saveStorage();
 
-            let pool = [...rawQuestions, ...customQuestions];
+            let pool = [...rawQuestions];
             pool.sort(() => Math.random() - 0.5);
             
             // Limit to qPerGame
