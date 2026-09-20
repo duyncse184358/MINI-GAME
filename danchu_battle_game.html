@@ -1587,7 +1587,8 @@
 
             const { data, error } = await supabaseClient.from('leaderboard')
                 .select('*')
-                .limit(100);
+                .order('score', { ascending: false })
+                .limit(50);
 
             tbody.innerHTML = '';
 
@@ -1595,19 +1596,6 @@
                 tbody.innerHTML = '<tr><td colspan="5" class="p-4 text-center text-[var(--muted-foreground)]">Chưa có ai ghi danh vào Bảng vàng. Hãy là người đầu tiên!</td></tr>';
                 return;
             }
-
-            // Xếp hạng ƯU TIÊN theo SỐ CÂU ĐÚNG (correct_ratio), nếu bằng nhau thì so sánh ĐIỂM SỐ
-            data.sort((a, b) => {
-                const getCorrect = (str) => {
-                    if (!str) return 0;
-                    const parts = str.toString().split('/');
-                    return parseInt(parts[0], 10) || 0;
-                };
-                const cA = getCorrect(a.correct_ratio);
-                const cB = getCorrect(b.correct_ratio);
-                if (cB !== cA) return cB - cA; // Số câu đúng nhiều hơn xếp trước
-                return (b.score || 0) - (a.score || 0); // Điểm số cao hơn xếp trước
-            });
 
             data.forEach((item, index) => {
                 const tr = document.createElement('tr');
