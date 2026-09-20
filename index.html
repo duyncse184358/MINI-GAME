@@ -518,36 +518,396 @@
 
         // --- 3. 16 QUESTIONS (GIÁO TRÌNH 2021) ---
         const rawQuestions = [
-    { round: "Vòng 1: Đạo đức, Văn minh", type: "mcq", question: "Theo Hồ Chí Minh, Đảng Cộng sản Việt Nam có mục đích tự thân không?", options: ["Có, mục đích là xây dựng hệ thống tổ chức chặt chẽ", "Không, Đảng không có mục đích tự thân, chỉ nhằm phục vụ Tổ quốc và nhân dân", "Có, mục đích là củng cố quyền lực nhà nước", "Không, mục đích của Đảng do Quốc tế Cộng sản định đoạt"], correct: 1, explanation: "Hồ Chí Minh khẳng định Đảng không có mục đích tự thân, mọi hoạt động đều vì lợi ích của giai cấp, nhân dân và dân tộc." },
-    { round: "Vòng 1: Đạo đức, Văn minh", type: "mcq", question: "Hồ Chí Minh cho rằng, xây dựng Đảng là đạo đức, là văn minh thì cốt lõi phải dựa trên nền tảng nào?", options: ["Trí tuệ của giới tinh hoa", "Hệ thống pháp luật chặt chẽ", "Đạo đức cách mạng của mỗi cán bộ, đảng viên", "Mối quan hệ ngoại giao với các nước"], correct: 2, explanation: "Đạo đức cách mạng là cái gốc của người cán bộ, đảng viên. Đảng là đạo đức, văn minh bắt nguồn từ sự trong sạch của từng đảng viên." },
-    { round: "Vòng 1: Đạo đức, Văn minh", type: "mcq", question: "Trong bài nói tại Lễ kỷ niệm 30 năm Ngày thành lập Đảng (1960), Hồ Chí Minh đã nói: 'Đảng ta là đạo đức, là _______.'", options: ["tự do", "hòa bình", "sức mạnh", "văn minh"], correct: 3, explanation: "Bác khẳng định 'Đảng ta là đạo đức, là văn minh'." },
-    { round: "Vòng 1: Đạo đức, Văn minh", type: "mcq", question: "Tính 'văn minh' của Đảng Cộng sản Việt Nam được Hồ Chí Minh nhấn mạnh thể hiện ở việc Đảng phải hoạt động trong khuôn khổ nào?", options: ["Khuôn khổ của kinh tế thị trường.", "Khuôn khổ của Hiến pháp và pháp luật.", "Khuôn khổ của hệ thống quốc tế.", "Khuôn khổ của tình cảm cá nhân."], correct: 1, explanation: "Đảng lãnh đạo nhà nước và xã hội nhưng Đảng cũng phải hoạt động trong khuôn khổ Hiến pháp và pháp luật." },
-    { round: "Vòng 1: Đạo đức, Văn minh", type: "mcq", question: "Hồ Chí Minh cảnh báo: 'Một dân tộc, một đảng và mỗi con người, ngày hôm qua là vĩ đại... không nhất định hôm nay và ngày mai vẫn được mọi người yêu mến, nếu...'", options: ["...không có sức mạnh kinh tế.", "...lòng dạ không trong sáng nữa, nếu sa vào chủ nghĩa cá nhân.", "...không được quốc tế ủng hộ.", "...không có vũ khí hiện đại."], correct: 1, explanation: "Đó là lời răn dạy sâu sắc về sự suy thoái, biến chất từ bên trong." },
-    { round: "Vòng 1: Đạo đức, Văn minh", type: "mcq", question: "Quan điểm 'Xây dựng Đảng là đạo đức, là văn minh' là bước phát triển sáng tạo của Hồ Chí Minh so với học thuyết nào?", options: ["Học thuyết Tam dân của Tôn Trung Sơn.", "Học thuyết dân chủ tư sản Pháp.", "Học thuyết Mác - Lênin về Đảng kiểu mới của giai cấp vô sản.", "Triết học Nho giáo."], correct: 2, explanation: "Đó là đóng góp sáng tạo đặc biệt của Người vào học thuyết Mác - Lênin về xây dựng Đảng." },
-    { round: "Vòng 2: Các Nguyên Tắc", type: "mcq", question: "Nguyên tắc nào được Hồ Chí Minh coi là nguyên tắc TỔ CHỨC cơ bản nhất, cốt lõi nhất của Đảng Cộng sản?", options: ["Tự phê bình và phê bình", "Tập trung dân chủ", "Kỷ luật nghiêm minh", "Gắn bó với nhân dân"], correct: 1, explanation: "Tập trung dân chủ là nguyên tắc tổ chức cơ bản nhất của tổ chức Đảng." },
-    { round: "Vòng 2: Các Nguyên Tắc", type: "mcq", question: "Thực hiện 'Tập trung dân chủ' trong Đảng nghĩa là gì?", options: ["Tập trung là chính, dân chủ là phụ.", "Dân chủ là tự do tuyệt đối, không cần lãnh đạo.", "Tập trung trên nền tảng dân chủ và dân chủ dưới sự chỉ đạo tập trung.", "Lãnh đạo đưa ra quyết định, cấp dưới chỉ được tuân theo."], correct: 2, explanation: "Đây là sự thống nhất biện chứng: Dân chủ là cơ sở của tập trung, tập trung bảo đảm cho dân chủ." },
-    { round: "Vòng 2: Các Nguyên Tắc", type: "mcq", question: "Hồ Chí Minh lưu ý hai điều kiện cần tránh trong hoạt động lãnh đạo của Đảng (khi áp dụng tập trung dân chủ) là gì?", options: ["Bệnh lười biếng và bệnh kiêu ngạo.", "Độc đoán chuyên quyền và dựa dẫm tập thể, không dám quyết đoán.", "Tham nhũng và lãng phí.", "Lạc hậu và bảo thủ."], correct: 1, explanation: "Thiếu dân chủ sinh ra độc đoán chuyên quyền; thiếu tập trung dẫn đến dựa dẫm tập thể, vô tổ chức." },
-    { round: "Vòng 2: Các Nguyên Tắc", type: "mcq", question: "Theo Hồ Chí Minh, 'thang thuốc' tốt nhất để làm cho phần tốt trong mỗi tổ chức nảy nở và phần xấu bị mất dần đi là gì?", options: ["Tập trung dân chủ.", "Kỷ luật sắt.", "Tự phê bình và phê bình.", "Xử phạt nghiêm khắc."], correct: 2, explanation: "Tự phê bình và phê bình là thứ vũ khí thần hiệu, là 'thang thuốc' tốt nhất." },
-    { round: "Vòng 2: Các Nguyên Tắc", type: "mcq", question: "Đối tượng của tự phê bình và phê bình trong Đảng là ai?", options: ["Chỉ áp dụng cho cấp dưới.", "Chỉ áp dụng cho lãnh đạo cấp cao.", "Tiến hành từ trên xuống dưới, từ dưới lên trên với mọi cán bộ, đảng viên.", "Chỉ áp dụng khi có khuyết điểm rất nghiêm trọng."], correct: 2, explanation: "Tự phê bình và phê bình phải tiến hành thường xuyên, liên tục, dân chủ, từ trên xuống và từ dưới lên." },
-    { round: "Vòng 2: Các Nguyên Tắc", type: "mcq", question: "Bác ví việc 'Tự phê bình và phê bình' trong Đảng quan trọng và thường xuyên giống như hành động gì của con người mỗi ngày?", options: ["Tập thể dục.", "Rửa mặt hàng ngày.", "Ăn uống.", "Làm việc."], correct: 1, explanation: "Ngày nào cũng phải rửa mặt cho sạch sẽ, cũng như ngày nào cũng phải tự phê bình." },
-    { round: "Vòng 2: Các Nguyên Tắc", type: "mcq", question: "Câu nói: 'Một Đảng giấu giếm khuyết điểm của mình là một Đảng hỏng...' nhấn mạnh nguyên tắc nào?", options: ["Đoàn kết thống nhất.", "Tập trung dân chủ.", "Tự phê bình và phê bình.", "Gắn bó với nhân dân."], correct: 2, explanation: "Dám thừa nhận và sửa chữa khuyết điểm là một Đảng chân chính, tiến bộ." },
-    { round: "Vòng 2: Các Nguyên Tắc", type: "mcq", question: "Trong Di chúc, Hồ Chí Minh nhắc nhở các đồng chí cần giữ gìn sự đoàn kết nhất trí của Đảng như giữ gìn cái gì?", options: ["Mạng sống của chính mình.", "Tài sản của quốc gia.", "Con ngươi của mắt mình.", "Sinh mệnh chính trị."], correct: 2, explanation: "Bác viết: 'phải giữ gìn sự đoàn kết nhất trí của Đảng như giữ gìn con ngươi của mắt mình'." },
-    { round: "Vòng 2: Các Nguyên Tắc", type: "mcq", question: "Đoàn kết trong Đảng không phải là 'đoàn kết xuôi chiều' mà là đoàn kết dựa trên cơ sở nào?", options: ["Bao che khuyết điểm cho nhau.", "Dựa trên lý luận Mác - Lênin, Cương lĩnh, Điều lệ Đảng và tình đồng chí.", "Sự dung hòa lợi ích cá nhân.", "Quyền uy của cấp trên ép buộc."], correct: 1, explanation: "Đoàn kết thống nhất phải dựa trên cơ sở lý luận cách mạng và tình đồng chí thương yêu lẫn nhau." },
-    { round: "Vòng 3: Kỷ luật & Chỉnh đốn", type: "mcq", question: "Hồ Chí Minh quan niệm tính kỷ luật của Đảng Cộng sản phải là loại kỷ luật như thế nào?", options: ["Kỷ luật tùy theo hoàn cảnh linh hoạt.", "Kỷ luật sắt - nghiêm minh và hoàn toàn tự giác.", "Kỷ luật mang tính áp đặt từ trên xuống.", "Kỷ luật có thể du di cho cán bộ cấp cao."], correct: 1, explanation: "Sức mạnh vô địch của Đảng là ở tinh thần kỷ luật nghiêm minh và tự giác (Kỷ luật sắt)." },
-    { round: "Vòng 3: Kỷ luật & Chỉnh đốn", type: "mcq", question: "Đặc điểm nổi bật nhất của 'kỷ luật sắt' trong Đảng theo Tư tưởng Hồ Chí Minh là gì?", options: ["Do sự áp bức mà có.", "Do lòng tự giác của đảng viên về nhiệm vụ của họ đối với Đảng.", "Do sự giám sát khắt khe của quần chúng.", "Do các hình phạt quá nặng."], correct: 1, explanation: "Kỷ luật tự giác làm nên tính vững chắc của kỷ luật Đảng." },
-    { round: "Vòng 3: Kỷ luật & Chỉnh đốn", type: "mcq", question: "Tại sao Hồ Chí Minh lại nhấn mạnh Đảng phải thường xuyên tự chỉnh đốn?", options: ["Vì Đảng là một cơ thể sống, cần loại bỏ yếu tố độc hại để phát triển.", "Vì có sự ép buộc của quốc tế.", "Vì đó là trào lưu của các đảng phái.", "Vì pháp luật bắt buộc."], correct: 0, explanation: "Đảng tồn tại trong xã hội, đảng viên mang trong mình cả mặt tốt và xấu của xã hội, nên tự chỉnh đốn là tất yếu." },
-    { round: "Vòng 3: Kỷ luật & Chỉnh đốn", type: "mcq", question: "Việc tự chỉnh đốn Đảng, theo Hồ Chí Minh, đặc biệt quan trọng nhất vào thời điểm nào?", options: ["Khi Đảng gặp thất bại liên tiếp.", "Khi nền kinh tế khủng hoảng.", "Khi cách mạng chuyển giai đoạn hoặc sau những thắng lợi lớn.", "Ngay trước thềm Đại hội Đảng."], correct: 2, explanation: "Vì sau thắng lợi, cán bộ đảng viên dễ sinh ra kiêu ngạo, tham nhũng, hưởng thụ." },
-    { round: "Vòng 3: Kỷ luật & Chỉnh đốn", type: "mcq", question: "Hồ Chí Minh đòi hỏi Đảng phải thường xuyên tẩy bỏ những phần tử nào ra khỏi tổ chức của mình?", options: ["Phần tử có chuyên môn yếu kém.", "Phần tử không có bằng cấp học thuật.", "Những phần tử thoái hóa, biến chất, hủ hóa.", "Những phần tử hay đưa ra ý kiến phản biện."], correct: 2, explanation: "Phải kiên quyết đưa những phần tử thoái hóa, biến chất ra khỏi Đảng để Đảng trong sạch." },
-    { round: "Vòng 3: Kỷ luật & Chỉnh đốn", type: "mcq", question: "Khi nói về việc xây dựng, rèn luyện Đảng, Bác thường dùng hình ảnh ẩn dụ nào để chỉ việc mài giũa đạo đức của đảng viên?", options: ["Ngọc càng mài càng sáng, vàng càng luyện càng trong.", "Nước chảy đá mòn.", "Có công mài sắt có ngày nên kim.", "Lửa thử vàng gian nan thử sức."], correct: 0, explanation: "Giáo dục, tu dưỡng đạo đức phải gian khổ rèn luyện suốt đời như mài ngọc, luyện vàng." },
-    { round: "Vòng 4: Gắn bó với nhân dân", type: "mcq", question: "Nguồn gốc sức mạnh vô địch của Đảng Cộng sản Việt Nam xuất phát từ đâu?", options: ["Hệ thống vũ khí quân đội.", "Viện trợ từ các nước XHCN.", "Mối liên hệ mật thiết, máu thịt với nhân dân.", "Bộ máy tuyên truyền hùng mạnh."], correct: 2, explanation: "Mối quan hệ gắn bó máu thịt với nhân dân là yếu tố quyết định mọi thắng lợi của Đảng." },
-    { round: "Vòng 4: Gắn bó với nhân dân", type: "mcq", question: "Căn bệnh nào được Hồ Chí Minh phê phán là nguy hiểm nhất làm xa rời Đảng với nhân dân?", options: ["Bệnh lười biếng.", "Bệnh quan liêu, mệnh lệnh, xa rời quần chúng.", "Bệnh giáo điều, sách vở.", "Bệnh thành tích."], correct: 1, explanation: "Quan liêu, mệnh lệnh làm mất đi sự tin yêu của quần chúng nhân dân." },
-    { round: "Vòng 4: Gắn bó với nhân dân", type: "mcq", question: "Nếu không có nhân dân giúp sức thì Đảng sẽ như thế nào theo quan điểm của Hồ Chí Minh?", options: ["Đảng vẫn tự mình lãnh đạo được.", "Đảng sẽ gặp khó khăn nhưng vẫn qua.", "Đảng không làm được việc gì hết.", "Đảng sẽ nhờ quốc tế can thiệp."], correct: 2, explanation: "Sức mạnh của Đảng là sức mạnh của nhân dân." },
-    { round: "Vòng 4: Gắn bó với nhân dân", type: "mcq", question: "Phương châm nào sau đây thể hiện rõ nhất vai trò tiên phong của người đảng viên?", options: ["Nói đi đôi với làm.", "Đảng viên đi trước, làng nước theo sau.", "Cần kiệm liêm chính.", "Phụng công thủ pháp."], correct: 1, explanation: "Đòi hỏi tính tiên phong, gương mẫu đi đầu trong mọi khó khăn của đảng viên." },
-    { round: "Vòng 4: Gắn bó với nhân dân", type: "mcq", question: "Để gắn bó với nhân dân, cán bộ, đảng viên phải tránh thái độ nào khi tiếp xúc với quần chúng?", options: ["Lắng nghe và học hỏi quần chúng.", "Nâng cao trình độ để hướng dẫn quần chúng.", "Thái độ vác mặt 'quan cách mạng', kiêu ngạo.", "Tin tưởng vào sức mạnh quần chúng."], correct: 2, explanation: "Bác luôn dạy cán bộ là 'đày tớ' của dân, tuyệt đối không được lên mặt 'làm quan cách mạng'." },
-    { round: "Vòng 4: Gắn bó với nhân dân", type: "mcq", question: "Hồ Chí Minh khẳng định: 'Sự lãnh đạo trong mọi công tác thiết thực của Đảng, ắt phải từ trong quần chúng ra, trở lại...'", options: ["...nơi quần chúng.", "...Trung ương Đảng.", "...cơ quan nhà nước.", "...sách vở lý luận."], correct: 0, explanation: "Đó là phương pháp lãnh đạo theo đường lối quần chúng." },
-    { round: "Vòng 5: Tổng hợp", type: "mcq", question: "Trong điều kiện Đảng cầm quyền, Hồ Chí Minh đặc biệt lo ngại nguy cơ gì nhất đối với tổ chức Đảng?", options: ["Bị các thế lực đế quốc tấn công quân sự.", "Bị cắt đứt nguồn viện trợ.", "Sự suy thoái về đạo đức, biến chất của cán bộ, đảng viên.", "Thiếu nguồn nhân lực có trình độ."], correct: 2, explanation: "Nguy cơ thoái hóa, biến chất, tham ô, lãng phí là thứ 'giặc nội xâm' đáng sợ nhất." },
-    { round: "Vòng 5: Tổng hợp", type: "mcq", question: "Câu nào sau đây KHÔNG PHẢI là một trong những vấn đề nguyên tắc trong hoạt động của Đảng theo tư tưởng Hồ Chí Minh?", options: ["Tập trung dân chủ.", "Đa nguyên chính trị, đa đảng đối lập.", "Tự phê bình và phê bình.", "Kỷ luật nghiêm minh, tự giác."], correct: 1, explanation: "Đảng Cộng sản Việt Nam hoạt động theo nguyên tắc nhất nguyên chính trị, không chấp nhận đa nguyên đa đảng." },
-    { round: "Vòng 5: Tổng hợp", type: "mcq", question: "Phương pháp giáo dục và rèn luyện đạo đức hiệu quả nhất cho đảng viên và quần chúng, theo Bác là phương pháp gì?", options: ["Xử phạt nghiêm khắc bằng pháp luật.", "Giáo dục bằng sách vở lý luận hàn lâm.", "Đưa vào trại cải tạo.", "Nêu gương."], correct: 3, explanation: "Bác nói: Một tấm gương sống còn có giá trị hơn một trăm bài diễn văn tuyên truyền." }
+    {
+        "round": "Vòng 1: Đạo đức, Văn minh",
+        "type": "mcq",
+        "question": "Theo Hồ Chí Minh, Đảng Cộng sản Việt Nam có mục đích tự thân không?",
+        "options": [
+            "Có, Đảng tồn tại nhằm xây dựng bộ máy quyền lực riêng của tổ chức",
+            "Không, Đảng không có mục đích tự thân mà tận tụy phụng sự Tổ quốc",
+            "Có, Đảng phấn đấu nhằm duy trì vai trò độc tôn tuyệt đối của mình",
+            "Không, Đảng hoạt động hoàn toàn theo chỉ thị của phong trào quốc tế"
+        ],
+        "correct": 1,
+        "explanation": "Hồ Chí Minh khẳng định Đảng không có mục đích tự thân, mọi hoạt động đều vì lợi ích của giai cấp, nhân dân và dân tộc."
+    },
+    {
+        "round": "Vòng 1: Đạo đức, Văn minh",
+        "type": "mcq",
+        "question": "Hồ Chí Minh cho rằng, xây dựng Đảng là đạo đức, là văn minh thì cốt lõi phải dựa trên nền tảng nào?",
+        "options": [
+            "Trí tuệ học vấn sâu rộng của tầng lớp tinh hoa",
+            "Hệ thống pháp luật và kỷ cương của chính quyền",
+            "Đạo đức cách mạng trong sáng của cán bộ đảng viên",
+            "Quan hệ ngoại giao và sự tương trợ quốc tế lớn"
+        ],
+        "correct": 2,
+        "explanation": "Đạo đức cách mạng là cái gốc của người cán bộ, đảng viên. Đảng là đạo đức, văn minh bắt nguồn từ sự trong sạch của từng đảng viên."
+    },
+    {
+        "round": "Vòng 1: Đạo đức, Văn minh",
+        "type": "mcq",
+        "question": "Trong bài nói tại Lễ kỷ niệm 30 năm Ngày thành lập Đảng (1960), Hồ Chí Minh đã nói: 'Đảng ta là đạo đức, là _______.'",
+        "options": [
+            "tự do",
+            "hòa bình",
+            "sức mạnh",
+            "văn minh"
+        ],
+        "correct": 3,
+        "explanation": "Bác khẳng định 'Đảng ta là đạo đức, là văn minh'."
+    },
+    {
+        "round": "Vòng 1: Đạo đức, Văn minh",
+        "type": "mcq",
+        "question": "Tính 'văn minh' của Đảng Cộng sản Việt Nam được Hồ Chí Minh nhấn mạnh thể hiện ở việc Đảng phải hoạt động trong khuôn khổ nào?",
+        "options": [
+            "Khuôn khổ các quy luật cung cầu kinh tế thị trường.",
+            "Khuôn khổ của Hiến pháp và pháp luật của Nhà nước.",
+            "Khuôn khổ hệ thống điều ước và cam kết quốc tế lớn.",
+            "Khuôn khổ thuần túy ý chí nội bộ của những nhà lãnh đạo."
+        ],
+        "correct": 1,
+        "explanation": "Đảng lãnh đạo nhà nước và xã hội nhưng Đảng cũng phải hoạt động trong khuôn khổ Hiến pháp và pháp luật."
+    },
+    {
+        "round": "Vòng 1: Đạo đức, Văn minh",
+        "type": "mcq",
+        "question": "Hồ Chí Minh cảnh báo: 'Một dân tộc, một đảng và mỗi con người, ngày hôm qua là vĩ đại... không nhất định hôm nay và ngày mai vẫn được mọi người yêu mến, nếu...'",
+        "options": [
+            "...không liên tục gia tăng tiềm lực quân sự và phát triển kinh tế nhanh chóng.",
+            "...lòng dạ không trong sáng nữa, sa vào cạm bẫy vị kỷ của chủ nghĩa cá nhân.",
+            "...không nhận được sự ủng hộ đồng lòng mạnh mẽ từ bạn bè và các tổ chức quốc tế.",
+            "...không thường xuyên đổi mới vũ khí trang bị và phương thức truyền thông đối ngoại."
+        ],
+        "correct": 1,
+        "explanation": "Đó là lời răn dạy sâu sắc về sự suy thoái, biến chất từ bên trong."
+    },
+    {
+        "round": "Vòng 1: Đạo đức, Văn minh",
+        "type": "mcq",
+        "question": "Quan điểm 'Xây dựng Đảng là đạo đức, là văn minh' là bước phát triển sáng tạo của Hồ Chí Minh so với học thuyết nào?",
+        "options": [
+            "Học thuyết Tam dân của Tôn Trung Sơn về độc lập và phúc lợi cho toàn dân tộc.",
+            "Học thuyết nhà nước pháp quyền và tam quyền phân lập tư sản của nước Pháp.",
+            "Học thuyết Mác - Lênin về chính đảng kiểu mới của giai cấp công nhân vô sản.",
+            "Triết học đạo đức luân lý Nho gia của Khổng Tử về tu thân, tề gia, trị quốc."
+        ],
+        "correct": 2,
+        "explanation": "Đó là đóng góp sáng tạo đặc biệt của Người vào học thuyết Mác - Lênin về xây dựng Đảng."
+    },
+    {
+        "round": "Vòng 2: Các Nguyên Tắc",
+        "type": "mcq",
+        "question": "Nguyên tắc nào được Hồ Chí Minh coi là nguyên tắc TỔ CHỨC cơ bản nhất, cốt lõi nhất của Đảng Cộng sản?",
+        "options": [
+            "Tự phê bình và phê bình",
+            "Tập trung dân chủ",
+            "Kỷ luật nghiêm minh",
+            "Gắn bó với nhân dân"
+        ],
+        "correct": 1,
+        "explanation": "Tập trung dân chủ là nguyên tắc tổ chức cơ bản nhất của tổ chức Đảng."
+    },
+    {
+        "round": "Vòng 2: Các Nguyên Tắc",
+        "type": "mcq",
+        "question": "Thực hiện 'Tập trung dân chủ' trong Đảng theo Hồ Chí Minh được hiểu chính xác là gì?",
+        "options": [
+            "Tập trung mệnh lệnh là nòng cốt tối cao, dân chủ chỉ là hình thức lấy ý kiến.",
+            "Dân chủ mở rộng tối đa không cần sự lãnh đạo hay khuôn khổ định hướng chung.",
+            "Tập trung trên nền tảng dân chủ và dân chủ dưới sự lãnh đạo tập trung thống nhất.",
+            "Cấp trên toàn quyền quyết định mọi chủ trương, cấp dưới chỉ chấp hành thụ động."
+        ],
+        "correct": 2,
+        "explanation": "Đây là sự thống nhất biện chứng: Dân chủ là cơ sở của tập trung, tập trung bảo đảm cho dân chủ."
+    },
+    {
+        "round": "Vòng 2: Các Nguyên Tắc",
+        "type": "mcq",
+        "question": "Hồ Chí Minh lưu ý hai căn bệnh cần tránh khi vận dụng nguyên tắc tập trung dân chủ trong lãnh đạo Đảng là gì?",
+        "options": [
+            "Căn bệnh chủ quan lười biếng và thái độ kiêu ngạo tự mãn với thành tích.",
+            "Độc đoán chuyên quyền và dựa dẫm tập thể mà không dám chịu trách nhiệm.",
+            "Hành vi tham ô lãng phí tiền của cùng thói tiêu xài phung phí công quỹ.",
+            "Tư tưởng lạc hậu bảo thủ và thái độ trốn tránh né tránh các việc gian khó."
+        ],
+        "correct": 1,
+        "explanation": "Thiếu dân chủ sinh ra độc đoán chuyên quyền; thiếu tập trung dẫn đến dựa dẫm tập thể, vô tổ chức."
+    },
+    {
+        "round": "Vòng 2: Các Nguyên Tắc",
+        "type": "mcq",
+        "question": "Theo Hồ Chí Minh, 'thang thuốc' tốt nhất để làm cho phần tốt trong mỗi tổ chức nảy nở và phần xấu bị mất dần đi là gì?",
+        "options": [
+            "Thực hiện tập trung dân chủ.",
+            "Giữ vững kỷ luật sắt nghiêm minh.",
+            "Tiến hành tự phê bình và phê bình.",
+            "Áp dụng các biện pháp xử phạt nghiêm khắc."
+        ],
+        "correct": 2,
+        "explanation": "Tự phê bình và phê bình là thứ vũ khí thần hiệu, là 'thang thuốc' tốt nhất."
+    },
+    {
+        "round": "Vòng 2: Các Nguyên Tắc",
+        "type": "mcq",
+        "question": "Đối tượng và phương châm của tự phê bình và phê bình trong nội bộ Đảng được thực hiện như thế nào?",
+        "options": [
+            "Chủ yếu hướng vào kiểm điểm cán bộ cơ sở và các đảng viên cấp dưới.",
+            "Chỉ ưu tiên áp dụng cho cán bộ giữ các cương vị lãnh đạo chủ chốt cấp cao.",
+            "Tiến hành từ trên xuống dưới, từ dưới lên trên với mọi cán bộ, đảng viên.",
+            "Chỉ tổ chức thực hiện khi tổ chức để xảy ra sai lầm hoặc khuyết điểm nghiêm trọng."
+        ],
+        "correct": 2,
+        "explanation": "Tự phê bình và phê bình phải tiến hành thường xuyên, liên tục, dân chủ, từ trên xuống và từ dưới lên."
+    },
+    {
+        "round": "Vòng 2: Các Nguyên Tắc",
+        "type": "mcq",
+        "question": "Bác ví việc 'Tự phê bình và phê bình' trong Đảng cần thiết và đều đặn giống như hoạt động gì mỗi ngày?",
+        "options": [
+            "Tập luyện thể thao.",
+            "Rửa mặt mỗi ngày.",
+            "Dùng bữa ăn uống.",
+            "Học tập làm việc."
+        ],
+        "correct": 1,
+        "explanation": "Ngày nào cũng phải rửa mặt cho sạch sẽ, cũng như ngày nào cũng phải tự phê bình."
+    },
+    {
+        "round": "Vòng 2: Các Nguyên Tắc",
+        "type": "mcq",
+        "question": "Câu nói: 'Một Đảng giấu giếm khuyết điểm của mình là một Đảng hỏng...' nhấn mạnh nguyên tắc nào?",
+        "options": [
+            "Đoàn kết thống nhất trong nội bộ Đảng.",
+            "Tập trung dân chủ trong mọi công tác.",
+            "Tự phê bình và phê bình thường xuyên.",
+            "Mối quan hệ máu thịt gắn bó với nhân dân."
+        ],
+        "correct": 2,
+        "explanation": "Dám thừa nhận và sửa chữa khuyết điểm là một Đảng chân chính, tiến bộ."
+    },
+    {
+        "round": "Vòng 2: Các Nguyên Tắc",
+        "type": "mcq",
+        "question": "Trong Di chúc, Hồ Chí Minh nhắc nhở toàn Đảng cần giữ gìn sự đoàn kết nhất trí như giữ gìn điều gì quý giá nhất?",
+        "options": [
+            "Mạng sống quý giá của bản thân mình.",
+            "Tài sản độc lập của toàn thể quốc gia.",
+            "Con ngươi của chính đôi mắt mình.",
+            "Vị thế và sinh mệnh chính trị của Đảng."
+        ],
+        "correct": 2,
+        "explanation": "Bác viết: 'phải giữ gìn sự đoàn kết nhất trí của Đảng như giữ gìn con ngươi của mắt mình'."
+    },
+    {
+        "round": "Vòng 2: Các Nguyên Tắc",
+        "type": "mcq",
+        "question": "Đoàn kết trong Đảng không phải là 'đoàn kết xuôi chiều' mà là đoàn kết dựa trên nền tảng vững chắc nào?",
+        "options": [
+            "Thỏa hiệp và dung túng bao che các thiếu sót, khuyết điểm cho nhau.",
+            "Cương lĩnh, Điều lệ Đảng, chủ nghĩa Mác - Lênin và tình đồng chí thân ái.",
+            "Sắp xếp cân đối quyền lợi vật chất và dung hòa mọi mục tiêu cá nhân.",
+            "Uy quyền chuyên quyền áp đặt từ cấp lãnh đạo buộc cấp dưới phục tùng."
+        ],
+        "correct": 1,
+        "explanation": "Đoàn kết thống nhất phải dựa trên cơ sở lý luận cách mạng và tình đồng chí thương yêu lẫn nhau."
+    },
+    {
+        "round": "Vòng 3: Kỷ luật & Chỉnh đốn",
+        "type": "mcq",
+        "question": "Hồ Chí Minh quan niệm tính kỷ luật của Đảng Cộng sản phải là loại kỷ luật mang đặc trưng gì?",
+        "options": [
+            "Kỷ luật tùy nghi, biến chuyển mềm dẻo theo từng hoàn cảnh thực tế.",
+            "Kỷ luật sắt vô cùng nghiêm minh nhưng phải hoàn toàn tự giác.",
+            "Kỷ luật hành chính mang tính cưỡng chế mệnh lệnh nghiêm ngặt.",
+            "Kỷ luật có sự châm chước linh hoạt cho các cán bộ có công trạng lớn."
+        ],
+        "correct": 1,
+        "explanation": "Sức mạnh vô địch của Đảng là ở tinh thần kỷ luật nghiêm minh và tự giác (Kỷ luật sắt)."
+    },
+    {
+        "round": "Vòng 3: Kỷ luật & Chỉnh đốn",
+        "type": "mcq",
+        "question": "Đặc điểm bản chất nổi bật nhất của 'kỷ luật sắt' trong Đảng theo Tư tưởng Hồ Chí Minh là gì?",
+        "options": [
+            "Hình thành từ sức ép trừng phạt và bộ máy cưỡng chế hành chính nghiêm khắc.",
+            "Xuất phát từ lòng tự giác cao độ của đảng viên đối với lý tưởng của Đảng.",
+            "Được thiết lập dựa trên sự kiểm tra giám sát liên tục của các đoàn thanh tra.",
+            "Tạo dựng nhờ quy chế xử phạt phân tầng rất nghiêm khắc đối với sai phạm."
+        ],
+        "correct": 1,
+        "explanation": "Kỷ luật tự giác làm nên tính vững chắc của kỷ luật Đảng."
+    },
+    {
+        "round": "Vòng 3: Kỷ luật & Chỉnh đốn",
+        "type": "mcq",
+        "question": "Tại sao Hồ Chí Minh lại khẳng định công tác chỉnh đốn Đảng là quy luật tồn tại và phát triển tất yếu?",
+        "options": [
+            "Vì Đảng là một cơ thể sống, phải tự đổi mới để bài trừ mọi mầm mống độc hại.",
+            "Vì đây là chỉ thị bắt buộc bắt nguồn từ phong trào cộng sản trên toàn cầu.",
+            "Vì đó là xu thế cạnh tranh chính trị chung của các đảng phái cầm quyền.",
+            "Vì pháp luật hiện hành và các định chế nhà nước ràng buộc Đảng phải làm."
+        ],
+        "correct": 0,
+        "explanation": "Đảng tồn tại trong xã hội, đảng viên mang trong mình cả mặt tốt và xấu của xã hội, nên tự chỉnh đốn là tất yếu."
+    },
+    {
+        "round": "Vòng 3: Kỷ luật & Chỉnh đốn",
+        "type": "mcq",
+        "question": "Việc chỉnh đốn Đảng, theo Hồ Chí Minh, cần đặc biệt lưu tâm tiến hành quyết liệt nhất vào thời điểm nào?",
+        "options": [
+            "Khi phong trào cách mạng tạm thời chịu những tổn thất và thất bại lớn.",
+            "Khi toàn bộ nền kinh tế đất nước rơi vào tình cảnh suy thoái đình trệ.",
+            "Khi cách mạng chuyển giai đoạn lịch sử hoặc sau những thắng lợi vẻ vang.",
+            "Trước những kỳ chuẩn bị tổ chức đại hội bầu ban lãnh đạo nhiệm kỳ mới."
+        ],
+        "correct": 2,
+        "explanation": "Vì sau thắng lợi, cán bộ đảng viên dễ sinh ra kiêu ngạo, tham nhũng, hưởng thụ."
+    },
+    {
+        "round": "Vòng 3: Kỷ luật & Chỉnh đốn",
+        "type": "mcq",
+        "question": "Hồ Chí Minh đòi hỏi Đảng phải kiên quyết sàng lọc và đưa những phần tử nào ra khỏi hàng ngũ của mình?",
+        "options": [
+            "Những người còn hạn chế về năng lực ngoại ngữ và chuyên môn kỹ thuật.",
+            "Những người chưa tích lũy đủ các chứng chỉ học vị học hàm chính quy.",
+            "Những kẻ thoái hóa, biến chất, suy đồi đạo đức và tham nhũng sa đọa.",
+            "Những cá nhân thẳng thắn đóng góp nhiều ý kiến phản biện trái chiều."
+        ],
+        "correct": 2,
+        "explanation": "Phải kiên quyết đưa những phần tử thoái hóa, biến chất ra khỏi Đảng để Đảng trong sạch."
+    },
+    {
+        "round": "Vòng 3: Kỷ luật & Chỉnh đốn",
+        "type": "mcq",
+        "question": "Khi nói về việc rèn luyện đạo đức cán bộ đảng viên, Bác Hồ thường dùng hình ảnh ẩn dụ sinh động nào?",
+        "options": [
+            "Ngọc càng mài càng sáng lạn, vàng càng luyện càng tinh khiết.",
+            "Nước chảy bền bỉ đá mòn, mưa dầm lâu ngày thấm sâu vào đất.",
+            "Có công mài sắt bền lòng rồi sẽ có ngày nên cây kim quý giá.",
+            "Lửa đỏ rực rỡ thử vàng, gian nan khó nhọc thử sức kiên cường."
+        ],
+        "correct": 0,
+        "explanation": "Giáo dục, tu dưỡng đạo đức phải gian khổ rèn luyện suốt đời như mài ngọc, luyện vàng."
+    },
+    {
+        "round": "Vòng 4: Gắn bó với nhân dân",
+        "type": "mcq",
+        "question": "Cội nguồn sức mạnh vô địch và bảo đảm thắng lợi của Đảng Cộng sản Việt Nam bắt nguồn từ đâu?",
+        "options": [
+            "Sức mạnh răn đe của tiềm lực vũ khí và các khí tài quân sự hiện đại.",
+            "Sự chi viện dồi dào về tài chính và công nghệ từ các nước đồng minh.",
+            "Mối quan hệ gắn bó máu thịt, đồng cam cộng khổ chặt chẽ với nhân dân.",
+            "Năng lực tuyên truyền cổ động và bộ máy hành chính công quyền lớn mạnh."
+        ],
+        "correct": 2,
+        "explanation": "Mối quan hệ gắn bó máu thịt với nhân dân là yếu tố quyết định mọi thắng lợi của Đảng."
+    },
+    {
+        "round": "Vòng 4: Gắn bó với nhân dân",
+        "type": "mcq",
+        "question": "Thói hư tật xấu nào bị Bác lên án là nguy cơ trực tiếp xói mòn niềm tin và chia rẽ Đảng với nhân dân?",
+        "options": [
+            "Thói quen lười biếng tư duy và ngại tìm hiểu kiến thức mới.",
+            "Căn bệnh quan liêu hách dịch, mệnh lệnh và xa rời quần chúng.",
+            "Cách làm việc rập khuôn theo sách vở, thiếu nhạy bén thực tế.",
+            "Thói ham thích phô trương thành tích ảo trong công tác báo cáo."
+        ],
+        "correct": 1,
+        "explanation": "Quan liêu, mệnh lệnh làm mất đi sự tin yêu của quần chúng nhân dân."
+    },
+    {
+        "round": "Vòng 4: Gắn bó với nhân dân",
+        "type": "mcq",
+        "question": "Theo quan điểm của Hồ Chí Minh, nếu không nhận được sự chở che và giúp sức từ nhân dân thì Đảng sẽ ra sao?",
+        "options": [
+            "Đảng vẫn đủ khả năng hoàn thành thắng lợi vai trò lãnh đạo cách mạng.",
+            "Đảng sẽ gặp phải nhiều lực cản nhưng cuối cùng cũng sẽ vượt qua được.",
+            "Đảng hoàn toàn không làm nên trò trống gì và không thể đứng vững được.",
+            "Đảng bắt buộc phải nhờ cậy sự can thiệp và bảo hộ từ phong trào quốc tế."
+        ],
+        "correct": 2,
+        "explanation": "Sức mạnh của Đảng là sức mạnh của nhân dân."
+    },
+    {
+        "round": "Vòng 4: Gắn bó với nhân dân",
+        "type": "mcq",
+        "question": "Phương châm hành động nào sau đây thể hiện sâu sắc và sinh động nhất vai trò tiên phong của người đảng viên?",
+        "options": [
+            "Hành động luôn đi liền với lời nói, không nói suông.",
+            "Đảng viên đi trước mở đường, làng nước theo sau nối bước.",
+            "Cần cù tiết kiệm, sống liêm khiết chính trực mỗi ngày.",
+            "Tận tụy vì việc chung và tôn trọng pháp luật triệt để."
+        ],
+        "correct": 1,
+        "explanation": "Đòi hỏi tính tiên phong, gương mẫu đi đầu trong mọi khó khăn của đảng viên."
+    },
+    {
+        "round": "Vòng 4: Gắn bó với nhân dân",
+        "type": "mcq",
+        "question": "Để thắt chặt mối quan hệ máu thịt với dân, người cán bộ tuyệt đối không được có biểu hiện tiêu cực nào?",
+        "options": [
+            "Chăm chú lắng nghe tâm tư và học hỏi kinh nghiệm quý từ quần chúng.",
+            "Không ngừng nâng cao trình độ để hỗ trợ dẫn dắt phong trào nhân dân.",
+            "Vác mặt 'quan cách mạng', trịch thượng, hống hách coi thường người dân.",
+            "Tuyệt đối tin tưởng vào sức mạnh sáng tạo vô tận của quần chúng nhân dân."
+        ],
+        "correct": 2,
+        "explanation": "Bác luôn dạy cán bộ là 'đày tớ' của dân, tuyệt đối không được lên mặt 'làm quan cách mạng'."
+    },
+    {
+        "round": "Vòng 4: Gắn bó với nhân dân",
+        "type": "mcq",
+        "question": "Hồ Chí Minh chỉ dẫn: 'Sự lãnh đạo trong mọi công tác thiết thực của Đảng, ắt phải từ trong quần chúng ra, trở lại...'",
+        "options": [
+            "...nơi quần chúng để kiểm nghiệm và thúc đẩy hành động cách mạng.",
+            "...Trung ương Đảng để hoàn thiện cơ chế báo cáo theo đúng quy trình.",
+            "...các cơ quan nhà nước để chuyển hóa thành các sắc lệnh hành chính.",
+            "...sách vở lý luận kinh điển để đối chiếu tính chính xác của học thuyết."
+        ],
+        "correct": 0,
+        "explanation": "Đó là phương pháp lãnh đạo theo đường lối quần chúng."
+    },
+    {
+        "round": "Vòng 5: Tổng hợp",
+        "type": "mcq",
+        "question": "Khi trở thành Đảng cầm quyền, Hồ Chí Minh đặc biệt coi trọng việc cảnh giác trước hiểm họa nghiêm trọng nào nhất?",
+        "options": [
+            "Nguy cơ bị các thế lực thù địch bên ngoài bao vây cô lập và tấn công vũ trang.",
+            "Nguy cơ thiếu hụt nguồn viện trợ tài chính và hàng hóa phục vụ đời sống dân sinh.",
+            "Nguy cơ suy thoái đạo đức, tham ô lãng phí, biến chất của cán bộ, đảng viên.",
+            "Nguy cơ thiếu hụt đội ngũ chuyên gia kỹ thuật có trình độ học vấn đại học cao."
+        ],
+        "correct": 2,
+        "explanation": "Nguy cơ thoái hóa, biến chất, tham ô, lãng phí là thứ 'giặc nội xâm' đáng sợ nhất."
+    },
+    {
+        "round": "Vòng 5: Tổng hợp",
+        "type": "mcq",
+        "question": "Nội dung nào sau đây KHÔNG THUỘC hệ thống các nguyên tắc tổ chức và sinh hoạt Đảng theo Tư tưởng Hồ Chí Minh?",
+        "options": [
+            "Tập trung dân chủ trên mọi lĩnh vực hoạt động.",
+            "Thực hiện đa nguyên chính trị, đa đảng đối lập.",
+            "Nghiêm túc tự phê bình và phê bình thường xuyên.",
+            "Giữ vững kỷ luật nghiêm minh, tự giác và đoàn kết."
+        ],
+        "correct": 1,
+        "explanation": "Đảng Cộng sản Việt Nam hoạt động theo nguyên tắc nhất nguyên chính trị, không chấp nhận đa nguyên đa đảng."
+    },
+    {
+        "round": "Vòng 5: Tổng hợp",
+        "type": "mcq",
+        "question": "Phương pháp rèn luyện và bồi dưỡng đạo đức cách mạng thiết thực, có sức thuyết phục mạnh mẽ nhất theo Bác Hồ là gì?",
+        "options": [
+            "Tập trung áp dụng các biện pháp chế tài xử phạt thật nghiêm khắc bằng pháp luật.",
+            "Tổ chức phổ biến học tập thật nhiều tài liệu lý luận hàn lâm và sách vở kinh điển.",
+            "Đưa các cán bộ có biểu hiện khuyết điểm vào các cơ sở tập trung để cải tạo tư tưởng.",
+            "Phát huy trách nhiệm nêu gương người tốt, việc tốt của cán bộ đảng viên trong thực tế."
+        ],
+        "correct": 3,
+        "explanation": "Bác nói: Một tấm gương sống còn có giá trị hơn một trăm bài diễn văn tuyên truyền."
+    }
 ];
 
         // --- 4. STATE MANAGEMENT ---
@@ -1150,11 +1510,14 @@
                 subtitle.textContent = "Đừng nản lòng, hãy xem lại các câu sai để bứt phá ở lượt đấu sau!";
             }
 
-            if (score >= 2500) {
+            // Đánh giá danh hiệu theo SỐ CÂU TRẢ LỜI ĐÚNG (correctCount), KHÔNG theo điểm số
+            const totalQ = currentQuestions.length || 30;
+            const ratio = correctCount / totalQ;
+            if (correctCount >= 27 || (totalQ < 30 && ratio >= 0.9)) {
                 badge.textContent = "Hạng: ĐẢNG VIÊN TIÊN PHONG GƯƠNG MẪU 👑";
-            } else if (score >= 1500) {
+            } else if (correctCount >= 21 || (totalQ < 30 && ratio >= 0.7)) {
                 badge.textContent = "Hạng: BẬC THẦY LÝ LUẬN VỀ ĐẢNG ⭐";
-            } else if (score >= 800) {
+            } else if (correctCount >= 15 || (totalQ < 30 && ratio >= 0.5)) {
                 badge.textContent = "Hạng: CHIẾN SĨ XÂY DỰNG ĐẢNG VỮNG MẠNH 🎖️";
             } else {
                 badge.textContent = "Hạng: TÂN BINH TÌM HIỂU TƯ TƯỞNG HCM 📖";
@@ -1224,8 +1587,7 @@
 
             const { data, error } = await supabaseClient.from('leaderboard')
                 .select('*')
-                .order('score', { ascending: false })
-                .limit(50);
+                .limit(100);
 
             tbody.innerHTML = '';
 
@@ -1233,6 +1595,19 @@
                 tbody.innerHTML = '<tr><td colspan="5" class="p-4 text-center text-[var(--muted-foreground)]">Chưa có ai ghi danh vào Bảng vàng. Hãy là người đầu tiên!</td></tr>';
                 return;
             }
+
+            // Xếp hạng ƯU TIÊN theo SỐ CÂU ĐÚNG (correct_ratio), nếu bằng nhau thì so sánh ĐIỂM SỐ
+            data.sort((a, b) => {
+                const getCorrect = (str) => {
+                    if (!str) return 0;
+                    const parts = str.toString().split('/');
+                    return parseInt(parts[0], 10) || 0;
+                };
+                const cA = getCorrect(a.correct_ratio);
+                const cB = getCorrect(b.correct_ratio);
+                if (cB !== cA) return cB - cA; // Số câu đúng nhiều hơn xếp trước
+                return (b.score || 0) - (a.score || 0); // Điểm số cao hơn xếp trước
+            });
 
             data.forEach((item, index) => {
                 const tr = document.createElement('tr');
