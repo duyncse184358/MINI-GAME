@@ -1167,6 +1167,7 @@
         let isBombQuestion = false;
         let currentQuestions = [];
         let mistakes = [];
+        let totalCorrect = 0;
         let canAnswer = true;
         let clearConfirm = false;
 
@@ -1330,6 +1331,7 @@
             lives = 3;
             hasShield = false;
             mistakes = [];
+            totalCorrect = 0;
 
             document.getElementById('screen-lobby').classList.add('hidden');
             document.getElementById('screen-result').classList.add('hidden');
@@ -1456,6 +1458,7 @@
             if (chosenIdx === q.correct) {
                 clickedBtn.classList.add('correct-anim');
                 combo++;
+                totalCorrect++;
                 if (combo > maxCombo) maxCombo = combo;
 
                 const timeBonus = Math.floor(timeLeft * 4);
@@ -1675,7 +1678,7 @@
             document.getElementById('screen-result').classList.remove('hidden');
 
             const totalQuestions = currentQuestions.length;
-            const answeredCount = currentQuestionIndex; const correctCount = Math.max(0, answeredCount - mistakes.length);
+            const correctCount = totalCorrect;
             const entry = {
                 name: activePlayer,
                 score: score,
